@@ -30,7 +30,3 @@ Além dos serviços de reparação, os clientes poderão visualizar e comprar el
 - **Transparência no Serviço**: O técnico oferece um diagnóstico inicial e só avança com a reparação após a aprovação do cliente, garantindo clareza nos custos.
 - **Gestão de Informação**: O técnico terá acesso direto às informações de marcação, como nome, morada e horário pretendido, organizando as visitas de forma mais eficiente.
 - **Venda Online**: A plataforma oferece a possibilidade de os clientes adquirirem eletrodomésticos, aumentando as oportunidades de negócio para o técnico.
-
-## Conclusão
-
-A aplicação **ElectroFix** trará uma solução digital completa para o técnico de reparação de eletrodomésticos, proporcionando uma melhor experiência para os clientes, seja na marcação de serviços ou na compra de novos equipamentos. O projeto visa aumentar a eficiência, conveniência e acessibilidade, tanto para o técnico como para os seus clientes, garantindo o pagamento antecipado da deslocação e um processo de agendamento mais simples e rápido.

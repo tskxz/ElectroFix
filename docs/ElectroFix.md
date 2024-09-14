@@ -30,3 +30,7 @@ Além dos serviços de reparação, os clientes poderão visualizar e comprar el
 - **Transparência no Serviço**: O técnico oferece um diagnóstico inicial e só avança com a reparação após a aprovação do cliente, garantindo clareza nos custos.
 - **Gestão de Informação**: O técnico terá acesso direto às informações de marcação, como nome, morada e horário pretendido, organizando as visitas de forma mais eficiente.
 - **Venda Online**: A plataforma oferece a possibilidade de os clientes adquirirem eletrodomésticos, aumentando as oportunidades de negócio para o técnico.
+
+
+## Diagrama Casos de uso
+<img src="https://files.polido.pt/Elecotro_Fix_drawio-2xLULC.png">

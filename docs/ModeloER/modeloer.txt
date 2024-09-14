@@ -36,6 +36,8 @@ ReparaçãoAgendamento(Reparação, Agendamento) 1:1
 # Um Eletrodoméstico pode estar presente em várias Encomendas.
 # Uma Encomenda pode incluir vários Eletrodomésticos.
 # Esse relacionamento muitos-para-muitos é mediado pela entidade associativa ItemEncomenda.
+# ItemEncomenda atua como uma tabela intermediária que organiza quais Eletrodomésticos estão em quais Encomendas e fornece detalhes adicionais sobre cada item na encomenda (como quantidade e preço).
+
 EletrodomésticoPertenceEncomenda(Eletrodoméstico, Encomenda) N:N
 
 # Uma Encomenda pode conter vários Itens de Encomenda.

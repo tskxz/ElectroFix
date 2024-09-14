@@ -34,3 +34,40 @@ Além dos serviços de reparação, os clientes poderão visualizar e comprar el
 
 ## Diagrama Casos de uso
 <img src="https://files.polido.pt/Elecotro_Fix_drawio-2xLULC.png">
+
+## Modelo Entidade-Relacionamento
+
+O diagrama abaixo ilustra o modelo entidade-relacionamento (ER) da aplicação **ElectroFix**. Este modelo descreve as entidades principais, seus atributos e os relacionamentos entre elas.
+
+### Entidades
+
+- **Cliente**: Armazena informações sobre os clientes que utilizam a aplicação.
+  - Atributos: `nome`, `email`, `telefone`, `password`
+
+- **Agendamento**: Representa o agendamento de uma reparação.
+  - Atributos: `endereco`, `data_horario`, `estado`
+
+- **Reparação**: Representa o serviço de reparação realizado pelo técnico.
+  - Atributos: `descricao_problema`, `valor_orcamento`, `status`
+
+- **Eletrodoméstico**: Refere-se aos produtos que estão disponíveis para compra.
+  - Atributos: `nome_produto`, `descricao`, `preco`, `quantidade_stock`
+
+- **Encomenda**: Representa o pedido feito por um cliente.
+  - Atributos: `valor_total`, `data_encomenda`, `status`
+
+- **ItemEncomenda**: Representa os produtos dentro de uma encomenda específica.
+  - Atributos: `quantidade`, `preco_unitario`
+
+### Relacionamentos
+
+- **ClienteFazAgendamento**: Um cliente pode fazer vários agendamentos, e cada agendamento é feito por um único cliente. (1:N)
+- **ClienteFazEncomenda**: Um cliente pode fazer várias encomendas, e cada encomenda é feita por um único cliente. (1:N)
+- **ReparaçãoAgendamento**: Cada agendamento resulta em uma única reparação, e cada reparação está associada a um único agendamento. (1:1)
+- **EletrodomésticoPertenceEncomenda**: Um eletrodoméstico pode estar presente em várias encomendas, e uma encomenda pode incluir vários eletrodomésticos. (N:N)
+- **EncomendaContémItens**: Uma encomenda pode conter vários itens de encomenda, e cada item de encomenda pertence a uma única encomenda. (1:N)
+- **ItemContémProduto**: Cada item de encomenda refere-se a um único eletrodoméstico, e um eletrodoméstico pode estar em vários itens de encomenda. (N:1)
+
+
+## Diagrama de Classes | Entidade e Relação
+<img src="https://files.polido.pt/entidaderelacao_drawio-IIlmkn.png">

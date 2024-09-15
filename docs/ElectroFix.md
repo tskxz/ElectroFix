@@ -71,3 +71,35 @@ O diagrama abaixo ilustra o modelo entidade-relacionamento (ER) da aplicação *
 
 ## Diagrama de Classes | Entidade e Relação
 <img src="https://files.polido.pt/entidaderelacao_drawio-IIlmkn.png">
+
+## Diagrama de Atividades
+O diagrama de atividades descreve o fluxo do processo de **Agendamento de Reparações** na plataforma ElectroFix, que envolve três principais atores: **Cliente**, **Sistema** e **Técnico**. Cada um deles desempenha um papel essencial no ciclo de vida de um agendamento de reparação de eletrodomésticos. Abaixo, descrevemos as principais etapas do processo conforme representado no diagrama.
+
+### 1. Cliente
+- **Preencher Agendamento**: O cliente inicia o processo preenchendo um formulário de agendamento na plataforma.
+- **Pagamento da Deslocação**: Após preencher o agendamento, o cliente deve pagar uma taxa de 20€ pela deslocação do técnico.
+  - Se o pagamento for **confirmado**, o processo segue para a criação de agenda.
+  - Se o pagamento não for efetuado, o sistema **notifica um erro** ao cliente, encerrando o processo.
+- **Autorização**: Após o diagnóstico e a apresentação do orçamento, o cliente deve decidir se autoriza ou não a reparação.
+  - Se o cliente **autorizar**, o processo continua com a reparação.
+  - Caso contrário, o processo é encerrado.
+
+### 2. Sistema
+- **Criação de Agenda**: Após o pagamento da deslocação, o sistema cria uma agenda para a visita do técnico.
+- **Definir Confirmado**: O sistema verifica se o técnico confirmou a agenda.
+  - Se a agenda for **confirmada** pelo técnico, o sistema segue com a visita.
+  - Se não for confirmada, o sistema define o status como **pendente**.
+- **Definir Orçamento**: Após a realização do diagnóstico pelo técnico, o sistema registra o orçamento proposto.
+- **Definir Autorizado**: O sistema aguarda a autorização do cliente para continuar o processo de reparação.
+
+### 3. Técnico
+- **Gerir Agendas**: O técnico visualiza e gerencia as agendas criadas pelo sistema.
+  - Caso o técnico **confirme** a agenda, ele realiza a visita conforme agendado.
+  - Se não for possível confirmar, o sistema continua com a agenda pendente.
+- **Visita**: O técnico realiza a visita ao local indicado para realizar o diagnóstico inicial.
+- **Faz Diagnóstico**: O técnico identifica o problema e insere o orçamento no sistema.
+- **Faz Reparação**: Após a autorização do cliente, o técnico executa a reparação.
+- **Encerrar Processo**: Ao finalizar a reparação, o processo é encerrado tanto pelo técnico quanto pelo sistema.
+
+
+<img src="https://files.polido.pt/diagrama_atividades_light_drawio-B3zusZ.png">

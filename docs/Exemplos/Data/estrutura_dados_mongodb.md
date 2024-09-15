@@ -27,7 +27,7 @@ Armazena as informações dos agendamentos, com referência ao cliente.
   "_id": ObjectId(),
   "id_cliente": ObjectId("id_cliente_exemplo"),
   "endereco": "Rua A, 123",
-  "data_horario": ISODate("2024-09-15T10:00:00Z"),
+  "data_horario": ISODate("2024-09-15T10:30:00Z"),
   "estado": "Agendado"
 }
 ```

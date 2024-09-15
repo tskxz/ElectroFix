@@ -1,0 +1,56 @@
+================================================================= Introdução =================================================================
+
+O projeto ElectroFix tem como objetivo criar uma plataforma online para facilitar o agendamento de reparações de eletrodomésticos e a compra de novos eletrodomésticos.
+A aplicação web visa modernizar o processo de contato entre clientes e o único técnico administrador, substituindo o tradicional método de agendamento por telefone por um sistema online eficiente e acessível.
+
+===================================================================== Objetivos do Projeto =================================================================
+O principal objetivo da aplicação ElectroFix é simplificar o processo de reparação de eletrodomésticos e de compra de novos produtos, proporcionando aos clientes:
+
+    Agendamento de Reparações: Permitir que os clientes agendem reparações de eletrodomésticos de forma rápida e prática.
+    Compra de Eletrodomésticos: Oferecer uma plataforma para visualizar e comprar novos eletrodomésticos diretamente.
+    Gestão de Informações: Facilitar ao técnico administrador a gestão de agendamentos e do catálogo de produtos.
+
+================================================================= Funcionalidade =================================================================
+Agendamento de Reparações
+A funcionalidade de agendamento inclui:
+    Pagamento Antecipado da Deslocação: O cliente paga uma taxa de 20€ para a deslocação do técnico.
+    Diagnóstico Inicial: O técnico realiza uma avaliação inicial do problema no local indicado pelo cliente.
+    Orçamento: O técnico apresenta o orçamento após o diagnóstico.
+    Autorização do Cliente: A reparação só é iniciada após a autorização do cliente.
+
+Compra de Eletrodomésticos
+Os clientes podem:
+    Visualizar Produtos: Consultar o catálogo de eletrodomésticos disponíveis.
+    Realizar Encomendas: Comprar eletrodomésticos diretamente através da aplicação.
+
+Painel de Administração
+Como único técnico e administrador, ele poderá:
+    Gerir Agendamentos: Visualizar e gerenciar todos os agendamentos de reparação.
+    Gerir Produtos: Adicionar e atualizar produtos no catálogo de eletrodomésticos.
+    Gerir Encomendas: Verificar e processar as encomendas feitas pelos clientes.
+
+================================================================= Público-Alvo =================================================================
+Clientes: Pessoas que desejam agendar reparações ou comprar eletrodomésticos.
+Técnico/Administrador: O único técnico que fornece serviços e gerencia a aplicação.
+
+================================================================= Arquitetura e Tecnologia =================================================================
+Frontend
+O frontend será desenvolvido utilizando React para a construção de interfaces de utilizador dinâmicas e interativas. As principais tecnologias e ferramentas incluirão:
+    React: Para criar componentes reutilizáveis e gerir o estado da aplicação.
+    React Router: Para gerir a navegação entre diferentes páginas da aplicação.
+    Redux ou Context API: Para gerir o estado global da aplicação (opcional, dependendo da complexidade).
+    HTML5 e CSS3: Para a estruturação e estilização das páginas.
+    Axios ou Fetch API: Para realizar chamadas HTTP e interagir com o backend.
+
+Backend
+O backend será desenvolvido utilizando:
+    Node.js com o framework Express.
+    APIs RESTful para comunicação com o frontend.
+
+Base de Dados
+A base de dados MongoDB será usado para armazenar dados:
+    Clientes: Dados de contato e autenticação.
+    Agendamentos: Informações sobre agendamentos de reparações.
+    Reparações: Diagnóstico e orçamento das reparações.
+    Eletrodomésticos: Catálogo de produtos disponíveis.
+    Encomendas: Registos das compras feitas pelos clientes.

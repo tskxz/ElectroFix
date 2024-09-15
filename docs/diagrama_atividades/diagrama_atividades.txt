@@ -1,0 +1,20 @@
+[Início]: O processo começa quando o cliente decide agendar uma reparação.
+[Solicitar Agendamento]: O cliente preenche um formulário online com detalhes do problema e informações de contato.
+[Pagamento da Taxa de Deslocação]: O cliente paga antecipadamente 20€ para a deslocação do técnico.
+[Confirmar Pagamento]: O sistema verifica a confirmação do pagamento.
+
+    (Pagamento Confirmado?)
+        [Sim]: O pagamento foi confirmado e o processo continua.
+        [Não]: O cliente é notificado sobre o erro e o processo é encerrado.
+
+[Agendar Visita do Técnico]: O sistema agenda uma visita do técnico conforme a disponibilidade.
+[Enviando Confirmação]: O cliente recebe a confirmação do agendamento.
+[Visita do Técnico]: O técnico realiza a visita, faz o diagnóstico e apresenta o orçamento.
+[Aprovação do Cliente]: O cliente decide se aceita ou rejeita o orçamento.
+
+    (Orçamento Aprovado?)
+        [Sim]: O orçamento é aprovado e o processo continua.
+        [Não]: O processo é encerrado e o cliente é notificado.
+
+[Reparação Concluída]: O técnico realiza a reparação e o sistema é atualizado com o status final.
+[Fim]: O processo de agendamento e reparação é concluído.

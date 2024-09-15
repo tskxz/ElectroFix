@@ -6,7 +6,7 @@ Armazena os dados essenciais do cliente.
 
 ### Exemplo de Estrutura
 
-```json
+```js
 {
   "_id": ObjectId(),
   "nome": "João Silva",
@@ -22,7 +22,7 @@ Armazena os dados essenciais do cliente.
 Armazena as informações dos agendamentos, com referência ao cliente.
 
 ### Exemplo de Estrutura
-```json
+```js
 {
   "_id": ObjectId(),
   "id_cliente": ObjectId("id_cliente_exemplo"),
@@ -38,7 +38,7 @@ Armazena as informações dos agendamentos, com referência ao cliente.
 Armazena os dados das reparações, com referência ao agendamento.
 
 ### Exemplo de Estrutura
-```json
+```js
 {
   "_id": ObjectId(),
   "id_agendamento": ObjectId("id_agendamento_exemplo"),
@@ -53,7 +53,7 @@ Armazena os dados das reparações, com referência ao agendamento.
 Armazena os dados dos eletrodomésticos disponíveis para venda.
 
 ### Exemplo de Estrutura
-```json
+```js
 {
   "_id": ObjectId(),
   "nome_produto": "Frigideira",
@@ -68,7 +68,7 @@ Armazena os dados dos eletrodomésticos disponíveis para venda.
 Armazena os dados das encomendas feitas pelos clientes.
 
 ### Exemplo de Estrutura
-```json
+```js
 {
   "_id": ObjectId(),
   "cliente": {

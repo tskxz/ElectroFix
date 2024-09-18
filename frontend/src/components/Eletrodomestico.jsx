@@ -1,20 +1,20 @@
 import React from 'react'
 import {Card, CardBody} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 
 const Eletrodomestico = ({eletrodomestico}) => {
   return (
     <Card className="my-3 card-equal">
-    <a href={`/eletrodomestico/${eletrodomestico.id}`}>
+    <Link to ={`/eletrodomestico/${eletrodomestico.id}`}>
         <Card.Img className="card-img-custom" variant="top" src={eletrodomestico.imagem} />
-    </a>
+    </Link>
 
     <CardBody>
-        <a href={`/eletrodomestico/${eletrodomestico.id}`}>
+        <Link to={`/eletrodomestico/${eletrodomestico.id}`}>
            <Card.Title as="div">
                 <strong>{eletrodomestico.nome}</strong>
             </Card.Title>
-        </a>
-
+        </Link>
         <Card.Text as="h3">
             {eletrodomestico.preco}€
         </Card.Text>

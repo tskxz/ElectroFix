@@ -1,6 +1,7 @@
 import React from 'react'
 import {Row, Col} from 'react-bootstrap'
 import eletrodomesticos from '../../eletrodomesticos'
+import Eletrodomestico from '../../components/Eletrodomestico'
 
 const HomeScreen = () => {
   return (
@@ -9,7 +10,7 @@ const HomeScreen = () => {
         <Row>
             {eletrodomesticos.map(eletrodomestico => (
                 <Col sm={12} md={6} lg={4} xl={3}>
-                    <h3>{eletrodomestico.nome}</h3>
+                    <Eletrodomestico eletrodomestico={eletrodomestico} />
                 </Col>
             ))}
         </Row>

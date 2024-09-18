@@ -66,3 +66,21 @@ main {
     color: #f39c12; /* Cor do hover */
 }
 
+.card-equal {
+  height: 100%; /* Garante que o card ocupe a altura máxima possível */
+  display: flex;
+  flex-direction: column;
+}
+
+.card-img-custom {
+  height: 300px; /* Defina uma altura fixa para as imagens */
+  object-fit: cover; /* Faz com que a imagem se ajuste ao container sem distorcer */
+  object-position: center; /* Centraliza a imagem */
+}
+
+.card-body {
+  flex-grow: 1; /* Faz com que o corpo do card cresça para preencher o espaço */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

@@ -1,6 +1,7 @@
 import React from 'react'
 import {Card, CardBody} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
+import Rating from './Rating'
 
 const Eletrodomestico = ({eletrodomestico}) => {
   return (
@@ -15,6 +16,11 @@ const Eletrodomestico = ({eletrodomestico}) => {
                 <strong>{eletrodomestico.nome}</strong>
             </Card.Title>
         </Link>
+
+        <Card.Text as="div" className="product-title">
+            <Rating value={eletrodomestico.rating} text={`${eletrodomestico.numReviews} reviews`} />
+        </Card.Text>
+
         <Card.Text as="h3">
             {eletrodomestico.preco}€
         </Card.Text>

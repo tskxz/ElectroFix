@@ -8,11 +8,13 @@ import './assets/styles/index.css';
 
 import App from './App';
 import HomeScreen from './Screens/HomeScreen/HomeScreen';
+import EletrodomesticoScreen from './Screens/EletrodomesticoScreen/EletrodomesticoScreen';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<HomeScreen />} />
+      <Route path="/eletrodomestico/:id" element={<EletrodomesticoScreen />} />
     </Route>
   )
 )

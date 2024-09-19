@@ -6,12 +6,12 @@ import Rating from './Rating'
 const Eletrodomestico = ({eletrodomestico}) => {
   return (
     <Card className="my-3 card-equal">
-    <Link to ={`/eletrodomestico/${eletrodomestico.id}`}>
+    <Link to ={`/eletrodomestico/${eletrodomestico._id}`}>
         <Card.Img className="card-img-custom" variant="top" src={eletrodomestico.imagem} />
     </Link>
 
     <CardBody>
-        <Link to={`/eletrodomestico/${eletrodomestico.id}`}>
+        <Link to={`/eletrodomestico/${eletrodomestico._id}`}>
            <Card.Title as="div">
                 <strong>{eletrodomestico.nome}</strong>
             </Card.Title>

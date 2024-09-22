@@ -1,9 +1,19 @@
 import React from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 import {Row, Col} from 'react-bootstrap'
-import eletrodomesticos from '../../eletrodomesticos'
 import Eletrodomestico from '../../components/Eletrodomestico'
 
 const HomeScreen = () => {
+
+  const [eletrodomesticos, setEletrodomesticos] = useState([])
+  useEffect(() => {
+    const fetchEletrodomesticos = async () => {
+      const {data} = await axios.get('/api/eletrodomesticos');
+      setEletrodomesticos(data);
+    }
+    fetchEletrodomesticos();
+  }, [])
   return (
     <>
         <h1>Os nossos eletrodomésticos</h1>

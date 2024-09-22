@@ -1,5 +1,5 @@
 import express from 'express';
-const port = 3000;
+const port = 5000;
 import eletrodomesticos from './data/eletrodomesticos.js';
 
 const app = express();

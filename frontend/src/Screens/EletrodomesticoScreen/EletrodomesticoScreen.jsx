@@ -2,12 +2,20 @@ import React from 'react'
 import {useParams} from 'react-router-dom'
 import {Row, Col, Image, ListGroup, Card, Button} from 'react-bootstrap';
 import Rating from '../../components/Rating'
-import eletrodomesticos from '../../eletrodomesticos'
+import {useState, useEffect} from 'react'
+import axios from 'axios';
 
 const EletrodomesticoScreen = () => {
+    const [eletrodomestico, setEletrodomestico] = useState([])
     const {id: eletrodomesticoId} = useParams()
-    const eletrodomestico = eletrodomesticos.find((e) => e._id === eletrodomesticoId);
-    console.log(eletrodomestico)
+
+    useEffect(() => {
+      const fetchEletrodomestico = async () => {
+        const {data} = await axios.get(`/api/eletrodomesticos/${eletrodomesticoId}`);
+        setEletrodomestico(data);
+      }
+      fetchEletrodomestico();
+    }, [eletrodomesticoId])
     return(
         <div>
             <Row>

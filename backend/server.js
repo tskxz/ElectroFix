@@ -1,11 +1,13 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import eletrodomesticos from './data/eletrodomesticos.js';
+import connectDB from './config/db.js';
 
 dotenv.config();
 
 const port = process.env.PORT || 5000;
 const app = express();
+connectDB();
 
 app.get('/', (req, res) => {
     res.send('Api está a rodar...');

@@ -14,7 +14,8 @@ router.get('/:id', asyncHandler(async (req, res) => {
     if(eletrodomestico){
         res.json(eletrodomestico);
     } else {
-        res.status(404).json({msg: 'Eletrodomestico não encontrado'});
+        res.status(404)
+        throw new Error('Eletrodomestico não encontrado');
     }
 }))
 

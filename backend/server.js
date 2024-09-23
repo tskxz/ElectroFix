@@ -11,15 +11,15 @@ const app = express();
 
 connectDB();
 
-app.use(notFound)
-app.use(errorHandler);
-
 app.use('/api/eletrodomesticos', eletrodomesticoRoutes);
+
 
 app.get('/', (req, res) => {
     res.send('Api está a rodar...');
 })
 
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(port, () => {
     console.log(`Servidor a rodar na porta ${port}`);

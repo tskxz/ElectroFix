@@ -3,27 +3,23 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import {Row, Col} from 'react-bootstrap'
 import Eletrodomestico from '../../components/Eletrodomestico'
+import { useGetEletrodomesticosQuery } from '../../slices/eletrodomesticosApiSlice'
 
 const HomeScreen = () => {
 
-  const [eletrodomesticos, setEletrodomesticos] = useState([])
-  useEffect(() => {
-    const fetchEletrodomesticos = async () => {
-      const {data} = await axios.get('/api/eletrodomesticos');
-      setEletrodomesticos(data);
-    }
-    fetchEletrodomesticos();
-  }, [])
+  const {data: eletrodomesticos, isLoading, error} = useGetEletrodomesticosQuery();
   return (
     <>
+       {isLoading ? (<h2>Loading</h2>) : error ? (<div>{error?.data?.message || error.error}</div>) : <>
         <h1>Os nossos eletrodomésticos</h1>
         <Row>
-            {eletrodomesticos.map(eletrodomestico => (
-                <Col sm={12} md={6} lg={4} xl={3}>
-                    <Eletrodomestico eletrodomestico={eletrodomestico} />
-                </Col>
-            ))}
+          {eletrodomesticos.map( (eletrodomestico) => (
+            <Col key={eletrodomestico._id} sm={12} md={6} lg={4} xl={3}>
+              <Eletrodomestico eletrodomestico={eletrodomestico} /> 
+            </Col>
+          ))}
         </Row>
+       </>}
     </>
   )
 }

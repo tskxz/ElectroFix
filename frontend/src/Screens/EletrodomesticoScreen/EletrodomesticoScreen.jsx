@@ -6,6 +6,7 @@ import {useState, useEffect} from 'react'
 import axios from 'axios';
 import { useGetEletrodomesticoQuery } from '../../slices/eletrodomesticosApiSlice';
 import Loader from '../../components/Loader'
+import Message from '../../components/Message';
 
 
 const EletrodomesticoScreen = () => {
@@ -13,7 +14,7 @@ const EletrodomesticoScreen = () => {
     const {data: eletrodomestico, isLoading, error} = useGetEletrodomesticoQuery(eletrodomesticoId);
     return(
       <>
-      {isLoading ? (<Loader/>) : error ? (<div>{error?.data?.message || error.error}</div>) : (<>
+      {isLoading ? (<Loader/>) : error ? (<Message variant='danger'>{error?.data?.message || error.error}</Message>) : (<>
         <Row>
         <Col md={5}>
           <Image src={eletrodomestico.imagem} alt={eletrodomestico.nome} fluid />

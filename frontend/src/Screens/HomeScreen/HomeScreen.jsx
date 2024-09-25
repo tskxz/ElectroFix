@@ -5,13 +5,14 @@ import {Row, Col} from 'react-bootstrap'
 import Eletrodomestico from '../../components/Eletrodomestico'
 import { useGetEletrodomesticosQuery } from '../../slices/eletrodomesticosApiSlice'
 import Loader from '../../components/Loader'
+import Message from '../../components/Message'
 
 const HomeScreen = () => {
 
   const {data: eletrodomesticos, isLoading, error} = useGetEletrodomesticosQuery();
   return (
     <>
-       {isLoading ? (<Loader/>) : error ? (<div>{error?.data?.message || error.error}</div>) : <>
+       {isLoading ? (<Loader/>) : error ? (<Message variant='danger'>{error?.data?.message || error.error}</Message>) : <>
         <h1>Os nossos eletrodomésticos</h1>
         <Row>
           {eletrodomesticos.map( (eletrodomestico) => (

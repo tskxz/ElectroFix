@@ -5,6 +5,7 @@ import Rating from '../../components/Rating'
 import {useState, useEffect} from 'react'
 import axios from 'axios';
 import { useGetEletrodomesticoQuery } from '../../slices/eletrodomesticosApiSlice';
+import Loader from '../../components/Loader'
 
 
 const EletrodomesticoScreen = () => {
@@ -12,7 +13,7 @@ const EletrodomesticoScreen = () => {
     const {data: eletrodomestico, isLoading, error} = useGetEletrodomesticoQuery(eletrodomesticoId);
     return(
       <>
-      {isLoading ? (<h2>Loading</h2>) : error ? (<div>{error?.data?.message || error.error}</div>) : (<>
+      {isLoading ? (<Loader/>) : error ? (<div>{error?.data?.message || error.error}</div>) : (<>
         <Row>
         <Col md={5}>
           <Image src={eletrodomestico.imagem} alt={eletrodomestico.nome} fluid />

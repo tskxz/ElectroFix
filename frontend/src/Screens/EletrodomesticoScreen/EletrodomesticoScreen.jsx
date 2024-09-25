@@ -4,21 +4,16 @@ import {Row, Col, Image, ListGroup, Card, Button} from 'react-bootstrap';
 import Rating from '../../components/Rating'
 import {useState, useEffect} from 'react'
 import axios from 'axios';
+import { useGetEletrodomesticoQuery } from '../../slices/eletrodomesticosApiSlice';
+
 
 const EletrodomesticoScreen = () => {
-    const [eletrodomestico, setEletrodomestico] = useState([])
     const {id: eletrodomesticoId} = useParams()
-
-    useEffect(() => {
-      const fetchEletrodomestico = async () => {
-        const {data} = await axios.get(`/api/eletrodomesticos/${eletrodomesticoId}`);
-        setEletrodomestico(data);
-      }
-      fetchEletrodomestico();
-    }, [eletrodomesticoId])
+    const {data: eletrodomestico, isLoading, error} = useGetEletrodomesticoQuery(eletrodomesticoId);
     return(
-        <div>
-            <Row>
+      <>
+      {isLoading ? (<h2>Loading</h2>) : error ? (<div>{error?.data?.message || error.error}</div>) : (<>
+        <Row>
         <Col md={5}>
           <Image src={eletrodomestico.imagem} alt={eletrodomestico.nome} fluid />
         </Col>
@@ -65,8 +60,9 @@ const EletrodomesticoScreen = () => {
         </Card>
          </Col>
       </Row>
-           
-        </div>
+      </>)}
+        
+      </>
     )
 
 }

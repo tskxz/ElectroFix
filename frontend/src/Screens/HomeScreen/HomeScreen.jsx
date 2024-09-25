@@ -4,13 +4,14 @@ import axios from 'axios'
 import {Row, Col} from 'react-bootstrap'
 import Eletrodomestico from '../../components/Eletrodomestico'
 import { useGetEletrodomesticosQuery } from '../../slices/eletrodomesticosApiSlice'
+import Loader from '../../components/Loader'
 
 const HomeScreen = () => {
 
   const {data: eletrodomesticos, isLoading, error} = useGetEletrodomesticosQuery();
   return (
     <>
-       {isLoading ? (<h2>Loading</h2>) : error ? (<div>{error?.data?.message || error.error}</div>) : <>
+       {isLoading ? (<Loader/>) : error ? (<div>{error?.data?.message || error.error}</div>) : <>
         <h1>Os nossos eletrodomésticos</h1>
         <Row>
           {eletrodomesticos.map( (eletrodomestico) => (

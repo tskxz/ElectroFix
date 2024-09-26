@@ -4,7 +4,7 @@ const addDecimals = (num) => {
 
 export const atualizarCarrinho = (state) => {
     // Calcular o preco dos itens
-    state.precoItens = addDecimals(state.carrinhoItens.reduce((acc, item) => acc * item.preco * item.quantidade, 0))
+    state.precoItens = addDecimals(state.carrinhoItens.reduce((acc, item) => acc + item.preco * item.quantidade, 0))
 
     // Calcular o preco do envio (se a encomenda for mais de 100 euros, é de graça, se não, 20 euros preco de envio)
     state.precoEnvio = addDecimals(state.precoItens > 100 ? 0 : 20)

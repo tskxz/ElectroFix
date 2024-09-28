@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import eletrodomesticoRoutes from './routes/eletrodomesticoRoutes.js';
+import utilizadorRoutes from './routes/utilizadorRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 dotenv.config();
@@ -12,6 +13,7 @@ const app = express();
 connectDB();
 
 app.use('/api/eletrodomesticos', eletrodomesticoRoutes);
+app.use('/api/utilizadores', utilizadorRoutes);
 
 
 app.get('/', (req, res) => {

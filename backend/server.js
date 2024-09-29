@@ -11,6 +11,9 @@ const port = process.env.PORT || 5000;
 const app = express();
 
 connectDB();
+// Body Parser Middleware
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 
 app.use('/api/eletrodomesticos', eletrodomesticoRoutes);
 app.use('/api/utilizadores', utilizadorRoutes);

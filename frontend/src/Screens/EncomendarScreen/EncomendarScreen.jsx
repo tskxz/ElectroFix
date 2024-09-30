@@ -1,30 +1,50 @@
 import {useEffect} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import {Button, Row, Col, ListGroup, Image, Card} from 'react-bootstrap'
 import CheckoutSteps from '../../components/CheckoutSteps'
-import Loader from '../../components/Loader'
-import Message from '../../components/Message'
 import {toast} from 'react-toastify'
+import Message from '../../components/Message'
+import Loader from '../../components/Loader'
+import {useCriarEncomendaMutation} from '../../slices/encomendasApiSlice.js'
+import {limparCarrinhoItens} from '../../slices/carrinhoSlice'
 
-import React from 'react'
 
 const EncomendarScreen = () => {
-  const navigate = useNavigate()
-  const carrinho = useSelector((state) => state.carrinho)
-  useEffect(() => {
-    if(!carrinho.enderecoPostal.endereco){
-        navigate('/compra')
-  
-    } else if(!carrinho.metodoPagamento) {
-        navigate('/pagamento')
-    }
-  }, [carrinho.metodoPagamento, carrinho.enderecoPostal.endereco, navigate])
-  return <>
-    <CheckoutSteps step1 step2 step3 step4 />
-    <Row>
-        <Col md={8}>
-        <ListGroup variant='flush'>
+	const navigate = useNavigate()
+	const dispatch = useDispatch()
+	const carrinho = useSelector((state) => state.carrinho)
+	const [criarEncomenda, {isLoading, error}] = useCriarEncomendaMutation()
+	useEffect(() => {
+		if(!carrinho.enderecoPostal.endereco){
+			navigate('/compra')
+		} else if(!carrinho.metodoPagamento){
+			navigate('/pagamento')
+		}
+	}, [carrinho.metodoPagamento, carrinho.enderecoPostal.endereco, navigate])
+	console.log(carrinho.carrinhoItens)
+	const encomendarHandler = async () => {
+		try {
+			const res = await criarEncomenda({
+				encomendaItens: carrinho.carrinhoItens,
+				enderecoPostal: carrinho.enderecoPostal,
+				metodoPagamento: carrinho.metodoPagamento,
+				precoItens: carrinho.precoItens,
+				precoEnvio: carrinho.precoEnvio,
+				precoTaxa: carrinho.precoTaxa,
+				precoTotal: carrinho.precoTotal
+			}).unwrap();
+			dispatch(limparCarrinhoItens());
+			navigate(`/encomenda/${res._id}`)
+		} catch(err) {
+			toast(err)
+		}
+	}
+	return <>
+		<CheckoutSteps step1 step2 step3 step4/>
+		<Row>
+			<Col md={8}>
+				<ListGroup variant='flush'>
 					<ListGroup.Item>
 						<h2>Shipping</h2>
 						<p>
@@ -52,7 +72,7 @@ const EncomendarScreen = () => {
 											</Col>
 
 											<Col>
-												<Link to={`/produto/${item._id}`}>{item.nome}</Link>
+												<Link to={`/eletrodomestico/${item._id}`}>{item.nome}</Link>
 											</Col>
 											<Col md={4}>
 												{item.quantidade} x {item.preco} = ${item.quantidade * item.preco}
@@ -64,9 +84,9 @@ const EncomendarScreen = () => {
 							)}
 					</ListGroup.Item>
 				</ListGroup>
-        </Col>
-        <Col md={4}>
-        <Card>
+			</Col>
+			<Col md={4}>
+				<Card>
 					<ListGroup variant='flush'>
 						<ListGroup.Item>
 							<h2>Resumo da encomenda</h2>
@@ -107,20 +127,20 @@ const EncomendarScreen = () => {
 							</Row>
 						</ListGroup.Item>
 						<ListGroup.Item>
-						
+						    {error && <Message variant='danger'>{error.data?.message || error.error || 'An error occurred'}</Message>}
 						</ListGroup.Item>
 						<ListGroup.Item>
-							<Button type='button' className='btn btn-block' disabled={carrinho.carrinhoItens.length === 0}>
+							<Button type='button' className='btn btn-block' disabled={carrinho.carrinhoItens.length === 0} onClick={encomendarHandler}>
 								Encomendar
 							</Button>
-							
+							{isLoading && <Loader/>}
 						</ListGroup.Item>
 
 					</ListGroup>
 				</Card>
-        </Col>
-    </Row>
-  </>
+			</Col>
+		</Row>
+	</>
 }
 
 export default EncomendarScreen

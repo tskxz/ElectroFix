@@ -76,14 +76,44 @@ const logoutUtilizador = asyncHandler(async(req, res) => {
 // @route   get /api/utilizadores/perfil
 // @acess   public
 const getUtilizadorPerfil = asyncHandler(async(req,res) => {
-    res.send('get utilizador perfil')
+	const utilizador = await Utilizador.findById(req.utilizador._id)
+	if(utilizador){
+		res.status(201).json({
+			_id: utilizador._id,
+			nome: utilizador.nome,
+			email: utilizador.email,
+			isAdmin: utilizador.isAdmin
+		})
+	} else {
+		res.status(404)
+		throw new Error('utilizador n encontrado')
+	}
 })
 
 // @desc    Atualizar perfil do utilizador
 // @route   PUT /api/utilizadores/perfil
 // @access  Private
 const atualizarUtilizadorPerfil = asyncHandler(async(req, res) => {
-	res.send('update utilizador perfil')
+	const utilizador = await Utilizador.findById(req.utilizador._id)
+	if(utilizador){
+		utilizador.nome = req.body.nome || utilizador.nome
+		utilizador.email = req.body.email || utilizador.email	
+		if(req.body.password){
+			utilizador.password = req.body.password
+		}
+
+		const utilizadorAtualizado = await utilizador.save();
+		res.status(200).json({
+			_id: utilizadorAtualizado._id,
+			nome: utilizadorAtualizado.nome,
+			email: utilizadorAtualizado.email,
+			password: utilizadorAtualizado.password,
+			isAdmin: utilizadorAtualizado.admin
+		})
+	} else {
+		res.status(404)
+		throw new Error('utilizador n encontrado')
+	}
 })
 
 // @desc    Ter utilizadores

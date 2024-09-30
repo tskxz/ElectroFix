@@ -13,6 +13,7 @@ import HomeScreen from './Screens/HomeScreen/HomeScreen';
 import EletrodomesticoScreen from './Screens/EletrodomesticoScreen/EletrodomesticoScreen';
 import CarrinhoScreen from './Screens/CarrinhoScreen/CarrinhoScreen'
 import LoginScreen from './Screens/LoginScreen/LoginScreen.jsx';
+import RegisterScreen from './Screens/RegisterScreen/RegisterScreen.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
       <Route path="/eletrodomestico/:id" element={<EletrodomesticoScreen />} />
       <Route path="/carrinho" element={<CarrinhoScreen />} />
       <Route path="/login" element={<LoginScreen />} />
+      <Route path="/register" element={<RegisterScreen />} />
     </Route>
   )
 )

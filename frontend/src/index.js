@@ -12,6 +12,7 @@ import App from './App';
 import HomeScreen from './Screens/HomeScreen/HomeScreen';
 import EletrodomesticoScreen from './Screens/EletrodomesticoScreen/EletrodomesticoScreen';
 import CarrinhoScreen from './Screens/CarrinhoScreen/CarrinhoScreen'
+import LoginScreen from './Screens/LoginScreen/LoginScreen.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
       <Route index={true} path="/" element={<HomeScreen />} />
       <Route path="/eletrodomestico/:id" element={<EletrodomesticoScreen />} />
       <Route path="/carrinho" element={<CarrinhoScreen />} />
+      <Route path="/login" element={<LoginScreen />} />
     </Route>
   )
 )

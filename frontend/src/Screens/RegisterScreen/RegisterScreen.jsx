@@ -35,7 +35,7 @@ const RegisterScreen = () => {
     const submitHandler = async (e) => {
         e.preventDefault()
         if(password!==confirmPassword){
-            toast.error('L... PASSWORD NAO SAO IGUAIS')
+            toast.error('Password não são iguais!')
             return;
         } else {
             try {

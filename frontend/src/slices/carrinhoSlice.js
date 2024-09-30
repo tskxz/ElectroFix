@@ -31,9 +31,13 @@ const carrinhoSlice = createSlice({
         salvarMetodoPagamento: (state, action) => {
             state.metodoPagamento = action.payload;
             return atualizarCarrinho(state)
+        },
+        limparCarrinhoItens: (state, action) => {
+            state.carrinhoItens = []
+            return atualizarCarrinho(state)
         }
     }
 })
 
-export const {adicionarToCarrinho, removerFromCarrinho, salvarEnderecoPostal, salvarMetodoPagamento} = carrinhoSlice.actions
+export const {adicionarToCarrinho, removerFromCarrinho, salvarEnderecoPostal, salvarMetodoPagamento, limparCarrinhoItens} = carrinhoSlice.actions
 export default carrinhoSlice.reducer

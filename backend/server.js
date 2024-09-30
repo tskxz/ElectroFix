@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import eletrodomesticoRoutes from './routes/eletrodomesticoRoutes.js';
 import utilizadorRoutes from './routes/utilizadorRoutes.js';
+import encomendaRoutes  from './routes/encomendaRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import cookieParser from 'cookie-parser';
 
@@ -19,7 +20,7 @@ app.use(cookieParser());
 
 app.use('/api/eletrodomesticos', eletrodomesticoRoutes);
 app.use('/api/utilizadores', utilizadorRoutes);
-
+app.use('/api/encomendas', encomendaRoutes);
 
 app.get('/', (req, res) => {
     res.send('Api está a rodar...');

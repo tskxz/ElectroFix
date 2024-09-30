@@ -4,6 +4,7 @@ import FormContainer from '../../components/FormContainer'
 import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import {salvarEnderecoPostal} from '../../slices/carrinhoSlice'
+import CheckoutSteps from '../../components/CheckoutSteps'
 
 const ShippingScreen = () => {
     const carrinho = useSelector((state)=>state.carrinho)
@@ -24,6 +25,7 @@ const ShippingScreen = () => {
     }
     return (
         <FormContainer>
+            <CheckoutSteps step1 step2/>
             <h1>Shipping</h1>
 
             <Form onSubmit={submitHandler}>

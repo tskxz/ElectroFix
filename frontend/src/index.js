@@ -27,7 +27,7 @@ const router = createBrowserRouter(
       <Route path="/register" element={<RegisterScreen />} />
       <Route path="" element={<PrivateRoute/>}>
         <Route path="/compra" element={<ShippingScreen/>}/> 
-        <ROute path="/pagamento" elemet={<PagamentoScreen/>}/>
+        <Route path="/pagamento" element={<PagamentoScreen/>}/>
       </Route>
     </Route>
   )

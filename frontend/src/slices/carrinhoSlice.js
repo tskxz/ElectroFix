@@ -27,9 +27,13 @@ const carrinhoSlice = createSlice({
         salvarEnderecoPostal: (state, action) => {
             state.enderecoPostal = action.payload
             return atualizarCarrinho(state)
+        },
+        salvarMetodoPagamento: (state, action) => {
+            state.metodoPagamento = action.payload;
+            return atualizarCarrinho(state)
         }
     }
 })
 
-export const {adicionarToCarrinho, removerFromCarrinho, salvarEnderecoPostal} = carrinhoSlice.actions
+export const {adicionarToCarrinho, removerFromCarrinho, salvarEnderecoPostal, salvarMetodoPagamento} = carrinhoSlice.actions
 export default carrinhoSlice.reducer

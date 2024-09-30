@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit'
 import { atualizarCarrinho } from '../utils/carrinhoUtils';
-const initialState = localStorage.getItem('carrinho') ? JSON.parse(localStorage.getItem("carrinho")) : {carrinhoItens: []}
+const initialState = localStorage.getItem('carrinho') ? JSON.parse(localStorage.getItem("carrinho")) : {carrinhoItens: [], enderecoPostal: {}, metodoPagamento: 'Paypal'}
 
 const carrinhoSlice = createSlice({
     name: "carrinho",
@@ -22,9 +22,14 @@ const carrinhoSlice = createSlice({
         removerFromCarrinho: (state, action) => {
             state.carrinhoItens = state.carrinhoItens.filter((x) => x._id !== action.payload)
             return atualizarCarrinho(state)
+        },
+
+        salvarEnderecoPostal: (state, action) => {
+            state.enderecoPostal = action.payload
+            return atualizarCarrinho(state)
         }
     }
 })
 
-export const {adicionarToCarrinho, removerFromCarrinho} = carrinhoSlice.actions
+export const {adicionarToCarrinho, removerFromCarrinho, salvarEnderecoPostal} = carrinhoSlice.actions
 export default carrinhoSlice.reducer

@@ -4,6 +4,7 @@ import connectDB from './config/db.js';
 import eletrodomesticoRoutes from './routes/eletrodomesticoRoutes.js';
 import utilizadorRoutes from './routes/utilizadorRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ connectDB();
 // Body Parser Middleware
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use(cookieParser());
 
 app.use('/api/eletrodomesticos', eletrodomesticoRoutes);
 app.use('/api/utilizadores', utilizadorRoutes);

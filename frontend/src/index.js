@@ -14,7 +14,8 @@ import EletrodomesticoScreen from './Screens/EletrodomesticoScreen/Eletrodomesti
 import CarrinhoScreen from './Screens/CarrinhoScreen/CarrinhoScreen'
 import LoginScreen from './Screens/LoginScreen/LoginScreen.jsx';
 import RegisterScreen from './Screens/RegisterScreen/RegisterScreen.jsx';
-
+import ShippingScreen from './Screens/ShippingScreen/ShippingScreen.jsx';
+import PrivateRoute from './components/PrivateRoute.jsx';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -23,6 +24,9 @@ const router = createBrowserRouter(
       <Route path="/carrinho" element={<CarrinhoScreen />} />
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />
+      <Route path="" element={<PrivateRoute/>}>
+        <Route path="/compra" element={<ShippingScreen/>}/>  
+      </Route>
     </Route>
   )
 )

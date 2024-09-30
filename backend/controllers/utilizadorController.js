@@ -1,6 +1,7 @@
 import asyncHandler from '../middleware/asyncHandler.js'
 import Utilizador from '../models/utilizadorModel.js'
 import jwt from 'jsonwebtoken'
+import generateToken from '../utils/generateToken.js'
 // @desc    autenticar utilizador e ter token
 // @route   get /api/utilizadores/login
 // @access  public
@@ -37,7 +38,27 @@ const authUtilizador = asyncHandler(async(req, res) => {
 // @route   post /api/utilizadores
 // @access  public
 const registarUtilizador = asyncHandler(async(req, res) => {
-    res.send('registar utilizador')
+	const {nome, email, password} = req.body;
+	const utilizadorExiste = await Utilizador.findOne({email})
+	if(utilizadorExiste){
+		res.status(400);
+		throw new Error('utilizador existe')
+	}
+	const utilizador = await Utilizador.create({
+		nome,email,password
+	})
+	if(utilizador){
+		generateToken(res, utilizador._id)
+		res.status(201).json({
+			_id: utilizador._id,
+			nome: utilizador.nome,
+			email: utilizador.email,
+			isAdmin: utilizador.isAdmin
+		})
+	} else {
+		res.status(400);
+		throw new Error('invalid user data')
+	} 
 })
 
 // @desc    Desautenticar utilizador / Limpar cookie

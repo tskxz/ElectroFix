@@ -11,21 +11,6 @@ const addEncomendaItens = asyncHandler(async(req, res) => {
         res.status(400)
         throw new Error('nenhum item na encomenda')
     } else {
-        console.log('Dados da encomenda:', {
-            encomendaItens: encomendaItens.map((x) => ({
-                nome: x.nome,
-                quantidade: x.quantidade,
-                preco: x.preco,
-                eletrodomestico: x.eletrodomestico,
-            })),
-            utilizador: req.utilizador._id,
-            enderecoPostal,
-            metodoPagamento,
-            precoItens,
-            precoTaxa,
-            precoEnvio,
-            precoTotal
-        });
         const encomenda = new Encomenda({
             encomendaItens: encomendaItens.map((x) => ({
                 ...x,
@@ -42,6 +27,7 @@ const addEncomendaItens = asyncHandler(async(req, res) => {
         })
         const criarEncomenda = await encomenda.save()
         console.log('criado')
+        console.log(criarEncomenda)
         res.status(201).json(criarEncomenda)
     }
 })
@@ -58,9 +44,9 @@ const getMinhasEncomendas = asyncHandler(async(req, res) => {
 // @route   GET /api/encomendas/:id
 // @access  Private/Admin
 const getEncomenda = asyncHandler(async(req, res) => {
-    const encomenda = await Encomenda.findById(req.params.id).populate('utilizador', 'name email')
+    const encomenda = await Encomenda.findById(req.params.id).populate('utilizador', 'nome email')
     if(encomenda){
-        res.status(200),json(encomenda)
+        res.status(200).json(encomenda)
     } else {
         res.status(404)
         throw new Error('encomenda n encontrado')

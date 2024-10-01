@@ -11,6 +11,7 @@ const encomendaSchema = new mongoose.Schema({
         {
             nome: {type: String, required: true},
             quantidade: {type: Number, required: true},
+            imagem: {type: String, required: true},
             preco: {type: Number, required: true},
             eletrodomestico: {
                 type: mongoose.Schema.Types.ObjectId,

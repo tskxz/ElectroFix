@@ -19,6 +19,7 @@ import PrivateRoute from './components/PrivateRoute.jsx';
 import PagamentoScreen from './Screens/PagamentoScreen/PagamentoScreen.jsx';
 import EncomendarScreen from './Screens/EncomendarScreen/EncomendarScreen.jsx';
 import EncomendaScreen from './Screens/EncomendaScreen/EncomendaScreen.jsx';
+import PerfilScreen from './Screens/PerfilScreen/PerfilScreen.jsx';
 
 import {PayPalScriptProvider} from '@paypal/react-paypal-js'
 
@@ -35,6 +36,7 @@ const router = createBrowserRouter(
         <Route path="/pagamento" element={<PagamentoScreen/>}/>
         <Route path="/encomendar" element={<EncomendarScreen/>}/>
         <Route path="/encomenda/:id" element={<EncomendaScreen/>} />
+        <Route path="/perfil" element={<PerfilScreen/>} />
       </Route>
     </Route>
   )

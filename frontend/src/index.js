@@ -20,7 +20,8 @@ import PagamentoScreen from './Screens/PagamentoScreen/PagamentoScreen.jsx';
 import EncomendarScreen from './Screens/EncomendarScreen/EncomendarScreen.jsx';
 import EncomendaScreen from './Screens/EncomendaScreen/EncomendaScreen.jsx';
 import PerfilScreen from './Screens/PerfilScreen/PerfilScreen.jsx';
-
+import AdminRoute from './components/AdminRoute.jsx';
+import ListaEncomendaScreen from './Screens/admin/ListaEncomendaScreen.jsx';
 import {PayPalScriptProvider} from '@paypal/react-paypal-js'
 
 const router = createBrowserRouter(
@@ -37,6 +38,9 @@ const router = createBrowserRouter(
         <Route path="/encomendar" element={<EncomendarScreen/>}/>
         <Route path="/encomenda/:id" element={<EncomendaScreen/>} />
         <Route path="/perfil" element={<PerfilScreen/>} />
+      </Route>
+      <Route path="" element={<AdminRoute/>}>
+        <Route path="/admin/listaencomenda" element={<ListaEncomendaScreen/>} /> 
       </Route>
     </Route>
   )

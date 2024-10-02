@@ -57,7 +57,23 @@ const getEncomenda = asyncHandler(async(req, res) => {
 // @route   GET /api/encomendas/:id/pago
 // @access  Private
 const atualizarEncomendaPago = asyncHandler(async(req, res) => {
-    res.send('atualizar encomenda para pago')
+    const encomenda = await Encomenda.findById(req.params.id)
+    if(encomenda){
+        encomenda.isPago = true;
+        encomenda.pagoEm = Date.now();
+        encomenda.resultadoPagamento = {
+            id: req.body.id,
+            status: req.body.status,
+            update_time: req.body.update_time,
+            email_address: req.body.payer.email
+        } 
+
+        const encomendaAtualizado = await encomenda.save()
+        res.status(200).json(encomendaAtualizado)
+    } else {
+            res.status(400)
+            throw new Error('encomenda n encontrado')
+    }
 })
 
 // @desc    Atualizar encomenda para entregue

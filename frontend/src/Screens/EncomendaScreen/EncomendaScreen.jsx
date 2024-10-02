@@ -2,7 +2,7 @@ import {Link, useParams} from 'react-router-dom'
 import {Row, Col, ListGroup, Image, Form, Button, Card} from 'react-bootstrap'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
-import {useGetEncomendaDetailsQuery, usePagarEncomendaMutation, useGetPayPalClientIdQuery} from '../../slices/encomendasApiSlice';
+import {useGetEncomendaDetailsQuery, usePagarEncomendaMutation, useGetPayPalClientIdQuery, useEntregarEncomendaMutation} from '../../slices/encomendasApiSlice';
 import {PayPalButtons, usePayPalScriptReducer} from '@paypal/react-paypal-js'
 import {toast} from 'react-toastify'
 import {useSelector} from 'react-redux'
@@ -11,6 +11,7 @@ const EncomendaScreen = () => {
 	const {id: encomendaId} = useParams();
 	const {data: encomenda, refetch, isLoading, error} = useGetEncomendaDetailsQuery(encomendaId)
 	const [pagarEncomenda, {isLoading:loadingPay}] = usePagarEncomendaMutation()
+	const [entregarEncomenda, {isLoading:loadingDeliver}] = useEntregarEncomendaMutation()
 	const [{isPending}, paypalDispatch] = usePayPalScriptReducer()
 	const {data:paypal, isLoading:loadingPayPal, error: errorPayPal} = useGetPayPalClientIdQuery()
 	const {utilizadorInfo} = useSelector((state) => state.auth)
@@ -70,6 +71,17 @@ const EncomendaScreen = () => {
 			return encomendaId
 		})
 	}
+
+	const  deliverOrderHandler = async () => {
+		try {
+			await entregarEncomenda(encomendaId)
+			refetch()
+			toast.success('Encomenda Atualizado')
+		} catch(err) {
+			toast.error(err?.data?.message || err.message)
+		}
+	}
+
 	return isLoading ? <Loader/> : error ? <Message variant='danger'/> : (
 		<>
 			<h1>Encomenda {encomendaId}</h1>
@@ -178,6 +190,15 @@ const EncomendaScreen = () => {
 											</div>
 										</div>
 									)}
+								</ListGroup.Item>
+							)}
+
+							{loadingDeliver && <Loader/>}
+							{utilizadorInfo && utilizadorInfo.isAdmin && encomenda.isPago && !encomenda.isEntregue && (
+								<ListGroup.Item>
+									<Button type='button' className='btn btn-block' onClick={deliverOrderHandler}>
+									Marcar como entregue
+									</Button>
 								</ListGroup.Item>
 							)}
 						</ListGroup>

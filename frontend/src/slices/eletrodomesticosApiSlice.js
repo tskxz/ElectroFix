@@ -16,8 +16,23 @@ export const eletrodomesticosApiSlice = apiSlice.injectEndpoints({
                 url: `${ELETRODOMESTICOS_URL}/${eletrodomesticoId}`
             }),
             keepUnusedDataFor: 5
+        }),
+        criarEletrodomestico: builder.mutation({
+            query: () => ({
+                url: ELETRODOMESTICOS_URL,
+                method: 'POST'
+            }),
+            invalidatesTags: ['Eletrodomestico']
+        }),
+        atualizarEletrodomestico: builder.mutation({
+            query: (data) => ({
+                url: `${ELETRODOMESTICOS_URL}/${data.eletrodomesticoId}`,
+                method: 'PUT',
+                body: data,
+            }),
+            invalidatesTags: ['Eletrodomesticos']
         })
     }),
 })
 
-export const {useGetEletrodomesticosQuery, useGetEletrodomesticoQuery} = eletrodomesticosApiSlice
+export const {useGetEletrodomesticosQuery, useGetEletrodomesticoQuery, useCriarEletrodomesticoMutation, useAtualizarEletrodomesticoMutation} = eletrodomesticosApiSlice

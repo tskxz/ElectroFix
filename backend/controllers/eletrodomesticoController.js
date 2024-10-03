@@ -60,4 +60,21 @@ const atualizarEletrodomestico = asyncHandler(async(req, res) => {
     }
 })
 
-export {getEletrodomesticos, getEletrodomestico, criarEletrodomestico, atualizarEletrodomestico}
+
+// @desc    Apagar eletrodomestico
+// @route   DELETE /api/produtos/:id
+// @access  Private/Admin
+const deleteEletrodomestico = asyncHandler(async(req, res) => {
+
+    const eletrodomestico = await Eletrodomestico.findById(req.params.id)
+    if(eletrodomestico){
+       await Eletrodomestico.deleteOne({_id: eletrodomestico._id})
+       res.status(200).json({message: 'eletrodomestico apagado'})
+
+    } else {
+        res.status(404)
+        throw new Error('resource n encontrado')
+    }
+})
+
+export {getEletrodomesticos, getEletrodomestico, criarEletrodomestico, atualizarEletrodomestico, deleteEletrodomestico}

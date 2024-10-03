@@ -4,13 +4,22 @@ import {FaTimes, FaEdit, FaTrash} from 'react-icons/fa'
 import Message from '../../components/Message.jsx';
 import Loader from '../../components/Loader.jsx'
 import {toast} from 'react-toastify'
-import {useGetEletrodomesticosQuery, useCriarEletrodomesticoMutation} from '../../slices/eletrodomesticosApiSlice.js'
+import {useGetEletrodomesticosQuery, useCriarEletrodomesticoMutation, useDeleteEletrodomesticoMutation} from '../../slices/eletrodomesticosApiSlice.js'
 
 const ListaEletrodomesticoScreen = () => {
 	const {data: eletrodomesticos, isLoading, error, refetch} = useGetEletrodomesticosQuery()
 	const [criarEletrodomestico, {isLoading:loadingCreate}] = useCriarEletrodomesticoMutation()
-	const deleteHandler = (id) => {
-		console.log('delete', id)
+	const [deleteEletrodomestico, {isLoading: loadingDelete}] = useDeleteEletrodomesticoMutation()
+	const deleteHandler = async (id) => {
+		if(window.confirm('Tens a certeza que queres apagar o eletrodoméstico?')){
+			try {
+				await deleteEletrodomestico(id)
+				toast.success('Eletrodomestico apagado')
+				refetch()
+			} catch(err) {
+				toast.error(err?.data?.message || err.error)
+			}
+		}
 	}
 	const criarEletrodomesticooHandler = async() => {
 		if(window.confirm('Tens a certeza que queres criar um eletrodoméstico novo?')){
@@ -34,6 +43,7 @@ const ListaEletrodomesticoScreen = () => {
 			</Col>
 		</Row>
 		{loadingCreate && <Loader/>}
+		{loadingDelete && <Loader/>}
 		{isLoading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> : (
 			<>
 				<Table striped hover responsive className='table-sm'>

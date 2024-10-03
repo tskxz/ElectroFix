@@ -43,11 +43,12 @@ const criarEletrodomestico = asyncHandler(async(req, res) => {
 // @route PUT /api/eletrodomesticos/:id
 // @access Private/Admin
 const atualizarEletrodomestico = asyncHandler(async(req, res) => {
-    const {nome, preco, emStock, numReviews, descricao} = req.body
+    const {nome, preco, imagem, emStock, numReviews, descricao} = req.body
     const eletrodomestico = await Eletrodomestico.findById(req.params.id)
     if(eletrodomestico){
         eletrodomestico.nome = nome || eletrodomestico.nome
         eletrodomestico.preco = preco || eletrodomestico.preco
+        eletrodomestico.imagem = imagem || eletrodomestico.imagem
         eletrodomestico.emStock = emStock || eletrodomestico.emStock
         eletrodomestico.numReviews = numReviews || eletrodomestico.numReviews
         eletrodomestico.descricao = descricao || eletrodomestico.descricao

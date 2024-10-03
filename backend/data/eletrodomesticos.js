@@ -39,7 +39,7 @@ const eletrodomesticos = [
     {
         nome: 'Máquina de lavar roupa Whirlpool 8,0kg FFB 8458',
         imagem: '/images/Whirlpool-8kg.jpg',
-        descricao: 'A máquina de lavar roupa Whirlpool FFB 8458 é uma opção moderna e eficiente, projetada para oferecer ótimo desempenho e cuidar das suas roupas com tecnologia de ponta, (AxLxP): 84.5 x 59.5 x 63.0',
+        descricao: 'A máquina de lavar roupa Whirlpool FFB 8458 é uma opção moderna e eficiente, projetada para oferecer ótimo desempenho e cuidar das suas roupas com tecnologia de ponta, (AxLxP): 84.5 x 59.5 x 63.0 cm',
         preco: 269.99,
         emStock: 5,
         rating: 4.0,
@@ -49,7 +49,7 @@ const eletrodomesticos = [
         nome: 'Máquina Lavar Loiça Siemens SN27YI03CE',
         imagem: '/images/Máquina de Lavar Loiça SIEMENS.jpg',
         descricao: 'A Máquina de Lavar Loiça Siemens SN27YI03CE é um modelo de alta gama, projetado para oferecer eficiência, tecnologia avançada e grande capacidade, (AxLxP): 84.5 x 60 x 60 cm',
-        preco: 349.99,
+        preco: 249.99,
         emStock: 1,
         rating: 4.5,
         numReviews: 11,
@@ -75,11 +75,20 @@ const eletrodomesticos = [
     {
         nome: 'Máquina Lavar Loiça bosch sms2htw02e branco d 13 conjuntos',
         imagem: '/images/Maquina-Bosch-Loica.jpg',
-        descricao: 'Máquina de lavar loiça de funcionamento silencioso, com controlo remoto através da app Home Connect, (AxLxP) 600 x 845 x 600',
+        descricao: 'Máquina de lavar loiça de funcionamento silencioso, com controlo remoto através da app Home Connect, (AxLxP) 600 x 845 x 600 mm',
         preco: 169.99,
         emStock: 2,
         rating: 3.0,
         numReviews: 11,
+    },
+    {
+        nome: 'Combinado bosch kgn366icf classe c inox 326l no frost',
+        imagem: '/images/frigorific-bosch.jpg',
+        descricao: 'Design elegante com porta(s) em inox com tratamento anti dedadas e puxadores verticais integrados na porta. Iluminação inte rior por LEDs com Soft Start: brilhante, eficiente e de longa duração, (AxLxP) 600 x1860 x 660 mm',
+        preco: 249.99,
+        emStock: 6,
+        rating: 4.0,
+        numReviews: 13,
     },
 ]
 

@@ -27,6 +27,15 @@ const eletrodomesticos = [
         rating: 4.0,
         numReviews: 15,
     },
+    {
+        nome: 'Frigorífico Combinado Bosch Inox KGN39HIEP Kontrolsat',
+        imagem: '/images/combinado-bosch-inox.jpg',
+        descricao: 'O Frigorífico Combinado Bosch KGN39HIEP (Série 6) é uma solução moderna e eficiente para a conservação de alimentos, com um design elegante em inox e uma capacidade total de 366 litros.',
+        preco: 349.99,
+        emStock: 2,
+        rating: 4.5,
+        numReviews: 9,
+    },
 ]
 
 export default eletrodomesticos

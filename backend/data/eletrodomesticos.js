@@ -57,7 +57,7 @@ const eletrodomesticos = [
     {
         nome: 'Frigorífico americano haier hsr3918enpg gentle silver 521l',
         imagem: '/images/frigorifico-americano-haier.jpg',
-        descricao: 'Com 90 cm de largura, os frigoríficos Side By Side 90 da Haier oferecem uma grande capacidade enquanto proporcionam um acesso fácil aos espaços tanto do frigorífico como do congelador, 908x1775x647 mm',
+        descricao: 'Com 90 cm de largura, os frigoríficos Side By Side 90 da Haier oferecem uma grande capacidade enquanto proporcionam um acesso fácil aos espaços tanto do frigorífico como do congelador, (AxLxP) 908x1775x647 mm',
         preco: 449.99,
         emStock: 2,
         rating: 4.0,
@@ -66,11 +66,20 @@ const eletrodomesticos = [
     {
         nome: 'Máquina de lavar roupa lg f4wr5010a6w 10kg',
         imagem: '/images/maquina-LG.jpg',
-        descricao: 'Motor Inverter Direct DriveT com Inteligência Artificial. Tratamento anti-alergias com a tecnologia SteamT. Batentes robustos e antibacterianos em aço inoxidável, 600x850x565 mm',
-        preco: 449.99,
+        descricao: 'Motor Inverter Direct DriveT com Inteligência Artificial. Tratamento anti-alergias com a tecnologia SteamT. Batentes robustos e antibacterianos em aço inoxidável, (AxLxP) 600x850x565 mm',
+        preco: 229.99,
+        emStock: 4,
+        rating: 3.5,
+        numReviews: 12,
+    },
+    {
+        nome: 'Máquina Lavar Loiça bosch sms2htw02e branco d 13 conjuntos',
+        imagem: '/images/Maquina-Bosch-Loica.jpg',
+        descricao: 'Máquina de lavar loiça de funcionamento silencioso, com controlo remoto através da app Home Connect, (AxLxP) 600 x 845 x 600',
+        preco: 169.99,
         emStock: 2,
-        rating: 4.0,
-        numReviews: 18,
+        rating: 3.0,
+        numReviews: 11,
     },
 ]
 

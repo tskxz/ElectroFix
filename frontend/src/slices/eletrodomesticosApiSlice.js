@@ -1,4 +1,4 @@
-import {ELETRODOMESTICOS_URL} from '../constants';
+import {ELETRODOMESTICOS_URL, UPLOAD_URL} from '../constants';
 import {apiSlice} from './apiSlice';
 
 export const eletrodomesticosApiSlice = apiSlice.injectEndpoints({
@@ -31,8 +31,15 @@ export const eletrodomesticosApiSlice = apiSlice.injectEndpoints({
                 body: data,
             }),
             invalidatesTags: ['Eletrodomesticos']
+        }),
+        uploadEletrodomesticoImagem: builder.mutation({
+            query: (data) => ({
+                url: `${UPLOAD_URL}`,
+                method: 'POST',
+                body: data,
+            })
         })
     }),
 })
 
-export const {useGetEletrodomesticosQuery, useGetEletrodomesticoQuery, useCriarEletrodomesticoMutation, useAtualizarEletrodomesticoMutation} = eletrodomesticosApiSlice
+export const {useGetEletrodomesticosQuery, useGetEletrodomesticoQuery, useCriarEletrodomesticoMutation, useAtualizarEletrodomesticoMutation, useUploadEletrodomesticoImagemMutation} = eletrodomesticosApiSlice

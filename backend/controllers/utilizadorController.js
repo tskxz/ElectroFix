@@ -120,28 +120,61 @@ const atualizarUtilizadorPerfil = asyncHandler(async(req, res) => {
 // @route   GET /api/utilizadores
 // @access  Private/Admin
 const getUtilizadores = asyncHandler(async(req, res) => {
-	res.send('get utilizadores')
+	const utilizadores = await Utilizador.find({})
+	res.status(200).json(utilizadores)
 })
 
 // @desc    Ter utilizadores atraves do ID
 // @route   GET /api/utilizadores/:id
 // @access  Private/Admin
 const getUtilizador = asyncHandler(async(req, res) => {
-	res.send('get utilizador')
+	const utilizador = await Utilizador.findById(req.params.id).select('-password')
+	if(utilizador){
+		res.status(200).json(utilizador)
+	} else {
+		res.status(404)
+		throw new Erorr('Utilizador nao encontrado')
+	}
 })
 
 // @desc    Atualizar utilizadores
 // @route   PUT /api/utilizadores/:id
 // @access  Private/Admin
 const atualizarUtilizador = asyncHandler(async(req, res) => {
-	res.send('atualizar utilizador')
+	const utilizador = await Utilizador.findById(req.params.id)
+	if(utilizador){
+		utilizador.nome = req.body.nome || utilizador.nome;
+		utilizador.email = req.body.email || utilizador.email;
+		utilizador.isAdmin = Boolean(req.body.isAdmin)
+		const utilizadorAtualizado = await utilizador.save()
+		res.status(200).json({
+			_id: utilizadorAtualizado._id,
+			nome: utilizadorAtualizado.nome,
+			email: utilizadorAtualizado.email,
+			isAdmin: utilizadorAtualizado.isAdmin
+		})
+	} else {
+		res.status(404)
+		throw new Error('utilizador nao encontrado')
+	}
 })
 
 // @desc    Apagar utilizadores
 // @route   DELETE /api/utilizadores/:id
 // @access  Private/Admin
 const deleteUtilizador = asyncHandler(async(req, res) => {
-	res.send('delete utilizador')
+	const utilizador = await Utilizador.findById(req.params.id)
+	if(utilizador){
+		if(utilizador.isAdmin){
+			res.status(400)
+			throw new Error('Nao pode deletar admin utilizador')
+		}
+		await Utilizador.deleteOne({_id: utilizador._id})
+		res.status(200).json({message: 'utilizador apagado com sucesso'})
+	} else {
+		res.status(404)
+		throw new Error('utilizador n encontrado')
+	}
 })
 
 export {

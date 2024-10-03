@@ -5,7 +5,7 @@ import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
 import {toast} from 'react-toastify'
-import {useAtualizarEletrodomesticoMutation, useGetEletrodomesticoQuery} from '../../slices/eletrodomesticosApiSlice.js'
+import {useAtualizarEletrodomesticoMutation, useGetEletrodomesticoQuery, useUploadEletrodomesticoImagemMutation} from '../../slices/eletrodomesticosApiSlice.js'
 
 const AtualizarEletrodomesticoScreen = () => {
 	const {id: eletrodomesticoId} = useParams();
@@ -17,6 +17,7 @@ const AtualizarEletrodomesticoScreen = () => {
 
 	const {data: eletrodomestico, isLoading, refetch, error} = useGetEletrodomesticoQuery(eletrodomesticoId);
 	const [atualizarEletrodomestico, {isLoading: loadingUpdate}] = useAtualizarEletrodomesticoMutation()
+	const [uploadEletrodomesticoImagem, {isLoading: loadingUpload}] = useUploadEletrodomesticoImagemMutation()
 
 	const navigate = useNavigate()
 
@@ -49,6 +50,19 @@ const AtualizarEletrodomesticoScreen = () => {
 			navigate('/admin/listaeletrodomestico')
 		}
 	}
+
+	const uploadFileHandler = async(e) => {
+		const formData = new FormData()
+		formData.append('image', e.target.files[0])
+		try {
+			const res = await uploadEletrodomesticoImagem(formData).unwrap()
+			toast.success(res.message)
+			setImagem(res.image)
+		} catch(err){
+			toast.error(err?.data?.message || err.error)
+		}
+	}
+
 	return <>
 		<Link to="/admin/listaeletrodomestico" className='btn btn-light my-3'>
 		Voltar
@@ -83,10 +97,11 @@ const AtualizarEletrodomesticoScreen = () => {
 						
 					</Form.Group>
 
-					<Form.Group controlId='image'>
+					<Form.Group controlId='imagem'>
 		              <Form.Label>Imagem</Form.Label>
-		              <Form.Control type='text' placeholder='Enter image url' value={imagem} onChange={(e) => setImagem(e.target.value)}></Form.Control>
-		             </Form.Group>
+					  <Form.Control type='text' placeholder='Enter image url' value={imagem} onChange={(e) => setImagem}></Form.Control>
+		              <Form.Control type='file' label='escolher ficheiro' onChange={uploadFileHandler}></Form.Control>
+					 </Form.Group>
 
 
 

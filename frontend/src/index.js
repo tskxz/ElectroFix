@@ -25,6 +25,8 @@ import ListaEncomendaScreen from './Screens/admin/ListaEncomendaScreen.jsx';
 import {PayPalScriptProvider} from '@paypal/react-paypal-js'
 import ListaEletrodomesticoScreen from './Screens/admin/ListaEletrodomesticoScreen.jsx';
 import AtualizarEletrodomesticoScreen from './Screens/admin/AtualizarEletrodomesticoScreen.jsx';
+import ListaUtilizadorScreen from './Screens/admin/ListaUtilizadorScreen.jsx';
+import AtualizarUtilizadorScreen from './Screens/admin/AtualizarUtilizadorScreen.jsx';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -44,6 +46,8 @@ const router = createBrowserRouter(
         <Route path="/admin/listaencomenda" element={<ListaEncomendaScreen/>} /> 
         <Route path="/admin/listaeletrodomestico" element={<ListaEletrodomesticoScreen/>} />
         <Route path="/admin/eletrodomestico/:id/edit" element={<AtualizarEletrodomesticoScreen/>} />
+        <Route path="/admin/listautilizador" element={<ListaUtilizadorScreen/>} /> 
+        <Route path="/admin/utilizador/:id/edit" element={<AtualizarUtilizadorScreen/>} /> 
       </Route>
     </Route>
   )

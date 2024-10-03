@@ -36,6 +36,16 @@ const eletrodomesticos = [
         rating: 4.5,
         numReviews: 9,
     },
+    {
+        nome: 'Máquina de lavar roupa Whirlpool 8,0kg FFB 8458',
+        imagem: '/images/Whirlpool-8kg.jpg',
+        descricao: 'A máquina de lavar roupa Whirlpool FFB 8458 é uma opção moderna e eficiente, projetada para oferecer ótimo desempenho e cuidar das suas roupas com tecnologia de ponta. ',
+        preco: 269.99,
+        emStock: 5,
+        rating: 4.0,
+        numReviews: 13,
+    },
+
 ]
 
 export default eletrodomesticos

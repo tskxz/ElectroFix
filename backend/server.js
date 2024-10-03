@@ -6,6 +6,8 @@ import utilizadorRoutes from './routes/utilizadorRoutes.js';
 import encomendaRoutes  from './routes/encomendaRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import cookieParser from 'cookie-parser';
+import path from 'path';
+import uploadRoutes from './routes/uploadRoutes.js';
 
 dotenv.config();
 
@@ -21,6 +23,10 @@ app.use(cookieParser());
 app.use('/api/eletrodomesticos', eletrodomesticoRoutes);
 app.use('/api/utilizadores', utilizadorRoutes);
 app.use('/api/encomendas', encomendaRoutes);
+app.use('/api/upload', uploadRoutes);
+
+const __dirname = path.resolve() // set __dirname to current directory
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 app.get('/', (req, res) => {
     res.send('Api está a rodar...');

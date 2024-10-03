@@ -99,6 +99,15 @@ const eletrodomesticos = [
         rating: 3.5,
         numReviews: 14,
     },
+    {
+        nome: 'Máquina de lavar loiça bosch sms25aw05e branco e 12 conjuntos',
+        imagem: '/images/maquina-loica-bosch2.jpg',
+        descricao: 'Máquina de lavar loiça com capacidade para 12 serviços padrão. Uma máquina bastante silenciosa - SilencePlus - e com um motor EcoSilenceDriveT: Potente, duradouro, silencioso e eficiente, (AxLxP) 600x845x600 mm',
+        preco: 179.99,
+        emStock: 3,
+        rating: 3.0,
+        numReviews: 3,
+    },
 ]
 
 export default eletrodomesticos

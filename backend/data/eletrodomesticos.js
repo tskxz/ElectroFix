@@ -54,6 +54,15 @@ const eletrodomesticos = [
         rating: 4.5,
         numReviews: 11,
     },
+    {
+        nome: 'Frigorífico americano haier hsr3918enpg gentle silver 521l',
+        imagem: '/images/frigorifico-americano-haier.jpg',
+        descricao: 'Com 90 cm de largura, os frigoríficos Side By Side 90 da Haier oferecem uma grande capacidade enquanto proporcionam um acesso fácil aos espaços tanto do frigorífico como do congelador.',
+        preco: 449.99,
+        emStock: 2,
+        rating: 4.0,
+        numReviews: 18,
+    },
 ]
 
 export default eletrodomesticos

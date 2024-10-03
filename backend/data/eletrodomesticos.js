@@ -90,6 +90,15 @@ const eletrodomesticos = [
         rating: 4.0,
         numReviews: 13,
     },
+    {
+        nome: 'Máquina de lavar roupa candy rp 696bwmrr/1-s - antracite a 9kg',
+        imagem: '/images/máquina-candy.jpg',
+        descricao: 'RapidÓ PRO é a máquina de lavar roupa mais rápida que lhe permite poupar tempo com excelentes resultados de lavagem: o inovador Motor Speed-Drive e ao sistema Quick & Clean permitem lavar uma carga completa em apenas 39 minutos sem perder o rendimento. Al ém disso, possui o novo Steam Hygiene Plus, o programa testado e aprovado pela BAF Authority, que garante uma lavagem profunda, (AxLxP) 600X850530 mm',
+        preco: 219.99,
+        emStock: 2,
+        rating: 3.5,
+        numReviews: 14,
+    },
 ]
 
 export default eletrodomesticos

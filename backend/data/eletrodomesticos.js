@@ -18,6 +18,15 @@ const eletrodomesticos = [
         rating: 4.0,
         numReviews: 8,
     },
+    {
+        nome: 'Máquina de lavar roupa Samsung WW80T4040EEEP',
+        imagem: '/images/samsung-ww80t40.jpg',
+        descricao: 'Capacidade de Lavagem: 8 Kgs Velocidade de Centrifugação: 1400 RPM Motor Digital Inverter Número de Programas: 12 Lavagem Rápida 15? Higienização a Vapor Limpeza do Tambor Opção de Demolhar Opção Enxaguamento+ Opção de Final Diferido Classe de Eficiência Energética: D Dimensões (AxLxP): 85 x 60 x 55 cm ',
+        preco: 199.99,
+        emStock: 5,
+        rating: 4.0,
+        numReviews: 15,
+    },
 ]
 
 export default eletrodomesticos

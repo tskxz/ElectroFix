@@ -62,7 +62,7 @@ const atualizarEletrodomestico = asyncHandler(async(req, res) => {
 
 
 // @desc    Apagar eletrodomestico
-// @route   DELETE /api/produtos/:id
+// @route   DELETE /api/eletrodomesticos/:id
 // @access  Private/Admin
 const deleteEletrodomestico = asyncHandler(async(req, res) => {
 
@@ -77,4 +77,39 @@ const deleteEletrodomestico = asyncHandler(async(req, res) => {
     }
 })
 
-export {getEletrodomesticos, getEletrodomestico, criarEletrodomestico, atualizarEletrodomestico, deleteEletrodomestico}
+// @desc    Criar uma review
+// @route   POST /api/eletrodomesticos/:id/review
+// @access  Private
+const criarEletrodomesticoReview = asyncHandler(async(req, res) => {
+    const {rating, comentario} = req.body
+     const eletrodomestico = await Eletrodomestico.findById(req.params.id)
+     if(eletrodomestico){
+        const alreadyReviewed = eletrodomestico.reviews.find(
+             (review) => review.utilizador.toString() === req.utilizador._id.toString()
+         )
+ 
+        if(alreadyReviewed){
+         res.status(400)
+         throw new Error('Eletrodomestico already reviewed')
+        }
+ 
+        const review = {
+         nome: req.utilizador.nome,
+         rating: Number(rating),
+         comentario,
+         utilizador: req.utilizador._id
+        }
+ 
+        eletrodomestico.reviews.push(review)
+        eletrodomestico.numReviews = eletrodomestico.reviews.length;
+        eletrodomestico.rating = eletrodomestico.reviews.reduce((acc, review) => acc+review.rating, 0) / eletrodomestico.reviews.length
+        await eletrodomestico.save()
+        res.status(201).json({message: 'Review added'})
+ 
+     } else {
+         res.status(404)
+         throw new Error('resource n encontrado')
+     }
+ })
+
+export {getEletrodomesticos, getEletrodomestico, criarEletrodomestico, atualizarEletrodomestico, deleteEletrodomestico, criarEletrodomesticoReview}

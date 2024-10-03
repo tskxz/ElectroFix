@@ -117,6 +117,15 @@ const eletrodomesticos = [
         rating: 4.5,
         numReviews: 12,
     },
+    {
+        nome: 'Máquina de lavar loiça bosch sms25ai05e inox e 12 conjuntos',
+        imagem: '/images/Maquina-Loica-Bosch.3.jpg',
+        descricao: 'Máquina de Lavar Loiça com capacidade para 12 serviços padrão. A máquina é muito silenciosa - SilencePlus. Toda a informação de que necessita é indicada no visor: tempo restante, ajustes básicos. AquaStop: Sistema anti-fugas com garantia vitalícia contra danos provocados por fugas de água. Tecnologia ActiveWater: Menos água, menos energia, melhor performance, (AxLxP) 600 x 845 x 600 mm',
+        preco: 159.99,
+        emStock: 14,
+        rating: 4.0,
+        numReviews: 19,
+    },
 ]
 
 export default eletrodomesticos

@@ -8,12 +8,14 @@ import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import {useParams} from 'react-router-dom'
 import Paginate from '../../components/Paginate'
+import {Link} from 'react-router-dom'
 
 const HomeScreen = () => {
-  const {pageNumber} = useParams()
-  const {data, isLoading, error} = useGetEletrodomesticosQuery({pageNumber});
+  const {pageNumber, keyword} = useParams()
+  const {data, isLoading, error} = useGetEletrodomesticosQuery({keyword, pageNumber});
   return (
     <>
+       {keyword && <Link to='/' className='btn btn-light mb-4'> Go back </Link>}
        {isLoading ? (<Loader/>) : error ? (<Message variant='danger'>{error?.data?.message || error.error}</Message>) : (<>
         <h1>Os nossos eletrodomésticos</h1>
         <Row>
@@ -23,7 +25,7 @@ const HomeScreen = () => {
             </Col>
           ))}
         </Row><br /><br />
-        <Paginate pages={data.pages} page={data.page}/>
+        <Paginate pages={data.pages} page={data.page} keyword={keyword ? keyword : ''}/>
        </>)}
     </>
   )

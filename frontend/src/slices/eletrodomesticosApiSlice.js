@@ -4,10 +4,14 @@ import {apiSlice} from './apiSlice';
 export const eletrodomesticosApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getEletrodomesticos: builder.query({
-            query: () => ({
+            query: ({pageNumber}) => ({
                 url: ELETRODOMESTICOS_URL,
+                params: {
+                    pageNumber,
+                }
 
             }),
+            providesTags: ['Eletrodomesticos'],
             keepUnusedDataFor: 5,
         }),
 

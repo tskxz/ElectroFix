@@ -2,7 +2,8 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "allowedHosts": "all", 
+  "allowedHosts": "all",
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@paypal/react-paypal-js": "^8.7.0",
     "@reduxjs/toolkit": "^2.2.7",

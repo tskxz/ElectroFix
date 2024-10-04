@@ -5,9 +5,12 @@ import Message from '../../components/Message.jsx';
 import Loader from '../../components/Loader.jsx'
 import {toast} from 'react-toastify'
 import {useGetEletrodomesticosQuery, useCriarEletrodomesticoMutation, useDeleteEletrodomesticoMutation} from '../../slices/eletrodomesticosApiSlice.js'
+import {useParams} from 'react-router-dom'
+import Paginate from '../../components/Paginate.jsx'
 
 const ListaEletrodomesticoScreen = () => {
-	const {data: eletrodomesticos, isLoading, error, refetch} = useGetEletrodomesticosQuery()
+	const {pageNumber} = useParams()
+	const {data, isLoading, error, refetch} = useGetEletrodomesticosQuery({pageNumber});
 	const [criarEletrodomestico, {isLoading:loadingCreate}] = useCriarEletrodomesticoMutation()
 	const [deleteEletrodomestico, {isLoading: loadingDelete}] = useDeleteEletrodomesticoMutation()
 	const deleteHandler = async (id) => {
@@ -55,7 +58,7 @@ const ListaEletrodomesticoScreen = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{eletrodomesticos.map((eletrodomestico) => (
+						{data.eletrodomesticos.map((eletrodomestico) => (
 							<tr key={eletrodomestico._id}>
 								<td>{eletrodomestico._id}</td>
 								<td>{eletrodomestico.nome}</td>
@@ -75,6 +78,7 @@ const ListaEletrodomesticoScreen = () => {
 						))}
 					</tbody>
 				</Table>
+				<Paginate pages={data.pages} page={data.page} isAdmin={true} />
 			</>
 		)}
 	</>

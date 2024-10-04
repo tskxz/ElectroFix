@@ -47,7 +47,7 @@ const eletrodomesticos = [
     },
     {
         nome: 'Máquina Lavar Loiça Siemens SN27YI03CE',
-        imagem: '/images/Máquina de Lavar Loiça SIEMENS.jpg',
+        imagem: '/images/Maquina-de-Lavar-Loica-SIEMENS.jpg',
         descricao: 'A Máquina de Lavar Loiça Siemens SN27YI03CE é um modelo de alta gama, projetado para oferecer eficiência, tecnologia avançada e grande capacidade, (AxLxP): 84.5 x 60 x 60 cm',
         preco: 249.99,
         emStock: 5,

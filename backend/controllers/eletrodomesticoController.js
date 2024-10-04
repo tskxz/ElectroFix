@@ -7,9 +7,10 @@ import Eletrodomestico from "../models/eletrodomesticoModel.js";
 const getEletrodomesticos = asyncHandler(async (req, res) => {
     const pageSize = 2;
     const page = Number(req.query.pageNumber) || 1;
-    const count = await Eletrodomestico.countDocuments()
+    const keyword = req.query.keyword ? {nome: {$regex: req.query.keyword, $options: 'i'}} : {}
+    const count = await Eletrodomestico.countDocuments({...keyword})
 
-    const eletrodomesticos = await Eletrodomestico.find({}).limit(pageSize).skip(pageSize * (page-1));
+    const eletrodomesticos = await Eletrodomestico.find({...keyword}).limit(pageSize).skip(pageSize * (page-1));
     res.json({eletrodomesticos, page, pages: Math.ceil(count / pageSize)});
 })
 

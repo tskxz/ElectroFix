@@ -5,8 +5,12 @@ import Eletrodomestico from "../models/eletrodomesticoModel.js";
 // @route  GET /api/eletrodomesticos
 // @access Public
 const getEletrodomesticos = asyncHandler(async (req, res) => {
-    const eletrodomesticos = await Eletrodomestico.find({});
-    res.json(eletrodomesticos);
+    const pageSize = 2;
+    const page = Number(req.query.pageNumber) || 1;
+    const count = await Eletrodomestico.countDocuments()
+
+    const eletrodomesticos = await Eletrodomestico.find({}).limit(pageSize).skip(pageSize * (page-1));
+    res.json({eletrodomesticos, page, pages: Math.ceil(count / pageSize)});
 })
 
 // @desc   Obter um eletrôdomestico específico pelo ID

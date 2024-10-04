@@ -6,22 +6,25 @@ import Eletrodomestico from '../../components/Eletrodomestico'
 import { useGetEletrodomesticosQuery } from '../../slices/eletrodomesticosApiSlice'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
+import {useParams} from 'react-router-dom'
+import Paginate from '../../components/Paginate'
 
 const HomeScreen = () => {
-
-  const {data: eletrodomesticos, isLoading, error} = useGetEletrodomesticosQuery();
+  const {pageNumber} = useParams()
+  const {data, isLoading, error} = useGetEletrodomesticosQuery({pageNumber});
   return (
     <>
-       {isLoading ? (<Loader/>) : error ? (<Message variant='danger'>{error?.data?.message || error.error}</Message>) : <>
+       {isLoading ? (<Loader/>) : error ? (<Message variant='danger'>{error?.data?.message || error.error}</Message>) : (<>
         <h1>Os nossos eletrodomésticos</h1>
         <Row>
-          {eletrodomesticos.map( (eletrodomestico) => (
+          {data.eletrodomesticos.map( (eletrodomestico) => (
             <Col key={eletrodomestico._id} sm={12} md={6} lg={4} xl={3}>
               <Eletrodomestico eletrodomestico={eletrodomestico} /> 
             </Col>
           ))}
-        </Row>
-       </>}
+        </Row><br /><br />
+        <Paginate pages={data.pages} page={data.page}/>
+       </>)}
     </>
   )
 }

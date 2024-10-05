@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Carousel,Image } from "react-bootstrap";
 import Loader from './Loader'
 import Message from './Message'
-import {useGetTopEletrodomesticosQuery} from '../slices/eletrodomesticoApiSlice.js'
+import {useGetTopEletrodomesticosQuery} from '../slices/eletrodomesticosApiSlice';
 
 const EletrodomesticoCarousel = () => {
     const {data: eletrodomesticos, isLoading, error} = useGetTopEletrodomesticosQuery()

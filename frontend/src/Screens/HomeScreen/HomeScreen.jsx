@@ -9,7 +9,7 @@ import Message from '../../components/Message'
 import {useParams} from 'react-router-dom'
 import Paginate from '../../components/Paginate'
 import {Link} from 'react-router-dom'
-import EletrodomesticoCarousel from '../components/EletrodomesticoCarousel'
+import EletrodomesticoCarousel from '../../components/EletrodomesticoCarousel.jsx'
 
 const HomeScreen = () => {
   const {pageNumber, keyword} = useParams()

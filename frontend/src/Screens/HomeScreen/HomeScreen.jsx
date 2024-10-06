@@ -11,12 +11,13 @@ import Paginate from '../../components/Paginate'
 import {Link} from 'react-router-dom'
 import EletrodomesticoCarousel from '../../components/EletrodomesticoCarousel.jsx'
 
+
 const HomeScreen = () => {
   const {pageNumber, keyword} = useParams()
   const {data, isLoading, error} = useGetEletrodomesticosQuery({keyword, pageNumber});
   return (
     <>
-       {keyword && <Link to='/' className='btn btn-light mb-4'> Go back </Link>}
+       {!keyword ? <EletrodomesticoCarousel/> : (<Link to='/' className='btn btn-light mb-4'> Go back </Link>)}
        {isLoading ? (<Loader/>) : error ? (<Message variant='danger'>{error?.data?.message || error.error}</Message>) : (<>
         <h1>Os nossos eletrodomésticos</h1>
         <Row>

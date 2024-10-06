@@ -1,3 +1,4 @@
+import { query } from 'express';
 import {ELETRODOMESTICOS_URL, UPLOAD_URL} from '../constants';
 import {apiSlice} from './apiSlice';
 
@@ -57,8 +58,15 @@ export const eletrodomesticosApiSlice = apiSlice.injectEndpoints({
                 body: data,
             }),
             invalidatesTags: ['Eletrodomestico']
+        }),
+
+        getTopEletrodomesticos: builder.query({
+            query: () => ({
+                url: `${ELETRODOMESTICOS_URL}/top`
+            }),
+            keepUnusedDataFor : 5
         })
-    }),
+    })
 })
 
-export const {useGetEletrodomesticosQuery, useGetEletrodomesticoQuery, useCriarEletrodomesticoMutation, useAtualizarEletrodomesticoMutation, useUploadEletrodomesticoImagemMutation, useDeleteEletrodomesticoMutation, useCriarReviewMutation} = eletrodomesticosApiSlice
+export const {useGetEletrodomesticosQuery, useGetEletrodomesticoQuery, useCriarEletrodomesticoMutation, useAtualizarEletrodomesticoMutation, useUploadEletrodomesticoImagemMutation, useDeleteEletrodomesticoMutation, useCriarReviewMutation, useGetTopEletrodomesticosQuery} = eletrodomesticosApiSlice

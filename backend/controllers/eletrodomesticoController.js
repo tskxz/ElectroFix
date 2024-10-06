@@ -117,4 +117,13 @@ const criarEletrodomesticoReview = asyncHandler(async(req, res) => {
      }
  })
 
-export {getEletrodomesticos, getEletrodomestico, criarEletrodomestico, atualizarEletrodomestico, deleteEletrodomestico, criarEletrodomesticoReview}
+ // @desc    Ter top rated Eletrodomésticos
+ // @route   GET /api/eletrodomesticos/top
+ // @access  Public
+
+ const getTopEletrodomesticos = asyncHandler(async(req, res) => {
+    const eletrodomesticos = await Eletrodomestico.find({}).sort(({rating: -1})).limit(3);
+    res.status(200).json(produtos)
+ })
+
+export {getEletrodomesticos, getEletrodomestico, criarEletrodomestico, atualizarEletrodomestico, deleteEletrodomestico, criarEletrodomesticoReview, getTopEletrodomesticos}

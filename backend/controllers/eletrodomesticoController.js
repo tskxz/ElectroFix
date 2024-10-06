@@ -123,7 +123,7 @@ const criarEletrodomesticoReview = asyncHandler(async(req, res) => {
 
  const getTopEletrodomesticos = asyncHandler(async(req, res) => {
     const eletrodomesticos = await Eletrodomestico.find({}).sort(({rating: -1})).limit(3);
-    res.status(200).json(produtos)
+    res.status(200).json(eletrodomesticos)
  })
 
 export {getEletrodomesticos, getEletrodomestico, criarEletrodomestico, atualizarEletrodomestico, deleteEletrodomestico, criarEletrodomesticoReview, getTopEletrodomesticos}

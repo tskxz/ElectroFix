@@ -11,6 +11,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import { adicionarToCarrinho } from '../../slices/carrinhoSlice';
 import {toast} from 'react-toastify'
 import {Link} from 'react-router-dom'
+import Meta from '../../components/Meta';
 
 const EletrodomesticoScreen = () => {
     const {id: eletrodomesticoId} = useParams()
@@ -45,6 +46,7 @@ const EletrodomesticoScreen = () => {
     return(
       <>
       {isLoading ? (<Loader/>) : error ? (<Message variant='danger'>{error?.data?.message || error.error}</Message>) : (<>
+      <Meta title={eletrodomestico.nome}/>
         <Row>
         <Col md={5}>
           <Image src={eletrodomestico.imagem} alt={eletrodomestico.nome} fluid />

@@ -15,7 +15,7 @@ const EletrodomesticoCarousel = () => {
                             <Image className="carousel-image" src={eletrodomestico.imagem} alt={eletrodomestico.nome} fluid />
                         </div>
                         <Carousel.Caption className="carousel-caption">
-                            <h2>{eletrodomestico.nome} (&{eletrodomestico.preco}) </h2>
+                            <h2>{eletrodomestico.nome} (€{eletrodomestico.preco}) </h2>
                         </Carousel.Caption>
                         </Link>
 

@@ -10,7 +10,7 @@ import {useParams} from 'react-router-dom'
 import Paginate from '../../components/Paginate'
 import {Link} from 'react-router-dom'
 import EletrodomesticoCarousel from '../../components/EletrodomesticoCarousel.jsx'
-
+import Meta from '../../components/Meta.jsx'
 
 const HomeScreen = () => {
   const {pageNumber, keyword} = useParams()
@@ -19,6 +19,7 @@ const HomeScreen = () => {
     <>
        {!keyword ? <EletrodomesticoCarousel/> : (<Link to='/' className='btn btn-light mb-4'> Go back </Link>)}
        {isLoading ? (<Loader/>) : error ? (<Message variant='danger'>{error?.data?.message || error.error}</Message>) : (<>
+       <Meta/>
         <h1>Os nossos eletrodomésticos</h1>
         <Row>
           {data.eletrodomesticos.map( (eletrodomestico) => (

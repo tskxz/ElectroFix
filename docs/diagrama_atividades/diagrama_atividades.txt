@@ -1,0 +1,57 @@
+Diagrama de Atividades - Processo de Agendamento e Reparação
+[Início]:
+
+    O processo começa quando o cliente decide agendar uma reparação.
+
+[Preencher Agendamento]:
+
+    O cliente preenche um formulário online com detalhes sobre o eletrodoméstico e o problema a ser resolvido, além de fornecer informações de contato.
+
+[Pagamento da Taxa de Deslocação]:
+
+    O cliente realiza o pagamento antecipado da taxa de deslocação do técnico, no valor de 20€.
+
+[Confirmar Pagamento]:
+
+    O sistema verifica se o pagamento foi processado corretamente.
+        (Pagamento Confirmado?)
+            [Sim]: O pagamento foi confirmado com sucesso e o processo continua.
+            [Não]: O cliente é notificado de um erro no pagamento e o processo é encerrado.
+
+[Criação de Agenda]:
+
+    O sistema gera uma agenda de visita com base nas informações fornecidas pelo cliente e na disponibilidade do técnico.
+
+[Definir Confirmado]:
+
+    O sistema aguarda a confirmação do técnico para validar a agenda.
+        (Agenda Confirmada?)
+            [Sim]: O técnico confirma a agenda e a visita é agendada.
+            [Não]: O sistema define o status da agenda como "pendente", e o processo aguarda nova confirmação.
+
+[Visita do Técnico]:
+
+    O técnico visita o cliente no local e faz um diagnóstico inicial do problema no eletrodoméstico.
+
+[Definir Orçamento]:
+
+    O técnico faz a avaliação do diagnóstico e insere o orçamento no sistema, para que o cliente possa analisá-lo.
+
+[Autorização do Cliente]:
+
+    O cliente recebe o orçamento e precisa autorizar a reparação.
+        (Reparação Autorizada?)
+            [Sim]: O cliente autoriza a reparação, e o processo continua.
+            [Não]: O cliente rejeita o orçamento e o processo é encerrado.
+
+[Criação de Reparação]:
+
+    O técnico inicia o processo de reparação do eletrodoméstico após a autorização do cliente.
+
+[Encerrar Processo]:
+
+    Após a conclusão da reparação, o técnico encerra o processo, atualizando o sistema e finalizando o agendamento.
+
+[Fim]:
+
+    O processo de agendamento e reparação está finalizado.

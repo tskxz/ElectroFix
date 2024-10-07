@@ -1,0 +1,49 @@
+# Entidades
+
+# Armazena informações sobre os clientes que utilizam a aplicação.
+Cliente(nome, email, telefone, password)
+
+# Representa o agendamento de uma reparação.
+Agendamento(endereco, data_horario, estado)
+
+# Representa o serviço de reparação realizado pelo técnico.
+Reparação(descricao_problema, valor_orcamento, status)
+
+# Refere-se aos produtos que estão disponíveis para compra.
+Eletrodoméstico(nome_produto, descricao, preco, quantidade_stock)
+
+# Representa o pedido feito por um cliente.
+Encomenda(valor_total, data_encomenda, status)
+
+# Representa os produtos dentro de uma encomenda específica
+ItemEncomenda(quantidade, preco_unitario)
+
+# Relacionamentos
+
+# Um Cliente pode fazer vários Agendamentos.
+# Cada Agendamento é feito por um único Cliente.
+ClienteFazAgendamento(Cliente, Agendamento) 1:N
+
+
+# Um Cliente pode fazer várias Encomendas.
+# Cada Encomenda é feita por um único Cliente.
+ClienteFazEncomenda(Cliente, Encomenda) 1:N
+
+# Cada Agendamento resulta em uma única Reparação.
+# Cada Reparação está associada a um único Agendamento.
+ReparaçãoAgendamento(Reparação, Agendamento) 1:1
+
+# Um Eletrodoméstico pode estar presente em várias Encomendas.
+# Uma Encomenda pode incluir vários Eletrodomésticos.
+# Esse relacionamento muitos-para-muitos é mediado pela entidade associativa ItemEncomenda.
+# ItemEncomenda atua como uma tabela intermediária que organiza quais Eletrodomésticos estão em quais Encomendas e fornece detalhes adicionais sobre cada item na encomenda (como quantidade e preço).
+
+EletrodomésticoPertenceEncomenda(Eletrodoméstico, Encomenda) N:N
+
+# Uma Encomenda pode conter vários Itens de Encomenda.
+# Cada ItemEncomenda pertence a uma única Encomenda.
+EncomendaContémItens(Encomenda, ItemEncomenda) 1:N
+
+#Cada ItemEncomenda refere-se a um único Eletrodoméstico.
+# Um Eletrodoméstico pode estar em vários Itens de Encomenda.
+ItemContémProduto(ItemEncomenda, Eletrodoméstico) N:1

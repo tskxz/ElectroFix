@@ -42,7 +42,7 @@ const CarrinhoScreen = () => {
                     <Image src={item.imagem} alt={item.nome} fluid rounded/>
                   </Col>
                   <Col md={3}>
-                    <Link to={`/eletrodomesticos/${item._id}`}>{item.nome}</Link>
+                    <Link to={`/eletrodomestico/${item._id}`}>{item.nome}</Link>
                   </Col>
                   <Col md={2}>
                     {item.preco}€

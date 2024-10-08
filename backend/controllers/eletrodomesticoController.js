@@ -5,7 +5,7 @@ import Eletrodomestico from "../models/eletrodomesticoModel.js";
 // @route  GET /api/eletrodomesticos
 // @access Public
 const getEletrodomesticos = asyncHandler(async (req, res) => {
-    const pageSize = 2;
+    const pageSize = 4;
     const page = Number(req.query.pageNumber) || 1;
     const keyword = req.query.keyword ? {nome: {$regex: req.query.keyword, $options: 'i'}} : {}
     const count = await Eletrodomestico.countDocuments({...keyword})

@@ -5,8 +5,6 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import {salvarEnderecoPostal} from '../../slices/carrinhoSlice'
 import CheckoutStepsmarcacao from '../../components/CheckoutStepsmarcacao'
-import DateTimePicker from '../../components/DateTimePicker'
-
 
 const ServicoMarcacaoScreen = () => {
     const carrinho = useSelector((state)=>state.carrinho)
@@ -16,6 +14,11 @@ const ServicoMarcacaoScreen = () => {
     const [cidade, setCidade] = useState(enderecoPostal?.cidade || '')
     const [codigoPostal, setCodigoPostal] = useState(enderecoPostal?.codigoPostal || '')
     const [pais, setPais] = useState(enderecoPostal?.pais || '')
+    const [dataMarcacao, setDataMarcacao] = useState("");
+
+    const handleChange = (event) => {
+        setDataMarcacao(event.target.value);
+    };
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -23,6 +26,7 @@ const ServicoMarcacaoScreen = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         dispatch(salvarEnderecoPostal({endereco, cidade, codigoPostal, pais}))
+        console.log(dataMarcacao)
         navigate('/pagamentoservico')
     }
     return (
@@ -52,7 +56,12 @@ const ServicoMarcacaoScreen = () => {
                 </Form.Group>
 
                 <Form.Group controlId='date_time' className='my-2'>
-                    <DateTimePicker/>
+                    <Form.Label>Selecione a data e a hora:</Form.Label>
+                    <Form.Control
+                        type="datetime-local"
+                        value={dataMarcacao}
+                        onChange={handleChange}
+                    />
                 </Form.Group>
         
                 <Button type='submit' variant='primary' className='my-2'>Continuar</Button>

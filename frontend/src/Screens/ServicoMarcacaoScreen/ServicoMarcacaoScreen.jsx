@@ -14,19 +14,18 @@ const ServicoMarcacaoScreen = () => {
     const [cidade, setCidade] = useState(enderecoPostal?.cidade || '')
     const [codigoPostal, setCodigoPostal] = useState(enderecoPostal?.codigoPostal || '')
     const [pais, setPais] = useState(enderecoPostal?.pais || '')
-    const [dataMarcacao, setDataMarcacao] = useState("");
+    const [dataMarcacao, setDataMarcacao] = useState(enderecoPostal?.dataMarcacao || '');
 
     const handleChange = (event) => {
         setDataMarcacao(event.target.value);
     };
-
+    console.log(dataMarcacao)
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(salvarEnderecoPostal({endereco, cidade, codigoPostal, pais}))
-        console.log(dataMarcacao)
+        dispatch(salvarEnderecoPostal({endereco, cidade, codigoPostal, pais, dataMarcacao}))
         navigate('/pagamentoservico')
     }
     return (
@@ -55,7 +54,7 @@ const ServicoMarcacaoScreen = () => {
                     <Form.Control type='text' placeholder='enter país' value={pais} onChange={(e) => setPais(e.target.value)}></Form.Control>
                 </Form.Group>
 
-                <Form.Group controlId='date_time' className='my-2'>
+                <Form.Group controlId='dataMarcacao' className='my-2'>
                     <Form.Label>Selecione a data e a hora:</Form.Label>
                     <Form.Control
                         type="datetime-local"

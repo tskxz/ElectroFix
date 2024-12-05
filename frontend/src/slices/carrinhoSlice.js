@@ -1,5 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit'
 import { atualizarCarrinho } from '../utils/carrinhoUtils';
+// foi adicionado a data marcacao, supostamente so deve ser para agendar servico
+// todo: criar marcacaoServico slice
 const initialState = localStorage.getItem('carrinho') ? JSON.parse(localStorage.getItem("carrinho")) : {carrinhoItens: [], enderecoPostal: {}, metodoPagamento: 'Paypal'}
 
 const carrinhoSlice = createSlice({

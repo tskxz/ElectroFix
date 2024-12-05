@@ -85,7 +85,7 @@ const AgendarServicoScreen = () => {
 							<Row>
 								<Col>Agendado: </Col>
 								<Col>
-									
+									{carrinho.enderecoPostal.dataMarcacao}
 								</Col>
 							</Row>
 						</ListGroup.Item>

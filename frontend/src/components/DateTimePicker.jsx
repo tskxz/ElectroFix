@@ -13,14 +13,14 @@ const DateTimePicker = () => {
   };
 
   return (
-    <Container className="mt-4">
+        <div>
           <Form.Label>Selecione a data e a hora:</Form.Label>
           <Form.Control
             type="datetime-local"
             value={dateTime}
             onChange={handleChange}
           />
-    </Container>
+          </div>
   );
 };
 

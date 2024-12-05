@@ -50,8 +50,9 @@ const ServicoMarcacaoScreen = () => {
                     <Form.Label>País</Form.Label>
                     <Form.Control type='text' placeholder='enter país' value={pais} onChange={(e) => setPais(e.target.value)}></Form.Control>
                 </Form.Group>
+
                 <Form.Group controlId='pais' className='my-2'>
-                <DateTimePicker/>
+                    <DateTimePicker/>
                 </Form.Group>
         
                 <Button type='submit' variant='primary' className='my-2'>Continuar</Button>

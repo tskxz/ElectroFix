@@ -1,12 +1,12 @@
 import {useState, useEffect} from 'react'
 import {Form, Button, Col} from 'react-bootstrap'
 import FormContainer from '../../components/FormContainer'
-import CheckoutSteps from '../../components/CheckoutSteps'
+import CheckoutStepsmarcacao from '../../components/CheckoutStepsmarcacao.jsx'
 import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import {salvarMetodoPagamento} from '../../slices/carrinhoSlice.js'
 
-const PagamentoScreen = () => {
+const PagamentoServicoScreen = () => {
     const [metodoPagamento, setMetodoPagamento] = useState('Paypal')
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -14,18 +14,18 @@ const PagamentoScreen = () => {
     const {enderecoPostal} = carrinho;
     useEffect(() => {
         if(!enderecoPostal){
-            navigate('/compra')
+            navigate('/marcacao')
         }
     }, [enderecoPostal, navigate])
 
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(salvarMetodoPagamento(metodoPagamento))
-        navigate('/encomendar')
+        navigate('/agendar')
     }
     return (
         <FormContainer>
-            <CheckoutSteps step1 step2 step3/>
+            <CheckoutStepsmarcacao step1 step2 step3/>
             <h1>Metodo pagamento</h1>
             <Form onSubmit={submitHandler}>
                 <Form.Group>
@@ -43,4 +43,4 @@ const PagamentoScreen = () => {
     )
 }
 
-export default PagamentoScreen
+export default PagamentoServicoScreen

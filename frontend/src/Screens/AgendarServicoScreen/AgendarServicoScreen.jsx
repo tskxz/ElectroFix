@@ -2,7 +2,7 @@ import {useEffect} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import {Button, Row, Col, ListGroup, Image, Card} from 'react-bootstrap'
-import CheckoutSteps from '../../components/CheckoutSteps'
+import CheckoutStepsmarcacao from '../../components/CheckoutStepsmarcacao.jsx'
 import {toast} from 'react-toastify'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
@@ -17,9 +17,9 @@ const AgendarServicoScreen = () => {
 	const [criarEncomenda, {isLoading, error}] = useCriarEncomendaMutation()
 	useEffect(() => {
 		if(!carrinho.enderecoPostal.endereco){
-			navigate('/compra')
+			navigate('/marcacao')
 		} else if(!carrinho.metodoPagamento){
-			navigate('/pagamento')
+			navigate('/pagamentoservico')
 		}
 	}, [carrinho.metodoPagamento, carrinho.enderecoPostal.endereco, navigate])
 	console.log(carrinho.carrinhoItens)
@@ -41,12 +41,12 @@ const AgendarServicoScreen = () => {
 		}
 	}
 	return <>
-		<CheckoutSteps step1 step2 step3 step4/>
+		<CheckoutStepsmarcacao step1 step2 step3 step4/>
 		<Row>
 			<Col md={8}>
 				<ListGroup variant='flush'>
 					<ListGroup.Item>
-						<h2>Shipping</h2>
+						<h2>Dados Pessoais</h2>
 						<p>
 							<strong>Endereco: </strong>
 							{carrinho.enderecoPostal.endereco}, {carrinho.enderecoPostal.cidade} {carrinho.enderecoPostal.codigoPostal}, {carrinho.enderecoPostal.pais}
@@ -60,28 +60,8 @@ const AgendarServicoScreen = () => {
 					</ListGroup.Item>
 
 					<ListGroup.Item>
-						<h2>Itens da encomenda</h2>
-						{carrinho.carrinhoItens.length === 0 ? (
-							<Message>O teu carrinho esta vazio</Message>) : (
-							<ListGroup variant='flush'>
-								{carrinho.carrinhoItens.map((item, index) => (
-									<ListGroup.Item>
-										<Row>
-											<Col md={1}>
-												<Image src={item.imagem} alt={item.nome} fluid rounded/>
-											</Col>
-
-											<Col>
-												<Link to={`/eletrodomestico/${item._id}`}>{item.nome}</Link>
-											</Col>
-											<Col md={4}>
-												{item.quantidade} x {item.preco} = ${item.quantidade * item.preco}
-											</Col> 
-										</Row>
-									</ListGroup.Item>
-								))}
-							</ListGroup>
-							)}
+						<h2>Detalhes do Serviço</h2>
+						
 					</ListGroup.Item>
 				</ListGroup>
 			</Col>
@@ -89,20 +69,12 @@ const AgendarServicoScreen = () => {
 				<Card>
 					<ListGroup variant='flush'>
 						<ListGroup.Item>
-							<h2>Resumo da encomenda</h2>
-						</ListGroup.Item>
-						<ListGroup.Item>
-							<Row>
-								<Col>Itens: </Col>
-								<Col>
-									${carrinho.precoItens}
-								</Col>
-							</Row>
+							<h2>Resumo do Serviço</h2>
 						</ListGroup.Item>
 
 						<ListGroup.Item>
 							<Row>
-								<Col>Preco Envio: </Col>
+								<Col>Preco Serviço: </Col>
 								<Col>
 									${carrinho.precoEnvio}
 								</Col>
@@ -111,9 +83,9 @@ const AgendarServicoScreen = () => {
 
 						<ListGroup.Item>
 							<Row>
-								<Col>Itens: </Col>
+								<Col>Agendado: </Col>
 								<Col>
-									${carrinho.precoTaxa}
+									
 								</Col>
 							</Row>
 						</ListGroup.Item>
@@ -131,7 +103,7 @@ const AgendarServicoScreen = () => {
 						</ListGroup.Item>
 						<ListGroup.Item>
 							<Button type='button' className='btn btn-block' disabled={carrinho.carrinhoItens.length === 0} onClick={encomendarHandler}>
-								Encomendar
+								Agendar
 							</Button>
 							{isLoading && <Loader/>}
 						</ListGroup.Item>

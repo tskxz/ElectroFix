@@ -4,7 +4,8 @@ import FormContainer from '../../components/FormContainer'
 import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import {salvarEnderecoPostal} from '../../slices/carrinhoSlice'
-import CheckoutSteps from '../../components/CheckoutSteps'
+import CheckoutStepsmarcacao from '../../components/CheckoutStepsmarcacao'
+
 
 const ServicoMarcacaoScreen = () => {
     const carrinho = useSelector((state)=>state.carrinho)
@@ -21,12 +22,12 @@ const ServicoMarcacaoScreen = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         dispatch(salvarEnderecoPostal({endereco, cidade, codigoPostal, pais}))
-        navigate('/pagamento')
+        navigate('/pagamentoservico')
     }
     return (
         <FormContainer>
-            <CheckoutSteps step1 step2/>
-            <h1>Shipping</h1>
+            <CheckoutStepsmarcacao step1 step2/>
+            <h1>Dados Pessoais</h1>
 
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='endereco' className='my-2'>
@@ -49,10 +50,10 @@ const ServicoMarcacaoScreen = () => {
                     <Form.Control type='text' placeholder='enter país' value={pais} onChange={(e) => setPais(e.target.value)}></Form.Control>
                 </Form.Group>
                 <Button type='submit' variant='primary' className='my-2'>Continuar</Button>
-
             </Form>
         </FormContainer>
     )
+    
 }
 
 export default ServicoMarcacaoScreen

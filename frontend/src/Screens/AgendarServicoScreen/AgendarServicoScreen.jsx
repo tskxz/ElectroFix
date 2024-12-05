@@ -60,7 +60,7 @@ const AgendarServicoScreen = () => {
 					</ListGroup.Item>
 
 					<ListGroup.Item>
-						<h2>Detalhes do Serviço</h2>
+						
 						
 					</ListGroup.Item>
 				</ListGroup>
@@ -74,7 +74,7 @@ const AgendarServicoScreen = () => {
 
 						<ListGroup.Item>
 							<Row>
-								<Col>Preco Serviço: </Col>
+								<Col>Deslocamento: </Col>
 								<Col>
 									${carrinho.precoEnvio}
 								</Col>

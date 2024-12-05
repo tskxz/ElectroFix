@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import {salvarEnderecoPostal} from '../../slices/carrinhoSlice'
 import CheckoutStepsmarcacao from '../../components/CheckoutStepsmarcacao'
+import DateTimePicker from '../../components/DateTimePicker'
 
 
 const ServicoMarcacaoScreen = () => {
@@ -27,7 +28,7 @@ const ServicoMarcacaoScreen = () => {
     return (
         <FormContainer>
             <CheckoutStepsmarcacao step1 step2/>
-            <h1>Dados Pessoais</h1>
+            <h1>Marcação</h1>
 
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='endereco' className='my-2'>
@@ -49,6 +50,10 @@ const ServicoMarcacaoScreen = () => {
                     <Form.Label>País</Form.Label>
                     <Form.Control type='text' placeholder='enter país' value={pais} onChange={(e) => setPais(e.target.value)}></Form.Control>
                 </Form.Group>
+                <Form.Group controlId='pais' className='my-2'>
+                <DateTimePicker/>
+                </Form.Group>
+        
                 <Button type='submit' variant='primary' className='my-2'>Continuar</Button>
             </Form>
         </FormContainer>

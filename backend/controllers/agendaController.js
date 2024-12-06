@@ -46,4 +46,27 @@ const getMinhasAgendas = asyncHandler(async(req, res) => {
     res.status(200).json(agendas)
 })
 
-export {addAgendaItens, getAgenda, getMinhasAgendas}
+// @desc    Atualizar agenda para pago
+// @route   GET /api/agendas/:id/pago
+// @access  Private
+const atualizarAgendaPago = asyncHandler(async(req, res) => {
+    const agenda = await Agenda.findById(req.params.id)
+    if(agenda){
+        agenda.isPago = true;
+        agenda.pagoEm = Date.now();
+        agenda.resultadoPagamento = {
+            id: req.body.id,
+            status: req.body.status,
+            update_time: req.body.update_time,
+            email_address: req.body.payer.email
+        } 
+
+        const agendaAtualizado = await agenda.save()
+        res.status(200).json(agendaAtualizado)
+    } else {
+            res.status(400)
+            throw new Error('agenda n encontrado')
+    }
+})
+
+export {addAgendaItens, getAgenda, getMinhasAgendas, atualizarAgendaPago}

@@ -38,7 +38,7 @@ const getAgenda = asyncHandler(async(req, res) => {
     }
 })
 
-// @desc    Ter agfendas efetuadas pelo utilizador
+// @desc    Ter agendas efetuadas pelo utilizador
 // @route   GET /api/agendas/minhas_agendas
 // @access  Private
 const getMinhasAgendas = asyncHandler(async(req, res) => {

@@ -11,6 +11,7 @@ import {useCriarAgendaMutation} from '../../slices/agendasApiSlice.js'
 const AgendarServicoScreen = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
+	const {utilizadorInfo} = useSelector((state) => state.auth)
 	const agenda = useSelector((state) => state.agenda)
 	const [criarAgenda, {isLoading, error}] = useCriarAgendaMutation()
 	useEffect(() => {
@@ -45,6 +46,12 @@ const AgendarServicoScreen = () => {
 					<ListGroup.Item>
 						<h2>Dados Pessoais</h2>
 						<p>
+						<strong>Nome: </strong>
+						{utilizadorInfo.nome}
+						<br></br>
+						<strong>Email: </strong>
+						{utilizadorInfo.email}
+						<br></br>
 							<strong>Endereco: </strong>
 							{agenda.enderecoPostal.endereco}, {agenda.enderecoPostal.cidade} {agenda.enderecoPostal.codigoPostal}, {agenda.enderecoPostal.pais}
 						</p>

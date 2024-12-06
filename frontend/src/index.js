@@ -20,6 +20,7 @@ import PrivateRoute from './components/PrivateRoute.jsx';
 import PagamentoScreen from './Screens/PagamentoScreen/PagamentoScreen.jsx';
 import EncomendarScreen from './Screens/EncomendarScreen/EncomendarScreen.jsx';
 import EncomendaScreen from './Screens/EncomendaScreen/EncomendaScreen.jsx';
+import AgendaScreen from './Screens/AgendaScreen/AgendaScreen.jsx';
 import PerfilScreen from './Screens/PerfilScreen/PerfilScreen.jsx';
 import AdminRoute from './components/AdminRoute.jsx';
 import ListaEncomendaScreen from './Screens/admin/ListaEncomendaScreen.jsx';
@@ -47,6 +48,7 @@ const router = createBrowserRouter(
         <Route path="/pagamento" element={<PagamentoScreen/>}/>
         <Route path="/encomendar" element={<EncomendarScreen/>}/>
         <Route path="/encomenda/:id" element={<EncomendaScreen/>} />
+        <Route path="/agenda/:id" element={<AgendaScreen/>} />
         <Route path="/perfil" element={<PerfilScreen/>} />
         <Route path="/marcacao" element={<ServicoMarcacaoScreen/>} />
         <Route path="/agendar" element={<AgendarServicoScreen/>} />

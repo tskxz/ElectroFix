@@ -143,6 +143,12 @@ const AgendaScreen = () => {
 							</ListGroup.Item>
 							<ListGroup.Item>
 								<Row>
+									<Col>Agendado</Col>
+									<Col>{agenda.enderecoPostal.dataMarcacao}</Col>
+								</Row>
+							</ListGroup.Item>
+							<ListGroup.Item>
+								<Row>
 									<Col>Taxa</Col>
 									<Col>${agenda.precoTaxa}</Col>
 								</Row>

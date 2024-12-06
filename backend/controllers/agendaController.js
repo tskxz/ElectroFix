@@ -25,5 +25,17 @@ const addAgendaItens = asyncHandler(async(req, res) => {
     
 })
 
+// @desc    Ter ordem atraves do id
+// @route   GET /api/agendas/:id
+// @access  Private/Admin
+const getAgenda = asyncHandler(async(req, res) => {
+    const agenda = await Agenda.findById(req.params.id).populate('utilizador', 'nome email')
+    if(agenda){
+        res.status(200).json(agenda)
+    } else {
+        res.status(404)
+        throw new Error('agenda n encontrado')
+    }
+})
 
-export {addAgendaItens}
+export {addAgendaItens, getAgenda}

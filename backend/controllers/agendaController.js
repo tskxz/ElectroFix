@@ -9,7 +9,7 @@ import Agenda from '../models/agendaModel.js'
 // @access  Private
 const addAgendaItens = asyncHandler(async(req, res) => {
     const {enderecoPostal, metodoPagamento, precoDeslocamento, precoTaxa, precoTotal} = req.body
-    
+    console.log(enderecoPostal)
     const agenda = new Agenda({
         utilizador: req.utilizador._id,
         enderecoPostal,
@@ -38,4 +38,12 @@ const getAgenda = asyncHandler(async(req, res) => {
     }
 })
 
-export {addAgendaItens, getAgenda}
+// @desc    Ter agfendas efetuadas pelo utilizador
+// @route   GET /api/agendas/minhas_agendas
+// @access  Private
+const getMinhasAgendas = asyncHandler(async(req, res) => {
+    const agendas = await Agenda.find({utilizador: req.utilizador._id})
+    res.status(200).json(agendas)
+})
+
+export {addAgendaItens, getAgenda, getMinhasAgendas}

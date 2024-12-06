@@ -58,7 +58,16 @@ const AgendarServicoScreen = () => {
 							<Row>
 								<Col>Deslocamento: </Col>
 								<Col>
-									20.00€
+									${agenda.precoDeslocamento}
+								</Col>
+							</Row>
+						</ListGroup.Item>
+
+						<ListGroup.Item>
+							<Row>
+								<Col>Taxa: </Col>
+								<Col>
+									${agenda.precoTaxa}
 								</Col>
 							</Row>
 						</ListGroup.Item>
@@ -76,7 +85,7 @@ const AgendarServicoScreen = () => {
 							<Row>
 								<Col>Total: </Col>
 								<Col>
-									20.00€
+									${agenda.precoTotal}
 								</Col>
 							</Row>
 						</ListGroup.Item>

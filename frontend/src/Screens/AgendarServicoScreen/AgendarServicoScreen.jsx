@@ -7,39 +7,21 @@ import {toast} from 'react-toastify'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 import {useCriarEncomendaMutation} from '../../slices/encomendasApiSlice.js'
-import {limparCarrinhoItens} from '../../slices/carrinhoSlice'
-
 
 const AgendarServicoScreen = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
-	const carrinho = useSelector((state) => state.carrinho)
+	const agenda = useSelector((state) => state.agenda)
 	const [criarEncomenda, {isLoading, error}] = useCriarEncomendaMutation()
 	useEffect(() => {
-		if(!carrinho.enderecoPostal.endereco){
+		if(!agenda.enderecoPostal.endereco){
 			navigate('/marcacao')
-		} else if(!carrinho.metodoPagamento){
+		} else if(!agenda.metodoPagamento){
 			navigate('/pagamentoservico')
 		}
-	}, [carrinho.metodoPagamento, carrinho.enderecoPostal.endereco, navigate])
-	console.log(carrinho.carrinhoItens)
-	const encomendarHandler = async () => {
-		try {
-			const res = await criarEncomenda({
-				encomendaItens: carrinho.carrinhoItens,
-				enderecoPostal: carrinho.enderecoPostal,
-				metodoPagamento: carrinho.metodoPagamento,
-				precoItens: carrinho.precoItens,
-				precoEnvio: carrinho.precoEnvio,
-				precoTaxa: carrinho.precoTaxa,
-				precoTotal: carrinho.precoTotal
-			}).unwrap();
-			dispatch(limparCarrinhoItens());
-			navigate(`/encomenda/${res._id}`)
-		} catch(err) {
-			toast(err)
-		}
-	}
+	}, [agenda.metodoPagamento, agenda.enderecoPostal.endereco, navigate])
+	
+	
 	return <>
 		<CheckoutStepsmarcacao step1 step2 step3 step4/>
 		<Row>
@@ -49,14 +31,14 @@ const AgendarServicoScreen = () => {
 						<h2>Dados Pessoais</h2>
 						<p>
 							<strong>Endereco: </strong>
-							{carrinho.enderecoPostal.endereco}, {carrinho.enderecoPostal.cidade} {carrinho.enderecoPostal.codigoPostal}, {carrinho.enderecoPostal.pais}
+							{agenda.enderecoPostal.endereco}, {agenda.enderecoPostal.cidade} {agenda.enderecoPostal.codigoPostal}, {agenda.enderecoPostal.pais}
 						</p>
 					</ListGroup.Item>
 
 					<ListGroup.Item>
 						<h2>Metodo pagamento</h2>
 						<strong>Metodo: </strong>
-						{carrinho.metodoPagamento}
+						{agenda.metodoPagamento}
 					</ListGroup.Item>
 
 					<ListGroup.Item>
@@ -76,7 +58,7 @@ const AgendarServicoScreen = () => {
 							<Row>
 								<Col>Deslocamento: </Col>
 								<Col>
-									${carrinho.precoEnvio}
+									20.00€
 								</Col>
 							</Row>
 						</ListGroup.Item>
@@ -85,7 +67,7 @@ const AgendarServicoScreen = () => {
 							<Row>
 								<Col>Agendado: </Col>
 								<Col>
-									{carrinho.enderecoPostal.dataMarcacao}
+									{agenda.enderecoPostal.dataMarcacao}
 								</Col>
 							</Row>
 						</ListGroup.Item>
@@ -94,7 +76,7 @@ const AgendarServicoScreen = () => {
 							<Row>
 								<Col>Total: </Col>
 								<Col>
-									${carrinho.precoTotal}
+									20.00€
 								</Col>
 							</Row>
 						</ListGroup.Item>
@@ -102,7 +84,7 @@ const AgendarServicoScreen = () => {
 						    {error && <Message variant='danger'>{error.data?.message || error.error || 'An error occurred'}</Message>}
 						</ListGroup.Item>
 						<ListGroup.Item>
-							<Button type='button' className='btn btn-block' disabled={carrinho.carrinhoItens.length === 0} onClick={encomendarHandler}>
+							<Button type='button' className='btn btn-block'>
 								Agendar
 							</Button>
 							{isLoading && <Loader/>}

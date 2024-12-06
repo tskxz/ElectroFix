@@ -3,12 +3,12 @@ import {Form, Button} from 'react-bootstrap'
 import FormContainer from '../../components/FormContainer'
 import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
-import {salvarEnderecoPostal} from '../../slices/carrinhoSlice'
+import {salvarEnderecoPostal} from '../../slices/agendaSlice'
 import CheckoutStepsmarcacao from '../../components/CheckoutStepsmarcacao'
 
 const ServicoMarcacaoScreen = () => {
-    const carrinho = useSelector((state)=>state.carrinho)
-    const {enderecoPostal} = carrinho
+    const agenda = useSelector((state)=>state.agenda)
+    const {enderecoPostal} = agenda
 
     const [endereco, setEndereco] = useState(enderecoPostal?.endereco || '')
     const [cidade, setCidade] = useState(enderecoPostal?.cidade || '')

@@ -6,13 +6,13 @@ import CheckoutStepsmarcacao from '../../components/CheckoutStepsmarcacao.jsx'
 import {toast} from 'react-toastify'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
-import {useCriarEncomendaMutation} from '../../slices/encomendasApiSlice.js'
+import {useCriarAgendaMutation} from '../../slices/agendasApiSlice.js'
 
 const AgendarServicoScreen = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const agenda = useSelector((state) => state.agenda)
-	const [criarEncomenda, {isLoading, error}] = useCriarEncomendaMutation()
+	const [criarAgenda, {isLoading, error}] = useCriarAgendaMutation()
 	useEffect(() => {
 		if(!agenda.enderecoPostal.endereco){
 			navigate('/marcacao')
@@ -21,7 +21,22 @@ const AgendarServicoScreen = () => {
 		}
 	}, [agenda.metodoPagamento, agenda.enderecoPostal.endereco, navigate])
 	
-	
+	const agendarHandler = async () => {
+		try {
+			const res = await criarAgenda({
+				enderecoPostal: agenda.enderecoPostal,
+				metodoPagamento: agenda.metodoPagamento,
+				precoDeslocamento: agenda.precoDeslocamento,
+				precoTaxa: agenda.precoTaxa,
+				precoTotal: agenda.precoTotal
+			}).unwrap();
+			
+			navigate(`/agenda/${res._id}`)
+		} catch(err) {
+			toast(err)
+		}
+	}
+
 	return <>
 		<CheckoutStepsmarcacao step1 step2 step3 step4/>
 		<Row>
@@ -93,7 +108,7 @@ const AgendarServicoScreen = () => {
 						    {error && <Message variant='danger'>{error.data?.message || error.error || 'An error occurred'}</Message>}
 						</ListGroup.Item>
 						<ListGroup.Item>
-							<Button type='button' className='btn btn-block'>
+							<Button type='button' className='btn btn-block' onClick={agendarHandler}>
 								Agendar
 							</Button>
 							{isLoading && <Loader/>}

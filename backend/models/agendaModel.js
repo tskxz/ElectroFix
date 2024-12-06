@@ -12,7 +12,8 @@ const agendaSchema = new mongoose.Schema({
         endereco: {type: String, required: true},
         cidade: {type: String, required: true},
         codigoPostal: {type: String, required: true},
-        pais: {type: String, required: true}
+        pais: {type: String, required: true},
+        dataMarcacao: {type: Date},
     },
 
     metodoPagamento: {

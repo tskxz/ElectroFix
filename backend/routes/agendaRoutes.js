@@ -5,8 +5,8 @@ import {addAgendaItens, getAgenda, getMinhasAgendas, atualizarAgendaPago, getTod
 
 router.route('/').post(protect, addAgendaItens)
 router.route('/minhasagendas').get(protect, getMinhasAgendas)
+router.route('/todasagendas').get(protect, admin, getTodasAgendas)
 router.route('/:id').get(protect,getAgenda)
 router.route('/:id/pago').put(protect, atualizarAgendaPago)
-router.route('/todasagendas').get(protect, admin, getTodasAgendas)
 
 export default router

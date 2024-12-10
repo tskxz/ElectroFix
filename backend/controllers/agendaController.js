@@ -74,7 +74,7 @@ const atualizarAgendaPago = asyncHandler(async(req, res) => {
 // @route   GET /api/agendas/minhas_agendas
 // @access  Private
 const getTodasAgendas = asyncHandler(async(req, res) => {
-    const agendas = await Agenda.find()
+    const agendas = await Agenda.find().populate('utilizador','id nome');
     res.status(200).json(agendas)
 })
 

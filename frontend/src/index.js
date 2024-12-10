@@ -20,6 +20,7 @@ import PrivateRoute from './components/PrivateRoute.jsx';
 import PagamentoScreen from './Screens/PagamentoScreen/PagamentoScreen.jsx';
 import EncomendarScreen from './Screens/EncomendarScreen/EncomendarScreen.jsx';
 import EncomendaScreen from './Screens/EncomendaScreen/EncomendaScreen.jsx';
+import AgendaScreen from './Screens/AgendaScreen/AgendaScreen.jsx';
 import PerfilScreen from './Screens/PerfilScreen/PerfilScreen.jsx';
 import AdminRoute from './components/AdminRoute.jsx';
 import ListaEncomendaScreen from './Screens/admin/ListaEncomendaScreen.jsx';
@@ -28,6 +29,9 @@ import ListaEletrodomesticoScreen from './Screens/admin/ListaEletrodomesticoScre
 import AtualizarEletrodomesticoScreen from './Screens/admin/AtualizarEletrodomesticoScreen.jsx';
 import ListaUtilizadorScreen from './Screens/admin/ListaUtilizadorScreen.jsx';
 import AtualizarUtilizadorScreen from './Screens/admin/AtualizarUtilizadorScreen.jsx';
+import ServicoMarcacaoScreen from './Screens/ServicoMarcacaoScreen/ServicoMarcacaoScreen.jsx';
+import AgendarServicoScreen from './Screens/AgendarServicoScreen/AgendarServicoScreen.jsx';
+import PagamentoServicoScreen from './Screens/PagamentoServicoScreen/PagamentoServicoScreen.jsx';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -44,7 +48,11 @@ const router = createBrowserRouter(
         <Route path="/pagamento" element={<PagamentoScreen/>}/>
         <Route path="/encomendar" element={<EncomendarScreen/>}/>
         <Route path="/encomenda/:id" element={<EncomendaScreen/>} />
+        <Route path="/agenda/:id" element={<AgendaScreen/>} />
         <Route path="/perfil" element={<PerfilScreen/>} />
+        <Route path="/marcacao" element={<ServicoMarcacaoScreen/>} />
+        <Route path="/agendar" element={<AgendarServicoScreen/>} />
+        <Route path="/pagamentoservico" element={<PagamentoServicoScreen/>} />
       </Route>
       <Route path="" element={<AdminRoute/>}>
         <Route path="/admin/listaencomenda" element={<ListaEncomendaScreen/>} /> 

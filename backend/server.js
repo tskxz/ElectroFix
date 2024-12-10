@@ -4,6 +4,7 @@ import connectDB from './config/db.js';
 import eletrodomesticoRoutes from './routes/eletrodomesticoRoutes.js';
 import utilizadorRoutes from './routes/utilizadorRoutes.js';
 import encomendaRoutes  from './routes/encomendaRoutes.js';
+import agendaRoutes from './routes/agendaRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use('/api/eletrodomesticos', eletrodomesticoRoutes);
 app.use('/api/utilizadores', utilizadorRoutes);
 app.use('/api/encomendas', encomendaRoutes);
+app.use('/api/agendas', agendaRoutes);
 app.use('/api/upload', uploadRoutes);
 
 const __dirname = path.resolve() // set __dirname to current directory

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Badge, Navbar, Nav, Container, NavDropdown} from 'react-bootstrap'
+import {Badge, Navbar, Nav, Container, NavDropdown, NavLink} from 'react-bootstrap'
 import {FaShoppingCart, FaUser} from 'react-icons/fa'
 import {LinkContainer} from 'react-router-bootstrap';
 import {useSelector, useDispatch} from 'react-redux';
@@ -43,6 +43,13 @@ const Header = () => {
                                 }
                             </Nav.Link>
                     </LinkContainer>
+                    <LinkContainer to="marcacao">
+                        <Nav.Link>
+                                Marcação
+                                <Badge pill bg='success' style={{marginLeft: '5px'}}></Badge>
+                            </Nav.Link>
+                    </LinkContainer>
+                   
                     {utilizadorInfo ? (
                             <NavDropdown title={utilizadorInfo.nome} id='username'>
                                 <LinkContainer to='/perfil'>

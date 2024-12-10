@@ -8,6 +8,7 @@ import Loader from '../../components/Loader'
 import {usePerfilMutation} from '../../slices/utilizadoresApiSlice'
 import {setCredentials} from '../../slices/authSlice'
 import {useGetMinhasEncomendasQuery} from '../../slices/encomendasApiSlice'
+import { useGetMinhasAgendasQuery } from '../../slices/agendasApiSlice'
 import {FaTimes} from 'react-icons/fa'
 
 const PerfilScreen = () => {
@@ -21,6 +22,7 @@ const PerfilScreen = () => {
 
 	const [atualizarPerfil, {isLoading:loadingAtualizarPerfil}] = usePerfilMutation();
     const {data: encomendas, isLoading, error} = useGetMinhasEncomendasQuery()
+	const {data: agendas, isLoadingAgendas, errorAgendas} = useGetMinhasAgendasQuery()
 	useEffect(() => {
 		if(utilizadorInfo){
 			setNome(utilizadorInfo.nome)
@@ -109,6 +111,52 @@ const PerfilScreen = () => {
 									</td>
 									<td>
 										<LinkContainer to={`/encomenda/${encomenda._id}`}>
+											<Button className='btn-sm' variant='light'>
+												Detalhes
+											</Button>
+										</LinkContainer>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</Table>
+				)}
+				<h2>Minhas agendas</h2>
+				{isLoading ? (<Loader/>): error ? (<Message variant='danger'>{error?.data?.message || error.error}</Message>) : (
+					<Table striped hover responsive className='table-sm'>
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>AGENDADO</th>
+								<th>Total</th>
+								<th>Pago</th>
+								<th>Confirmado</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							{agendas.map((agenda) => (
+
+								<tr key={agenda._id}>
+									<td>{agenda._id}</td>
+									<td>{agenda.enderecoPostal.dataMarcacao.substring(0,10)}</td>
+									<td>{agenda.precoTotal}</td>
+									<td>
+										{agenda.isPago ? (
+										agenda.pagoEm.substring(0,10)
+										) : (
+											<FaTimes style={{color: 'red'}}/>
+										)}
+									</td>
+									<td>
+										{agenda.isEntregue ? (
+										agenda.entregueEm.substring(0,10)
+										) : (
+											<FaTimes style={{color: 'red'}}/>
+										)}
+									</td>
+									<td>
+										<LinkContainer to={`/agenda/${agenda._id}`}>
 											<Button className='btn-sm' variant='light'>
 												Detalhes
 											</Button>

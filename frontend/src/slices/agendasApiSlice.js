@@ -38,6 +38,12 @@ export const agendasApiSlice = apiSlice.injectEndpoints({
 			}),
 			keepUnusedDataFor: 5,
 		}),
+		getTodasAgendas: builder.query({
+            query: () => ({
+				url:`${AGENDAS_URL}/todasagendas`
+			}),
+			keepUnusedDataFor: 5,
+		}),
 		getAgendas: builder.query({
 			query: () => ({
 				url: AGENDAS_URL,
@@ -54,4 +60,4 @@ export const agendasApiSlice = apiSlice.injectEndpoints({
 })
 
 
-export const {useCriarAgendaMutation, useGetAgendaDetailsQuery, usePagarAgendaMutation, useGetPayPalClientIdQuery, useGetMinhasAgendasQuery, useGetAgendasQuery, useEntregarAgendaMutation} = agendasApiSlice
+export const {useCriarAgendaMutation, useGetAgendaDetailsQuery, usePagarAgendaMutation, useGetPayPalClientIdQuery, useGetMinhasAgendasQuery, useGetAgendasQuery, useEntregarAgendaMutation, useGetTodasAgendasQuery} = agendasApiSlice

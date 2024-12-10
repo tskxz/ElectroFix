@@ -38,14 +38,14 @@ const authUtilizador = asyncHandler(async(req, res) => {
 // @route   post /api/utilizadores
 // @access  public
 const registarUtilizador = asyncHandler(async(req, res) => {
-	const {nome, email, password} = req.body;
+	const {nome, email, password, num_telemovel} = req.body;
 	const utilizadorExiste = await Utilizador.findOne({email})
 	if(utilizadorExiste){
 		res.status(400);
 		throw new Error('utilizador existe')
 	}
 	const utilizador = await Utilizador.create({
-		nome,email,password
+		nome,email,password,num_telemovel
 	})
 	if(utilizador){
 		generateToken(res, utilizador._id)
@@ -53,6 +53,7 @@ const registarUtilizador = asyncHandler(async(req, res) => {
 			_id: utilizador._id,
 			nome: utilizador.nome,
 			email: utilizador.email,
+			num_telemovel: utilizador.num_telemovel,
 			isAdmin: utilizador.isAdmin
 		})
 	} else {

@@ -18,6 +18,11 @@ const utilizadorSchema = new mongoose.Schema({
         required: true,
     },
 
+   num_telemovel:{
+    type: String,
+    required: true,
+   },
+
     isAdmin: {
         type: Boolean,
         required: true,

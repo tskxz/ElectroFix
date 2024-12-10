@@ -52,6 +52,9 @@ const AgendarServicoScreen = () => {
 						<strong>Email: </strong>
 						{utilizadorInfo.email}
 						<br></br>
+						<strong>Número de Telemóvel: </strong>
+						{utilizadorInfo.num_telemovel}
+						<br></br>
 							<strong>Endereco: </strong>
 							{agenda.enderecoPostal.endereco}, {agenda.enderecoPostal.cidade} {agenda.enderecoPostal.codigoPostal}, {agenda.enderecoPostal.pais}
 						</p>

@@ -61,6 +61,10 @@ const agendaSchema = new mongoose.Schema({
     entregueEm: {
         type: Date,
     },
+    status:{
+       type: String,
+       default: "Pendente",
+    }
 }, {timestamps: true});
 
 const Agenda = mongoose.model('Agenda', agendaSchema);

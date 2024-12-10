@@ -8,7 +8,7 @@ import Agenda from '../models/agendaModel.js'
 // @route   POST /api/agendas
 // @access  Private
 const addAgendaItens = asyncHandler(async(req, res) => {
-    const {enderecoPostal, metodoPagamento, precoDeslocamento, precoTaxa, precoTotal} = req.body
+    const {enderecoPostal, metodoPagamento, precoDeslocamento, precoTaxa, precoTotal, status} = req.body
     console.log(enderecoPostal)
     const agenda = new Agenda({
         utilizador: req.utilizador._id,
@@ -17,6 +17,7 @@ const addAgendaItens = asyncHandler(async(req, res) => {
         precoDeslocamento,
         precoTaxa,
         precoTotal,
+        status,
     })
         const criarAgenda = await agenda.save()
         console.log('agenda criado: ')

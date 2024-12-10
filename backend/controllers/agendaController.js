@@ -70,4 +70,12 @@ const atualizarAgendaPago = asyncHandler(async(req, res) => {
     }
 })
 
-export {addAgendaItens, getAgenda, getMinhasAgendas, atualizarAgendaPago}
+// @desc    Ter agendas efetuadas pelo utilizador
+// @route   GET /api/agendas/minhas_agendas
+// @access  Private
+const getTodasAgendas = asyncHandler(async(req, res) => {
+    const agendas = await Agenda.find()
+    res.status(200).json(agendas)
+})
+
+export {addAgendaItens, getAgenda, getMinhasAgendas, atualizarAgendaPago, getTodasAgendas}

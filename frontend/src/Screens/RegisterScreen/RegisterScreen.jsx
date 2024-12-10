@@ -13,6 +13,7 @@ const RegisterScreen = () => {
     const [nome, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [num_telemovel, setNum_telemovel] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
 
     const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const RegisterScreen = () => {
             return;
         } else {
             try {
-                const res = await register({nome, email, password}).unwrap()
+                const res = await register({nome, email, password,num_telemovel}).unwrap()
                 dispatch(setCredentials({...res}))
                 navigate(redirect)
             } catch(err) {
@@ -61,7 +62,10 @@ const RegisterScreen = () => {
                     <Form.Label>Endereço de Email</Form.Label>
                     <Form.Control type='email' placeholder='Enter email' value={email} onChange={(e) => setEmail(e.target.value)}></Form.Control>
                 </Form.Group>
-
+                <Form.Group controlId='num_telemovel' className='my-3'>
+                    <Form.Label>Telemóvel</Form.Label>
+                    <Form.Control type='text' placeholder='Enter Phone Number' value={num_telemovel} onChange={(e) => setNum_telemovel(e.target.value)}></Form.Control>
+                </Form.Group>
                 <Form.Group controlId='password' className='my-3'>
                     <Form.Label>Password</Form.Label>
                     <Form.Control type='password' placeholder='Enter password' value={password} onChange={(e) => setPassword(e.target.value)}></Form.Control>

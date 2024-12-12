@@ -95,4 +95,21 @@ const atualizarAgendaConfirmado = asyncHandler(async(req, res) => {
     }
 })
 
-export {addAgendaItens, getAgenda, getMinhasAgendas, atualizarAgendaPago, getTodasAgendas, atualizarAgendaConfirmado}
+// @desc    Atualizar agenda Data
+// @route   GET /api/agendas/:id/mudar_data
+// @access  Private/Admin
+const atualizarAgendaData = asyncHandler(async(req, res) => {
+    const { dataMarcacao } = req.body
+    const agenda = await Agenda.findById(req.params.id)
+    if(agenda){
+        agenda.enderecoPostal.dataMarcacao = dataMarcacao || agenda.enderecoPostal.dataMarcacao
+
+        const agendaAtualizado = await agenda.save()
+        res.status(200).json(agendaAtualizado)
+    } else {
+        res.status(404)
+        throw new Error('agenda n encontrado')
+    }
+})
+
+export {addAgendaItens, getAgenda, getMinhasAgendas, atualizarAgendaPago, getTodasAgendas, atualizarAgendaConfirmado, atualizarAgendaData}

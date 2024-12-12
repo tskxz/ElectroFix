@@ -19,7 +19,7 @@ const ListaAgendaScreen = () => {
 					<th>TOTAL</th>
 					<th>DATE</th>
 					<th>PAGO</th>
-					<th>ENTREGUE</th>
+					<th>CONFIRMADO</th>
 					<th></th>
 				</thead>
 				<tbody>

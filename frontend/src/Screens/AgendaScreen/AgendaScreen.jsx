@@ -2,7 +2,7 @@ import {Link, useParams} from 'react-router-dom'
 import {Row, Col, ListGroup, Image, Form, Button, Card} from 'react-bootstrap'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
-import {useGetAgendaDetailsQuery, usePagarAgendaMutation, useGetPayPalClientIdQuery, useEntregarAgendaMutation} from '../../slices/agendasApiSlice';
+import {useGetAgendaDetailsQuery, usePagarAgendaMutation, useGetPayPalClientIdQuery, useConfirmarAgendaMutation} from '../../slices/agendasApiSlice';
 import {PayPalButtons, usePayPalScriptReducer} from '@paypal/react-paypal-js'
 import {toast} from 'react-toastify'
 import {useSelector} from 'react-redux'
@@ -11,7 +11,7 @@ const AgendaScreen = () => {
 	const {id: agendaId} = useParams();
 	const {data: agenda, refetch, isLoading, error} = useGetAgendaDetailsQuery(agendaId)
 	const [pagarAgenda, {isLoading:loadingPay}] = usePagarAgendaMutation()
-	const [entregarAgenda, {isLoading:loadingDeliver}] = useEntregarAgendaMutation()
+	const [confirmarAgenda, {isLoading:loadingDeliver}] = useConfirmarAgendaMutation()
 	const [{isPending}, paypalDispatch] = usePayPalScriptReducer()
 	const {data:paypal, isLoading:loadingPayPal, error: errorPayPal} = useGetPayPalClientIdQuery()
 	const {utilizadorInfo} = useSelector((state) => state.auth)
@@ -74,7 +74,7 @@ const AgendaScreen = () => {
 
 	const  deliverOrderHandler = async () => {
 		try {
-			await entregarAgenda(agendaId)
+			await confirmarAgenda(agendaId)
 			refetch()
 			toast.success('Agenda Atualizado')
 		} catch(err) {
@@ -102,14 +102,18 @@ const AgendaScreen = () => {
 							<p>
 								<strong>Endereco: {agenda.enderecoPostal.endereco}, {agenda.enderecoPostal.cidade}{' '}{agenda.enderecoPostal.codigoPostal}, {agenda.enderecoPostal.pais}</strong>
 							</p>
-							{agenda.isEntregue ? (
+							{agenda.status === "Confirmado" ? (
 								<Message variant='success'>
-									Entregue em {agenda.entregueEm}
+									Confirmado em {agenda.confirmadoEm}
+								</Message>
+							) : agenda.status === "Anulado" ? (
+								<Message variant='danger'>
+									Anulado
 								</Message>
 							) : (
-								<Message variant='danger'>
-									Não entregue
-								</Message>
+								<Message variant='warning'>
+                                    Pendente
+                                </Message>
 							)}						
 						</ListGroup.Item>
 						<ListGroup.Item>
@@ -177,10 +181,10 @@ const AgendaScreen = () => {
 							)}
 
 							{loadingDeliver && <Loader/>}
-							{utilizadorInfo && utilizadorInfo.isAdmin && agenda.isPago && !agenda.isEntregue && (
+							{utilizadorInfo && utilizadorInfo.isAdmin && agenda.isPago && agenda.status === "Pendente" && (
 								<ListGroup.Item>
 									<Button type='button' className='btn btn-block' onClick={deliverOrderHandler}>
-									Marcar como entregue
+									Marcar como Confirmado
 									</Button>
 								</ListGroup.Item>
 							)}

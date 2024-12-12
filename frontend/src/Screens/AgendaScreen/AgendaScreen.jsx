@@ -7,6 +7,8 @@ import {PayPalButtons, usePayPalScriptReducer} from '@paypal/react-paypal-js'
 import {toast} from 'react-toastify'
 import {useSelector} from 'react-redux'
 import {useEffect} from 'react'
+import {LinkContainer} from 'react-router-bootstrap'
+
 const AgendaScreen = () => {
 	const {id: agendaId} = useParams();
 	const {data: agenda, refetch, isLoading, error} = useGetAgendaDetailsQuery(agendaId)
@@ -187,6 +189,16 @@ const AgendaScreen = () => {
 									Marcar como Confirmado
 									</Button>
 								</ListGroup.Item>
+							)}
+							{utilizadorInfo && utilizadorInfo.isAdmin && agenda.isPago && agenda.status === "Pendente" && (
+								<ListGroup.Item>
+									<LinkContainer to={`/admin/agenda/${agenda._id}/edit`}>
+										<Button type='button' className='btn btn-block'>
+										Alterar Data
+										</Button>
+									</LinkContainer>
+								</ListGroup.Item>
+								
 							)}
 						</ListGroup>
 					</Card>

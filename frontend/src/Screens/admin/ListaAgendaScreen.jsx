@@ -16,8 +16,7 @@ const ListaAgendaScreen = () => {
 				<thead>
 					<th>ID</th>
 					<th>UTILIZADOR</th>
-					<th>TOTAL</th>
-					<th>DATE</th>
+					<th>MARCAÇÃO</th>
 					<th>PAGO</th>
 					<th>CONFIRMADO</th>
 					<th></th>
@@ -27,8 +26,7 @@ const ListaAgendaScreen = () => {
 						<tr key={agenda._id}>
 							<td>{agenda._id}</td>
 							<td>{agenda.utilizador && agenda.utilizador.nome}</td>
-                            <td>{agenda.precoTotal}</td>
-							<td>{agenda.createdAt.substring(0,10)}</td>
+							<td>{agenda.enderecoPostal.dataMarcacao.substring(0,10)}</td>
 							<td>
 										{agenda.isPago ? (
 										agenda.pagoEm.substring(0,10)

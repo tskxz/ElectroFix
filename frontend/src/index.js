@@ -33,6 +33,7 @@ import ServicoMarcacaoScreen from './Screens/ServicoMarcacaoScreen/ServicoMarcac
 import AgendarServicoScreen from './Screens/AgendarServicoScreen/AgendarServicoScreen.jsx';
 import PagamentoServicoScreen from './Screens/PagamentoServicoScreen/PagamentoServicoScreen.jsx';
 import ListaAgendaScreen from './Screens/admin/ListaAgendaScreen.jsx';
+import AtualizarAgendaScreen from './Screens/admin/AtualizarAgendaScreen.jsx';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -60,6 +61,7 @@ const router = createBrowserRouter(
         <Route path="/admin/listaeletrodomestico" element={<ListaEletrodomesticoScreen/>} />
         <Route path="/admin/listaeletrodomestico/:pageNumber" element={<ListaEletrodomesticoScreen/>} />
         <Route path="/admin/eletrodomestico/:id/edit" element={<AtualizarEletrodomesticoScreen/>} />
+        <Route path="/admin/agenda/:id/edit" element={<AtualizarAgendaScreen/>} />
         <Route path="/admin/listautilizador" element={<ListaUtilizadorScreen/>} /> 
         <Route path="/admin/utilizador/:id/edit" element={<AtualizarUtilizadorScreen/>} /> 
         <Route path='/admin/listaagendas' element={<ListaAgendaScreen/>} />

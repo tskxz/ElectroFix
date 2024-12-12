@@ -78,14 +78,14 @@ const getTodasAgendas = asyncHandler(async(req, res) => {
     res.status(200).json(agendas)
 })
 
-// @desc    Atualizar agenda para entregue
-// @route   GET /api/agendas/:id/entregue
+// @desc    Atualizar agenda para confirmado
+// @route   GET /api/agendas/:id/confirmado
 // @access  Private/Admin
-const atualizarAgendaEntregue = asyncHandler(async(req, res) => {
+const atualizarAgendaConfirmado = asyncHandler(async(req, res) => {
     const agenda = await Agenda.findById(req.params.id)
     if(agenda){
-        agenda.isEntregue = true
-        agenda.entregueEm = Date.now();
+        agenda.status = "Confirmado"
+        agenda.confirmadoEm = Date.now();
 
         const agendaAtualizado = await agenda.save()
         res.status(200).json(agendaAtualizado)
@@ -95,4 +95,4 @@ const atualizarAgendaEntregue = asyncHandler(async(req, res) => {
     }
 })
 
-export {addAgendaItens, getAgenda, getMinhasAgendas, atualizarAgendaPago, getTodasAgendas, atualizarAgendaEntregue}
+export {addAgendaItens, getAgenda, getMinhasAgendas, atualizarAgendaPago, getTodasAgendas, atualizarAgendaConfirmado}

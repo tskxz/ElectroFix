@@ -149,8 +149,8 @@ const PerfilScreen = () => {
 										)}
 									</td>
 									<td>
-										{agenda.isEntregue ? (
-										agenda.entregueEm.substring(0,10)
+										{agenda.status === "Confirmado" ? (
+										agenda.confirmadoEm.substring(0,10)
 										) : (
 											<FaTimes style={{color: 'red'}}/>
 										)}

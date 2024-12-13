@@ -95,6 +95,25 @@ const atualizarAgendaConfirmado = asyncHandler(async(req, res) => {
     }
 })
 
+// @desc    Atualizar agenda para recusado
+// @route   GET /api/agendas/:id/recusado
+// @access  Private/Admin
+const atualizarAgendaRecusado = asyncHandler(async(req, res) => {
+    const agenda = await Agenda.findById(req.params.id)
+    if(agenda){
+        agenda.status = "Recusado"
+        agenda.recusadoEm = Date.now();
+
+        const atualizarAgendaRecusado = await agenda.save()
+            res.status(200).json(agendaAtualizado)
+    } else {
+        res.status(404)
+        throw new Error('agenda n encontrado')
+    }     
+    
+    
+})
+
 // @desc    Atualizar agenda Data
 // @route   GET /api/agendas/:id/mudar_data
 // @access  Private/Admin
@@ -112,4 +131,4 @@ const atualizarAgendaData = asyncHandler(async(req, res) => {
     }
 })
 
-export {addAgendaItens, getAgenda, getMinhasAgendas, atualizarAgendaPago, getTodasAgendas, atualizarAgendaConfirmado, atualizarAgendaData}
+export {addAgendaItens, getAgenda, getMinhasAgendas, atualizarAgendaPago, getTodasAgendas, atualizarAgendaConfirmado, atualizarAgendaRecusado, atualizarAgendaData}

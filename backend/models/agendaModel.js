@@ -56,6 +56,9 @@ const agendaSchema = new mongoose.Schema({
     confirmadoEm: {
         type: Date,
     },
+    recusadoEm: {
+        type: Date,
+    },
     status:{
        type: String,
        default: "Pendente",

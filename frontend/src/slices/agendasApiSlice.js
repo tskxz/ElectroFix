@@ -56,6 +56,12 @@ export const agendasApiSlice = apiSlice.injectEndpoints({
 				method: 'PUT',
 			})
 		}),
+		recusarAgenda: builder.mutation({
+			query: (agendaId) => ({
+				url: `${AGENDAS_URL}/${agendaId}/recusado`,
+				method: 'PUT',
+			})
+		}),
 
 		atualizarAgenda: builder.mutation({
 			query: (data) => ({
@@ -69,4 +75,4 @@ export const agendasApiSlice = apiSlice.injectEndpoints({
 })
 
 
-export const {useCriarAgendaMutation, useGetAgendaDetailsQuery, usePagarAgendaMutation, useGetPayPalClientIdQuery, useGetMinhasAgendasQuery, useGetAgendasQuery, useConfirmarAgendaMutation, useGetTodasAgendasQuery, useAtualizarAgendaMutation} = agendasApiSlice
+export const {useCriarAgendaMutation, useGetAgendaDetailsQuery, usePagarAgendaMutation, useGetPayPalClientIdQuery, useGetMinhasAgendasQuery, useGetAgendasQuery, useConfirmarAgendaMutation, useRecusarAgendaMutation, useGetTodasAgendasQuery, useAtualizarAgendaMutation} = agendasApiSlice

@@ -2,7 +2,7 @@ import {Link, useParams} from 'react-router-dom'
 import {Row, Col, ListGroup, Image, Form, Button, Card} from 'react-bootstrap'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
-import {useGetAgendaDetailsQuery, usePagarAgendaMutation, useGetPayPalClientIdQuery, useConfirmarAgendaMutation} from '../../slices/agendasApiSlice';
+import {useGetAgendaDetailsQuery, usePagarAgendaMutation, useGetPayPalClientIdQuery, useConfirmarAgendaMutation, useRecusarAgendaMutation} from '../../slices/agendasApiSlice';
 import {PayPalButtons, usePayPalScriptReducer} from '@paypal/react-paypal-js'
 import {toast} from 'react-toastify'
 import {useSelector} from 'react-redux'
@@ -14,6 +14,7 @@ const AgendaScreen = () => {
 	const {data: agenda, refetch, isLoading, error} = useGetAgendaDetailsQuery(agendaId)
 	const [pagarAgenda, {isLoading:loadingPay}] = usePagarAgendaMutation()
 	const [confirmarAgenda, {isLoading:loadingDeliver}] = useConfirmarAgendaMutation()
+	const [recusarAgenda, {isLoading:recusarDeliver}] = useRecusarAgendaMutation()
 	const [{isPending}, paypalDispatch] = usePayPalScriptReducer()
 	const {data:paypal, isLoading:loadingPayPal, error: errorPayPal} = useGetPayPalClientIdQuery()
 	const {utilizadorInfo} = useSelector((state) => state.auth)
@@ -84,6 +85,16 @@ const AgendaScreen = () => {
 		}
 	}
 
+	const recusarOrderHandler = async () => {
+		try {
+			await recusarAgenda(agendaId)
+			refetch()
+			toast.success('Agenda Recusado')
+		} catch(err) {
+			toast.error(err?.data?.message || err.message)
+		}
+	}
+
 	return isLoading ? <Loader/> : error ? <Message variant='danger'/> : (
 		<>
 			<h1>Agenda {agendaId}</h1>
@@ -108,9 +119,9 @@ const AgendaScreen = () => {
 								<Message variant='success'>
 									Confirmado em {agenda.confirmadoEm}
 								</Message>
-							) : agenda.status === "Anulado" ? (
+							) : agenda.status === "Recusado" ? (
 								<Message variant='danger'>
-									Anulado
+									Recusado em {agenda.recusadoEm}
 								</Message>
 							) : (
 								<Message variant='warning'>
@@ -187,6 +198,13 @@ const AgendaScreen = () => {
 								<ListGroup.Item>
 									<Button type='button' className='btn btn-block' onClick={deliverOrderHandler}>
 									Marcar como Confirmado
+									</Button>
+								</ListGroup.Item>
+							)}
+							{utilizadorInfo && utilizadorInfo.isAdmin && agenda.isPago && agenda.status === "Pendente" && (
+								<ListGroup.Item>
+									<Button type='button' className='btn btn-block' onClick={recusarOrderHandler}>
+									Recusar Agenda
 									</Button>
 								</ListGroup.Item>
 							)}

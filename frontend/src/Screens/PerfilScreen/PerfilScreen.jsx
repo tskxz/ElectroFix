@@ -9,7 +9,7 @@ import {usePerfilMutation} from '../../slices/utilizadoresApiSlice'
 import {setCredentials} from '../../slices/authSlice'
 import {useGetMinhasEncomendasQuery} from '../../slices/encomendasApiSlice'
 import { useGetMinhasAgendasQuery } from '../../slices/agendasApiSlice'
-import {FaTimes} from 'react-icons/fa'
+import {FaTimes, FaClock} from 'react-icons/fa'
 
 const PerfilScreen = () => {
 	const [nome, setNome] = useState("")
@@ -149,10 +149,12 @@ const PerfilScreen = () => {
 										)}
 									</td>
 									<td>
-										{agenda.isEntregue ? (
-										agenda.entregueEm.substring(0,10)
-										) : (
+									{agenda.status === "Confirmado" ? (
+										agenda.confirmadoEm.substring(0,10)
+										) : agenda.status === "Recusado" ? (
 											<FaTimes style={{color: 'red'}}/>
+										) : (
+											<FaClock style={{color: 'orange'}}/>
 										)}
 									</td>
 									<td>

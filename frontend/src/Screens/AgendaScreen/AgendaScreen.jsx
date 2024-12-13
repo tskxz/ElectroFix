@@ -2,16 +2,19 @@ import {Link, useParams} from 'react-router-dom'
 import {Row, Col, ListGroup, Image, Form, Button, Card} from 'react-bootstrap'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
-import {useGetAgendaDetailsQuery, usePagarAgendaMutation, useGetPayPalClientIdQuery, useEntregarAgendaMutation} from '../../slices/agendasApiSlice';
+import {useGetAgendaDetailsQuery, usePagarAgendaMutation, useGetPayPalClientIdQuery, useConfirmarAgendaMutation, useRecusarAgendaMutation} from '../../slices/agendasApiSlice';
 import {PayPalButtons, usePayPalScriptReducer} from '@paypal/react-paypal-js'
 import {toast} from 'react-toastify'
 import {useSelector} from 'react-redux'
 import {useEffect} from 'react'
+import {LinkContainer} from 'react-router-bootstrap'
+
 const AgendaScreen = () => {
 	const {id: agendaId} = useParams();
 	const {data: agenda, refetch, isLoading, error} = useGetAgendaDetailsQuery(agendaId)
 	const [pagarAgenda, {isLoading:loadingPay}] = usePagarAgendaMutation()
-	const [entregarAgenda, {isLoading:loadingDeliver}] = useEntregarAgendaMutation()
+	const [confirmarAgenda, {isLoading:loadingDeliver}] = useConfirmarAgendaMutation()
+	const [recusarAgenda, {isLoading:recusarDeliver}] = useRecusarAgendaMutation()
 	const [{isPending}, paypalDispatch] = usePayPalScriptReducer()
 	const {data:paypal, isLoading:loadingPayPal, error: errorPayPal} = useGetPayPalClientIdQuery()
 	const {utilizadorInfo} = useSelector((state) => state.auth)
@@ -74,9 +77,19 @@ const AgendaScreen = () => {
 
 	const  deliverOrderHandler = async () => {
 		try {
-			await entregarAgenda(agendaId)
+			await confirmarAgenda(agendaId)
 			refetch()
 			toast.success('Agenda Atualizado')
+		} catch(err) {
+			toast.error(err?.data?.message || err.message)
+		}
+	}
+
+	const recusarOrderHandler = async () => {
+		try {
+			await recusarAgenda(agendaId)
+			refetch()
+			toast.success('Agenda Recusado')
 		} catch(err) {
 			toast.error(err?.data?.message || err.message)
 		}
@@ -102,14 +115,18 @@ const AgendaScreen = () => {
 							<p>
 								<strong>Endereco: {agenda.enderecoPostal.endereco}, {agenda.enderecoPostal.cidade}{' '}{agenda.enderecoPostal.codigoPostal}, {agenda.enderecoPostal.pais}</strong>
 							</p>
-							{agenda.isEntregue ? (
+							{agenda.status === "Confirmado" ? (
 								<Message variant='success'>
-									Entregue em {agenda.entregueEm}
+									Confirmado em {agenda.confirmadoEm}
+								</Message>
+							) : agenda.status === "Recusado" ? (
+								<Message variant='danger'>
+									Recusado em {agenda.recusadoEm}
 								</Message>
 							) : (
-								<Message variant='danger'>
-									Não entregue
-								</Message>
+								<Message variant='warning'>
+                                    Pendente
+                                </Message>
 							)}						
 						</ListGroup.Item>
 						<ListGroup.Item>
@@ -177,12 +194,29 @@ const AgendaScreen = () => {
 							)}
 
 							{loadingDeliver && <Loader/>}
-							{utilizadorInfo && utilizadorInfo.isAdmin && agenda.isPago && !agenda.isEntregue && (
+							{utilizadorInfo && utilizadorInfo.isAdmin && agenda.isPago && agenda.status === "Pendente" && (
 								<ListGroup.Item>
 									<Button type='button' className='btn btn-block' onClick={deliverOrderHandler}>
-									Marcar como entregue
+									Marcar como Confirmado
 									</Button>
 								</ListGroup.Item>
+							)}
+							{utilizadorInfo && utilizadorInfo.isAdmin && agenda.isPago && agenda.status === "Pendente" && (
+								<ListGroup.Item>
+									<Button type='button' className='btn btn-block' onClick={recusarOrderHandler}>
+									Recusar Agenda
+									</Button>
+								</ListGroup.Item>
+							)}
+							{utilizadorInfo && utilizadorInfo.isAdmin && agenda.isPago && agenda.status === "Pendente" && (
+								<ListGroup.Item>
+									<LinkContainer to={`/admin/agenda/${agenda._id}/edit`}>
+										<Button type='button' className='btn btn-block'>
+										Alterar Data
+										</Button>
+									</LinkContainer>
+								</ListGroup.Item>
+								
 							)}
 						</ListGroup>
 					</Card>

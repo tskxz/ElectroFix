@@ -53,12 +53,10 @@ const agendaSchema = new mongoose.Schema({
     pagoEm: {
         type: Date,
     },
-    isEntregue: {
-        type: Boolean,
-        required: true,
-        default: false,
+    confirmadoEm: {
+        type: Date,
     },
-    entregueEm: {
+    recusadoEm: {
         type: Date,
     },
     status:{

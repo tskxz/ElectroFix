@@ -38,20 +38,41 @@ export const agendasApiSlice = apiSlice.injectEndpoints({
 			}),
 			keepUnusedDataFor: 5,
 		}),
+		getTodasAgendas: builder.query({
+            query: () => ({
+				url:`${AGENDAS_URL}/todasagendas`
+			}),
+			keepUnusedDataFor: 5,
+		}),
 		getAgendas: builder.query({
 			query: () => ({
 				url: AGENDAS_URL,
 			}),
 			keepUnusedDataFor: 5,
 		}),
-		entregarAgenda: builder.mutation({
+		confirmarAgenda: builder.mutation({
 			query: (agendaId) => ({
-				url: `${AGENDAS_URL}/${agendaId}/entregue`,
+				url: `${AGENDAS_URL}/${agendaId}/confirmado`,
 				method: 'PUT',
 			})
+		}),
+		recusarAgenda: builder.mutation({
+			query: (agendaId) => ({
+				url: `${AGENDAS_URL}/${agendaId}/recusado`,
+				method: 'PUT',
+			})
+		}),
+
+		atualizarAgenda: builder.mutation({
+			query: (data) => ({
+                url: `${AGENDAS_URL}/${data.agendaId}/mudar_data`,
+                method: 'PUT',
+				body: data,
+            }),
+			invalidatesTags: ['Agendas']
 		})
 	})
 })
 
 
-export const {useCriarAgendaMutation, useGetAgendaDetailsQuery, usePagarAgendaMutation, useGetPayPalClientIdQuery, useGetMinhasAgendasQuery, useGetAgendasQuery, useEntregarAgendaMutation} = agendasApiSlice
+export const {useCriarAgendaMutation, useGetAgendaDetailsQuery, usePagarAgendaMutation, useGetPayPalClientIdQuery, useGetMinhasAgendasQuery, useGetAgendasQuery, useConfirmarAgendaMutation, useRecusarAgendaMutation, useGetTodasAgendasQuery, useAtualizarAgendaMutation} = agendasApiSlice

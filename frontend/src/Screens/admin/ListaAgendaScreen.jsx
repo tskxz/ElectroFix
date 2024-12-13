@@ -1,6 +1,6 @@
 import {LinkContainer} from 'react-router-bootstrap'
 import {Table, Button} from 'react-bootstrap'
-import {FaTimes} from 'react-icons/fa'
+import {FaTimes, FaClock} from 'react-icons/fa'
 import Message from '../../components/Message';
 import Loader from '../../components/Loader'
 import {useGetEncomendasQuery} from '../../slices/encomendasApiSlice.js'
@@ -37,8 +37,10 @@ const ListaAgendaScreen = () => {
 									<td>
 										{agenda.status === "Confirmado" ? (
 										agenda.confirmadoEm.substring(0,10)
-										) : (
+										) : agenda.status === "Recusado" ? (
 											<FaTimes style={{color: 'red'}}/>
+										) : (
+											<FaClock style={{color: 'orange'}}/>
 										)}
 									</td>
 									<td>

@@ -1,8 +1,10 @@
-import {Link, useParams} from 'react-router-dom'
+import {Link, useParams, useNavigate} from 'react-router-dom'
 import {Row, Col, ListGroup, Image, Form, Button, Card} from 'react-bootstrap'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 import {useGetAgendaDetailsQuery, usePagarAgendaMutation, useGetPayPalClientIdQuery, useConfirmarAgendaMutation, useRecusarAgendaMutation} from '../../slices/agendasApiSlice';
+import {useCriarReparacaoMutation} from '../../slices/reparacoesApiSlice';
+
 import {PayPalButtons, usePayPalScriptReducer} from '@paypal/react-paypal-js'
 import {toast} from 'react-toastify'
 import {useSelector} from 'react-redux'
@@ -11,10 +13,12 @@ import {LinkContainer} from 'react-router-bootstrap'
 
 const AgendaScreen = () => {
 	const {id: agendaId} = useParams();
+	const navigate = useNavigate()
 	const {data: agenda, refetch, isLoading, error} = useGetAgendaDetailsQuery(agendaId)
 	const [pagarAgenda, {isLoading:loadingPay}] = usePagarAgendaMutation()
 	const [confirmarAgenda, {isLoading:loadingDeliver}] = useConfirmarAgendaMutation()
 	const [recusarAgenda, {isLoading:recusarDeliver}] = useRecusarAgendaMutation()
+	const [criarReparacao, {isLoadingReparacao, errorReparacao}] = useCriarReparacaoMutation()
 	const [{isPending}, paypalDispatch] = usePayPalScriptReducer()
 	const {data:paypal, isLoading:loadingPayPal, error: errorPayPal} = useGetPayPalClientIdQuery()
 	const {utilizadorInfo} = useSelector((state) => state.auth)
@@ -92,6 +96,20 @@ const AgendaScreen = () => {
 			toast.success('Agenda Recusado')
 		} catch(err) {
 			toast.error(err?.data?.message || err.message)
+		}
+	}
+
+	const criarReparacaoHandler = async() => {
+		if(window.confirm('Tens a certeza que queres criar uma reparação?')){
+			try {
+				const res = await criarReparacao({
+					agenda: agendaId,
+				}).unwrap();
+				console.log('reparacao criado')
+				navigate(`/reparacao/${res._id}`)
+			} catch(err){
+				toast.error(err?.data?.message || err.error)
+			}
 		}
 	}
 
@@ -215,6 +233,16 @@ const AgendaScreen = () => {
 										Alterar Data
 										</Button>
 									</LinkContainer>
+								</ListGroup.Item>
+								
+							)}
+							{utilizadorInfo && utilizadorInfo.isAdmin && agenda.isPago && agenda.status === "Confirmado" && (
+								<ListGroup.Item>
+									
+										<Button type='button' className='btn btn-block' onClick={criarReparacaoHandler}> 
+										Criar Reparação
+										</Button>
+
 								</ListGroup.Item>
 								
 							)}

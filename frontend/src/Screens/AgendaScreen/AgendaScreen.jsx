@@ -152,11 +152,6 @@ const AgendaScreen = () => {
 							)}						
 						</ListGroup.Item>
 						<ListGroup.Item>
-							<h2>Método de pagamento</h2>
-							<p>
-								<strong>Método: </strong>
-								{agenda.metodoPagamento}
-							</p>
 							{agenda.isPago ? (
 								<Message variant='success'>
 									Pago em {agenda.pagoEm}

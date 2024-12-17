@@ -160,6 +160,8 @@ const ReparacaoScreen = () => {
 									{isPending? <Loader/> : (
 										<div>
 											<br />
+											<Button onClick={onApproveTest} style={{marginBottom: '10px'}}>Test Pay Order</Button>
+											<br />
 											<Button onClick={recusarOrderHandler} style={{marginBottom: '10px'}}>Recusar Reparação
 											</Button>
 											<div>

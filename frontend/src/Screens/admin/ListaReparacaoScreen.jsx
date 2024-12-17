@@ -7,6 +7,7 @@ import {useGetEncomendasQuery} from '../../slices/encomendasApiSlice.js'
 import { useGetTodasReparacoesQuery } from '../../slices/reparacoesApiSlice.js';
 const ListaReparacaoScreen = () => {
 	const {data: reparacoes, isLoading, error} = useGetTodasReparacoesQuery()
+	console.log(reparacoes)
 	
 	return <>
 		<h1>Reparações</h1>
@@ -15,16 +16,17 @@ const ListaReparacaoScreen = () => {
 				<thead>
 					<th>ID</th>
 					<th>UTILIZADOR</th>
-					<th>MARCAÇÃO</th>
 					<th>PAGO</th>
+					<th>REPARADO</th>
 					<th>CONFIRMADO</th>
 					<th></th>
 				</thead>
 				<tbody>
 					{reparacoes.map((reparacao) => (
+						
 						<tr key={reparacao._id}>
 							<td>{reparacao._id}</td>
-							<td>{reparacao.utilizador && reparacao.utilizador.nome}</td>
+							<td>{reparacao.agenda.utilizador.nome}</td>
 							<td>
 										{reparacao.isPago ? (
 										reparacao.pagoEm.substring(0,10)

@@ -102,8 +102,10 @@ const AgendaScreen = () => {
 	const criarReparacaoHandler = async() => {
 		if(window.confirm('Tens a certeza que queres criar uma reparação?')){
 			try {
+				let valor_orcamento = prompt("Valor do Orçamento", 30);
 				const res = await criarReparacao({
 					agenda: agendaId,
+					valor_orcamento: valor_orcamento,
 				}).unwrap();
 				console.log('reparacao criado')
 				navigate(`/reparacao/${res._id}`)

@@ -6,11 +6,12 @@ import Reparacao from '../models/reparacaoModel.js'
 // @route   POST /api/reparacoes
 // @access  Private/Admin
 const addReparacaoItens = asyncHandler(async(req, res) => {
-    const {agenda, valor_orcamento} = req.body
+    const {agenda, valor_orcamento, descricao} = req.body
     console.log(agenda)
     const reparacao = new Reparacao({
         agenda,
-        valor_orcamento
+        valor_orcamento,
+        descricao,
     })
         const criarReparacao = await reparacao.save()
         console.log('reparacao criado: ')

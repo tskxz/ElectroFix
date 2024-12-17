@@ -12,6 +12,11 @@ const reparacaoSchema = new mongoose.Schema({
         required: false,
     },
 
+    descricao: {
+        type: String,
+        required: true,
+    },
+
     resultadoPagamento: {
         id: {type: String},
         status: {type: String},

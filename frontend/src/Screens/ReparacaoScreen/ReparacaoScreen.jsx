@@ -94,7 +94,8 @@ const ReparacaoScreen = () => {
 				<Col md={8}>
 					<ListGroup>
 						<ListGroup.Item>
-							<h2>Agenda</h2>
+							<h2>Reparação</h2>
+							<p>Descrição: {reparacao.descricao}</p>
 							<p>
                 <LinkContainer to={`/agenda/${reparacao.agenda}`}>
                   <Button variant='primary'>Visualizar Agenda</Button>

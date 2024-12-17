@@ -102,10 +102,12 @@ const AgendaScreen = () => {
 	const criarReparacaoHandler = async() => {
 		if(window.confirm('Tens a certeza que queres criar uma reparação?')){
 			try {
+				let descricao = prompt("Descricao do problema");
 				let valor_orcamento = prompt("Valor do Orçamento", 30);
 				const res = await criarReparacao({
 					agenda: agendaId,
 					valor_orcamento: valor_orcamento,
+					descricao: descricao,
 				}).unwrap();
 				console.log('reparacao criado')
 				navigate(`/reparacao/${res._id}`)
@@ -117,12 +119,12 @@ const AgendaScreen = () => {
 
 	return isLoading ? <Loader/> : error ? <Message variant='danger'/> : (
 		<>
-			<h1>Agenda {agendaId}</h1>
+			<h1>Agenda</h1>
 			<Row>
 				<Col md={8}>
 					<ListGroup>
 						<ListGroup.Item>
-							<h2>Agenda</h2>
+							<h2>Agenda {agendaId}</h2>
 							<p>
 								<strong>Nome: {agenda.utilizador.nome}</strong>
 							</p>

@@ -9,7 +9,7 @@ const ListaReparacaoScreen = () => {
 	const {data: reparacoes, isLoading, error} = useGetTodasReparacoesQuery()
 	
 	return <>
-		<h1>Agendas</h1>
+		<h1>Reparações</h1>
 		{isLoading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> : (
 			<Table striped bordered hover responsive className='table-sm'>
 				<thead>

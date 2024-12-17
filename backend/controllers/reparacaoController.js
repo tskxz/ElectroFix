@@ -24,7 +24,7 @@ const addReparacaoItens = asyncHandler(async(req, res) => {
 // @route   GET /api/reparacoes/:id
 // @access  Private/Admin
 const getReparacao = asyncHandler(async(req, res) => {
-    const reparacao = await Reparacao.findById(req.params.id)
+    const reparacao = await Reparacao.findById(req.params.id).populate('agenda', 'id utilizador')
     console.log(reparacao)
     if(reparacao){
         res.status(200).json(reparacao)
@@ -56,7 +56,12 @@ const atualizarReparacaoRecusado = asyncHandler(async(req, res) => {
 // @route   GET /api/reparacoes/todas
 // @access  Private
 const getTodasReparacoes = asyncHandler(async(req, res) => {
-    const reparacoes = await Reparacao.find()
+    const reparacoes = await Reparacao.find({})
+    .populate({
+        path: 'agenda',
+        select: 'id utilizador',
+        populate: { path: 'utilizador', select: 'nome' },
+    });
     res.status(200).json(reparacoes)
 })
 

@@ -2,7 +2,7 @@ import {Link, useParams, useNavigate} from 'react-router-dom'
 import {Row, Col, ListGroup, Image, Form, Button, Card} from 'react-bootstrap'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
-import {useGetReparacaoDetailsQuery, usePagarReparacaoMutation, useRecusarReparacaoMutation, useGetPayPalClientIdQuery} from '../../slices/reparacoesApiSlice';
+import {useGetReparacaoDetailsQuery, usePagarReparacaoMutation, useRecusarReparacaoMutation, useGetPayPalClientIdQuery, useConcluirReparacaoMutation} from '../../slices/reparacoesApiSlice';
 
 import {PayPalButtons, usePayPalScriptReducer} from '@paypal/react-paypal-js'
 import {toast} from 'react-toastify'
@@ -17,6 +17,8 @@ const ReparacaoScreen = () => {
   console.log(reparacao)
 	const [pagarReparacao, {isLoading:loadingPay}] = usePagarReparacaoMutation()
   const [recusarReparacao, {isLoading:recusarDeliver}] = useRecusarReparacaoMutation()
+  const [concluirReparacao, {isLoading: concluirDeliver}] = useConcluirReparacaoMutation()
+
 	const [{isPending}, paypalDispatch] = usePayPalScriptReducer()
 	const {data:paypal, isLoading:loadingPayPal, error: errorPayPal} = useGetPayPalClientIdQuery()
 	const {utilizadorInfo} = useSelector((state) => state.auth)
@@ -87,6 +89,16 @@ const ReparacaoScreen = () => {
 		}
 	}
 
+	const concluirOrderHandler = async () => {
+		try {
+			await concluirReparacao(reparacaoId)
+			refetch()
+			toast.success('Reparacao Concluida')
+		} catch(err) {
+			toast.error(err?.data?.message || err.message)
+		}
+	}
+
 	return isLoading ? <Loader/> : error ? <Message variant='danger'/> : (
 		<>
 			<h1>Reparacao {reparacaoId}</h1>
@@ -97,7 +109,7 @@ const ReparacaoScreen = () => {
 							<h2>Reparação</h2>
 							<p>Descrição: {reparacao.descricao}</p>
 							<p>
-                <LinkContainer to={`/agenda/${reparacao.agenda}`}>
+                <LinkContainer to={`/agenda/${reparacao.agenda._id}`}>
                   <Button variant='primary'>Visualizar Agenda</Button>
                 </LinkContainer>
 							</p>
@@ -115,6 +127,10 @@ const ReparacaoScreen = () => {
 							) : reparacao.status === "Recusado" ? (
 								<Message variant='danger'>
 									Recusado em {reparacao.recusadoEm}
+								</Message>
+							) : reparacao.status === "Concluido" ? (
+								<Message variant='success'>
+									Concluido em {reparacao.concluidoEm}
 								</Message>
 							) : (
 								<Message variant='warning'>
@@ -160,17 +176,30 @@ const ReparacaoScreen = () => {
 									{isPending? <Loader/> : (
 										<div>
 											<br />
-											<Button onClick={onApproveTest} style={{marginBottom: '10px'}}>Test Pay Order</Button>
 											<br />
-											<Button onClick={recusarOrderHandler} style={{marginBottom: '10px'}}>Recusar Reparação
-											</Button>
+											
 											<div>
 												<PayPalButtons createOrder={createOrder} onApprove={onApprove} onError={onError}></PayPalButtons>
 											</div>
 										</div>
 									)}
+									
 								</ListGroup.Item>
-							)}				
+							)}
+							{utilizadorInfo && !reparacao.isPago && (
+								<ListGroup.Item>
+									<Button onClick={onApproveTest} style={{marginBottom: '10px'}}>Test Pay Order</Button>
+									<Button onClick={recusarOrderHandler} style={{marginBottom: '10px'}}>Recusar Reparação
+									</Button>
+								</ListGroup.Item>
+							)}	
+							{utilizadorInfo && utilizadorInfo.isAdmin && reparacao.isPago && !reparacao.status !== 'Concluido' && (
+								<ListGroup.Item>
+									<Button type='button' className='btn btn-block' onClick={concluirOrderHandler}>
+									Concluír Entrega
+									</Button>
+								</ListGroup.Item>
+							)}		
 						</ListGroup>
 					</Card>
 				</Col>

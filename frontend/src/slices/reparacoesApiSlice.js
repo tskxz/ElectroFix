@@ -44,8 +44,14 @@ export const reparacoesApiSlice = apiSlice.injectEndpoints({
 				body: {...details}
 			})
 		}),
+		concluirReparacao: builder.mutation({
+			query: (reparacaoId) => ({
+				url: `${REPARACOES_URL}/${reparacaoId}/concluido`,
+				method: 'PUT',
+			})
+		}),
 
     })
 })
 
-export const {useCriarReparacaoMutation, usePagarReparacaoMutation, useGetReparacaoDetailsQuery,useGetPayPalClientIdQuery, useRecusarReparacaoMutation, useGetTodasReparacoesQuery} = reparacoesApiSlice
+export const {useCriarReparacaoMutation, usePagarReparacaoMutation, useGetReparacaoDetailsQuery,useGetPayPalClientIdQuery, useRecusarReparacaoMutation, useGetTodasReparacoesQuery, useConcluirReparacaoMutation} = reparacoesApiSlice

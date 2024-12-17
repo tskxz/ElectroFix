@@ -44,6 +44,10 @@ const reparacaoSchema = new mongoose.Schema({
         type: Date,
     },
 
+    concluidoEm: {
+        type: Date,
+    },
+
     recusadoEm: {
         type: Date,
     },

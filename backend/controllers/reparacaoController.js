@@ -52,6 +52,24 @@ const atualizarReparacaoRecusado = asyncHandler(async(req, res) => {
     
 })
 
+// @desc    Atualizar reparacao para 
+// @route   GET /api/reparacoes/:id/concluido
+// @access  Private/Admin
+const atualizarReparacaoConcluido = asyncHandler(async(req, res) => {
+    const reparacao = await Reparacao.findById(req.params.id)
+    if(reparacao){
+        reparacao.status = "Concluido"
+        reparacao.concluidoEm = Date.now();
+
+        const atualizarReparacaoConcluido = await reparacao.save()
+            res.status(200).json(reparacaoAtualizado)
+    } else {
+        res.status(404)
+        throw new Error('reparacao n encontrado')
+    }     
+    
+})
+
 // @desc    Ter reparacoes
 // @route   GET /api/reparacoes/todas
 // @access  Private
@@ -89,4 +107,4 @@ const atualizarReparacaoPago = asyncHandler(async(req, res) => {
 })
 
 
-export {addReparacaoItens, getReparacao, atualizarReparacaoRecusado, getTodasReparacoes, atualizarReparacaoPago}
+export {addReparacaoItens, getReparacao, atualizarReparacaoRecusado, getTodasReparacoes, atualizarReparacaoPago, atualizarReparacaoConcluido}

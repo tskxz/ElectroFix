@@ -1,8 +1,10 @@
-import {Link, useParams} from 'react-router-dom'
+import {Link, useParams, useNavigate} from 'react-router-dom'
 import {Row, Col, ListGroup, Image, Form, Button, Card} from 'react-bootstrap'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 import {useGetAgendaDetailsQuery, usePagarAgendaMutation, useGetPayPalClientIdQuery, useConfirmarAgendaMutation, useRecusarAgendaMutation} from '../../slices/agendasApiSlice';
+import {useCriarReparacaoMutation} from '../../slices/reparacoesApiSlice';
+
 import {PayPalButtons, usePayPalScriptReducer} from '@paypal/react-paypal-js'
 import {toast} from 'react-toastify'
 import {useSelector} from 'react-redux'
@@ -11,10 +13,12 @@ import {LinkContainer} from 'react-router-bootstrap'
 
 const AgendaScreen = () => {
 	const {id: agendaId} = useParams();
+	const navigate = useNavigate()
 	const {data: agenda, refetch, isLoading, error} = useGetAgendaDetailsQuery(agendaId)
 	const [pagarAgenda, {isLoading:loadingPay}] = usePagarAgendaMutation()
 	const [confirmarAgenda, {isLoading:loadingDeliver}] = useConfirmarAgendaMutation()
 	const [recusarAgenda, {isLoading:recusarDeliver}] = useRecusarAgendaMutation()
+	const [criarReparacao, {isLoadingReparacao, errorReparacao}] = useCriarReparacaoMutation()
 	const [{isPending}, paypalDispatch] = usePayPalScriptReducer()
 	const {data:paypal, isLoading:loadingPayPal, error: errorPayPal} = useGetPayPalClientIdQuery()
 	const {utilizadorInfo} = useSelector((state) => state.auth)
@@ -95,14 +99,32 @@ const AgendaScreen = () => {
 		}
 	}
 
+	const criarReparacaoHandler = async() => {
+		if(window.confirm('Tens a certeza que queres criar uma reparação?')){
+			try {
+				let descricao = prompt("Descricao do problema");
+				let valor_orcamento = prompt("Valor do Orçamento", 30);
+				const res = await criarReparacao({
+					agenda: agendaId,
+					valor_orcamento: valor_orcamento,
+					descricao: descricao,
+				}).unwrap();
+				console.log('reparacao criado')
+				navigate(`/reparacao/${res._id}`)
+			} catch(err){
+				toast.error(err?.data?.message || err.error)
+			}
+		}
+	}
+
 	return isLoading ? <Loader/> : error ? <Message variant='danger'/> : (
 		<>
-			<h1>Agenda {agendaId}</h1>
+			<h1>Agenda</h1>
 			<Row>
 				<Col md={8}>
 					<ListGroup>
 						<ListGroup.Item>
-							<h2>Agenda</h2>
+							<h2>Agenda {agendaId}</h2>
 							<p>
 								<strong>Nome: {agenda.utilizador.nome}</strong>
 							</p>
@@ -130,11 +152,6 @@ const AgendaScreen = () => {
 							)}						
 						</ListGroup.Item>
 						<ListGroup.Item>
-							<h2>Método de pagamento</h2>
-							<p>
-								<strong>Método: </strong>
-								{agenda.metodoPagamento}
-							</p>
 							{agenda.isPago ? (
 								<Message variant='success'>
 									Pago em {agenda.pagoEm}
@@ -215,6 +232,16 @@ const AgendaScreen = () => {
 										Alterar Data
 										</Button>
 									</LinkContainer>
+								</ListGroup.Item>
+								
+							)}
+							{utilizadorInfo && utilizadorInfo.isAdmin && agenda.isPago && agenda.status === "Confirmado" && (
+								<ListGroup.Item>
+									
+										<Button type='button' className='btn btn-block' onClick={criarReparacaoHandler}> 
+										Criar Reparação
+										</Button>
+
 								</ListGroup.Item>
 								
 							)}

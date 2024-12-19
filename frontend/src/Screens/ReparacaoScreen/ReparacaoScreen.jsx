@@ -186,17 +186,17 @@ const ReparacaoScreen = () => {
 									
 								</ListGroup.Item>
 							)}
-							{utilizadorInfo && !reparacao.isPago && (
+							{utilizadorInfo && !reparacao.isPago && reparacao.status !== "Recusado"  && (
 								<ListGroup.Item>
 									<Button onClick={onApproveTest} style={{marginBottom: '10px'}}>Test Pay Order</Button>
 									<Button onClick={recusarOrderHandler} style={{marginBottom: '10px'}}>Recusar Reparação
 									</Button>
 								</ListGroup.Item>
 							)}	
-							{utilizadorInfo && utilizadorInfo.isAdmin && reparacao.isPago && !reparacao.status !== 'Concluido' && (
+							{utilizadorInfo && utilizadorInfo.isAdmin && reparacao.isPago && reparacao.status !== 'Concluido' && (
 								<ListGroup.Item>
 									<Button type='button' className='btn btn-block' onClick={concluirOrderHandler}>
-									Concluír Entrega
+									Concluír Reparação
 									</Button>
 								</ListGroup.Item>
 							)}		

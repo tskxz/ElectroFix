@@ -35,8 +35,8 @@ const ListaReparacaoScreen = () => {
 										)}
 									</td>
 									<td>
-										{reparacao.status === "Confirmado" ? (
-										reparacao.confirmadoEm.substring(0,10)
+										{reparacao.status === "Concluido" ? (
+										reparacao.concluidoEm.substring(0,10)
 										) : reparacao.status === "Recusado" ? (
 											<FaTimes style={{color: 'red'}}/>
 										) : (

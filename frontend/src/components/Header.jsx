@@ -28,7 +28,7 @@ const Header = () => {
     <Navbar className="custom-navbar" expand="lg" collapseOnSelect>
         <Container>
                 <LinkContainer to="/">
-                    <Navbar.Brand>ElectroFix</Navbar.Brand>
+                    <Navbar.Brand>ElectroCycle</Navbar.Brand>
                 </LinkContainer>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse id="basic-navbar-nav">

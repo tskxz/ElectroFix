@@ -69,7 +69,7 @@ const CarrinhoScreen = () => {
             <ListGroup variant='flush'>
               <ListGroup.Item>
                 <h2>Sub-Total ({carrinhoItens.reduce((acc, item) => acc+item.quantidade, 0)}) itens</h2>
-                ${carrinhoItens.reduce((acc, item) => acc+item.quantidade * item.preco, 0).toFixed(2)}
+                {carrinhoItens.reduce((acc, item) => acc+item.quantidade * item.preco, 0).toFixed(2)}€
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button type='button' className='btn-block' disabled={carrinhoItens.length === 0} onClick={checkoutHandler}>

@@ -53,7 +53,7 @@ main {
   }
 
 .custom-navbar {
-    background-color: #3c4c5d; /* cor da nav bar */
+    background-color: #40c43e; /* cor da nav bar */
 }
 
 .custom-navbar .navbar-brand,
@@ -63,7 +63,7 @@ main {
 }
 
 .custom-navbar .nav-link:hover {
-    color: #f39c12; /* Cor do hover */
+    color: #000000; /* Cor do hover */
 }
 
 .card-equal {

@@ -141,7 +141,7 @@ const EncomendaScreen = () => {
 										</Col>
 
 										<Col md={4}>
-											{item.quantidade} x ${item.preco} = ${item.quantidade*item.preco}
+											{item.quantidade} x {item.preco}€ = {item.quantidade*item.preco}€
 										</Col>
 									</Row>
 								</ListGroup.Item>
@@ -158,25 +158,25 @@ const EncomendaScreen = () => {
 							<ListGroup.Item>
 								<Row>
 									<Col>Itens</Col>
-									<Col>${encomenda.precoItens}</Col>
+									<Col>{encomenda.precoItens}€</Col>
 								</Row>
 							</ListGroup.Item>
 							<ListGroup.Item>
 								<Row>
 									<Col>Envio</Col>
-									<Col>${encomenda.precoEnvio}</Col>
+									<Col>{encomenda.precoEnvio}€</Col>
 								</Row>
 							</ListGroup.Item>
 							<ListGroup.Item>
 								<Row>
 									<Col>Taxa</Col>
-									<Col>${encomenda.precoTaxa}</Col>
+									<Col>{encomenda.precoTaxa}€</Col>
 								</Row>
 							</ListGroup.Item>
 							<ListGroup.Item>
 								<Row>
 									<Col>Total</Col>
-									<Col>${encomenda.precoTotal}</Col>
+									<Col>{encomenda.precoTotal}€</Col>
 								</Row>
 							</ListGroup.Item>
 							{!encomenda.isPago && (

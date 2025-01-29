@@ -175,7 +175,7 @@ const AgendaScreen = () => {
 							<ListGroup.Item>
 								<Row>
 									<Col>Deslocamento</Col>
-									<Col>${agenda.precoDeslocamento}</Col>
+									<Col>{agenda.precoDeslocamento}€</Col>
 								</Row>
 							</ListGroup.Item>
 							<ListGroup.Item>
@@ -187,13 +187,13 @@ const AgendaScreen = () => {
 							<ListGroup.Item>
 								<Row>
 									<Col>Taxa</Col>
-									<Col>${agenda.precoTaxa}</Col>
+									<Col>{agenda.precoTaxa}€</Col>
 								</Row>
 							</ListGroup.Item>
 							<ListGroup.Item>
 								<Row>
 									<Col>Total</Col>
-									<Col>${agenda.precoTotal}</Col>
+									<Col>{agenda.precoTotal}€</Col>
 								</Row>
 							</ListGroup.Item>
 							{!agenda.isPago && (

@@ -74,7 +74,7 @@ const EletrodomesticoScreen = () => {
               <Row>
                 <Col>Preco: </Col>
                 <Col>
-                  <strong>{eletrodomestico.preco}</strong>
+                  <strong>{eletrodomestico.preco}€</strong>
                 </Col>
               </Row>
             </ListGroup.Item>

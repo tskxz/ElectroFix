@@ -95,7 +95,7 @@ const EncomendarScreen = () => {
 							<Row>
 								<Col>Itens: </Col>
 								<Col>
-									${carrinho.precoItens}
+									{carrinho.precoItens}€
 								</Col>
 							</Row>
 						</ListGroup.Item>
@@ -104,7 +104,7 @@ const EncomendarScreen = () => {
 							<Row>
 								<Col>Preco Envio: </Col>
 								<Col>
-									${carrinho.precoEnvio}
+									{carrinho.precoEnvio}€
 								</Col>
 							</Row>
 						</ListGroup.Item>
@@ -113,7 +113,7 @@ const EncomendarScreen = () => {
 							<Row>
 								<Col>Itens: </Col>
 								<Col>
-									${carrinho.precoTaxa}
+									{carrinho.precoTaxa}€
 								</Col>
 							</Row>
 						</ListGroup.Item>
@@ -122,7 +122,7 @@ const EncomendarScreen = () => {
 							<Row>
 								<Col>Total: </Col>
 								<Col>
-									${carrinho.precoTotal}
+									{carrinho.precoTotal}€
 								</Col>
 							</Row>
 						</ListGroup.Item>

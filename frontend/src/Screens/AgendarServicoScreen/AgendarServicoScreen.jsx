@@ -83,7 +83,7 @@ const AgendarServicoScreen = () => {
 							<Row>
 								<Col>Deslocamento: </Col>
 								<Col>
-									${agenda.precoDeslocamento}
+									{agenda.precoDeslocamento}€
 								</Col>
 							</Row>
 						</ListGroup.Item>
@@ -92,7 +92,7 @@ const AgendarServicoScreen = () => {
 							<Row>
 								<Col>Taxa: </Col>
 								<Col>
-									${agenda.precoTaxa}
+									{agenda.precoTaxa}€
 								</Col>
 							</Row>
 						</ListGroup.Item>
@@ -110,7 +110,7 @@ const AgendarServicoScreen = () => {
 							<Row>
 								<Col>Total: </Col>
 								<Col>
-									${agenda.precoTotal}
+									{agenda.precoTotal}€
 								</Col>
 							</Row>
 						</ListGroup.Item>

@@ -132,7 +132,7 @@ const AgendaScreen = () => {
 								<strong>Email: {agenda.utilizador.email}</strong>
 							</p>
 							<p>
-								<strong>Número de Telemóvel: {utilizadorInfo.num_telemovel}</strong>
+								<strong>Número de Telemóvel: {agenda.utilizador.num_telemovel}</strong>
 							</p>
 							<p>
 								<strong>Endereco: {agenda.enderecoPostal.endereco}, {agenda.enderecoPostal.cidade}{' '}{agenda.enderecoPostal.codigoPostal}, {agenda.enderecoPostal.pais}</strong>

@@ -22,6 +22,7 @@ const AgendarServicoScreen = () => {
 		}
 	}, [agenda.metodoPagamento, agenda.enderecoPostal.endereco, navigate])
 	
+	
 	const agendarHandler = async () => {
 		try {
 			const res = await criarAgenda({
@@ -37,6 +38,7 @@ const AgendarServicoScreen = () => {
 			toast(err)
 		}
 	}
+	
 
 	return <>
 		<CheckoutStepsmarcacao step1 step2 step3 step4/>

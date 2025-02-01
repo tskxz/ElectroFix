@@ -25,6 +25,7 @@ const authUtilizador = asyncHandler(async(req, res) => {
 			_id: utilizador._id,
 			nome: utilizador.nome,
 			email: utilizador.email,
+			num_telemovel: utilizador.num_telemovel || "",
             isAdmin: utilizador.isAdmin,
 		})
 	} else {
@@ -83,6 +84,7 @@ const getUtilizadorPerfil = asyncHandler(async(req,res) => {
 			_id: utilizador._id,
 			nome: utilizador.nome,
 			email: utilizador.email,
+			num_telemovel: utilizador.num_telemovel || "",
 			isAdmin: utilizador.isAdmin
 		})
 	} else {
@@ -109,6 +111,7 @@ const atualizarUtilizadorPerfil = asyncHandler(async(req, res) => {
 			nome: utilizadorAtualizado.nome,
 			email: utilizadorAtualizado.email,
 			password: utilizadorAtualizado.password,
+			num_telemovel: utilizadorAtualizado.num_telemovel || "",
 			isAdmin: utilizadorAtualizado.admin
 		})
 	} else {
@@ -152,6 +155,7 @@ const atualizarUtilizador = asyncHandler(async(req, res) => {
 			_id: utilizadorAtualizado._id,
 			nome: utilizadorAtualizado.nome,
 			email: utilizadorAtualizado.email,
+			num_telemovel: utilizadorAtualizado.num_telemovel || "",
 			isAdmin: utilizadorAtualizado.isAdmin
 		})
 	} else {

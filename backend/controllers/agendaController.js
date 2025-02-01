@@ -30,7 +30,7 @@ const addAgendaItens = asyncHandler(async(req, res) => {
 // @route   GET /api/agendas/:id
 // @access  Private/Admin
 const getAgenda = asyncHandler(async(req, res) => {
-    const agenda = await Agenda.findById(req.params.id).populate('utilizador', 'nome email')
+    const agenda = await Agenda.findById(req.params.id).populate('utilizador', 'nome email num_telemovel')
     if(agenda){
         res.status(200).json(agenda)
     } else {

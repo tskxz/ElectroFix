@@ -22,6 +22,7 @@ const AgendarServicoScreen = () => {
 		}
 	}, [agenda.metodoPagamento, agenda.enderecoPostal.endereco, navigate])
 	
+	
 	const agendarHandler = async () => {
 		try {
 			const res = await criarAgenda({
@@ -37,6 +38,7 @@ const AgendarServicoScreen = () => {
 			toast(err)
 		}
 	}
+	
 
 	return <>
 		<CheckoutStepsmarcacao step1 step2 step3 step4/>
@@ -83,7 +85,7 @@ const AgendarServicoScreen = () => {
 							<Row>
 								<Col>Deslocamento: </Col>
 								<Col>
-									${agenda.precoDeslocamento}
+									{agenda.precoDeslocamento}€
 								</Col>
 							</Row>
 						</ListGroup.Item>
@@ -92,7 +94,7 @@ const AgendarServicoScreen = () => {
 							<Row>
 								<Col>Taxa: </Col>
 								<Col>
-									${agenda.precoTaxa}
+									{agenda.precoTaxa}€
 								</Col>
 							</Row>
 						</ListGroup.Item>
@@ -110,7 +112,7 @@ const AgendarServicoScreen = () => {
 							<Row>
 								<Col>Total: </Col>
 								<Col>
-									${agenda.precoTotal}
+									{agenda.precoTotal}€
 								</Col>
 							</Row>
 						</ListGroup.Item>

@@ -60,10 +60,10 @@ const EletrodomesticoScreen = () => {
             <Rating value={eletrodomestico.rating} text={`${eletrodomestico.numReviews} reviews`} />
           </ListGroup.Item>
           <ListGroup.Item>
-            Preco: ${eletrodomestico.preco} 
+            Preco: {eletrodomestico.preco}€ 
           </ListGroup.Item>
           <ListGroup.Item>
-            Descricao: ${eletrodomestico.descricao} 
+            Descricao: {eletrodomestico.descricao} 
           </ListGroup.Item>
         </ListGroup>
         </Col>
@@ -74,7 +74,7 @@ const EletrodomesticoScreen = () => {
               <Row>
                 <Col>Preco: </Col>
                 <Col>
-                  <strong>{eletrodomestico.preco}</strong>
+                  <strong>{eletrodomestico.preco}€</strong>
                 </Col>
               </Row>
             </ListGroup.Item>

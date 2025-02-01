@@ -77,98 +77,101 @@ const PerfilScreen = () => {
             <Col md={9}>
 				<h2>Minhas encomendas</h2>
 				{isLoading ? (<Loader/>): error ? (<Message variant='danger'>{error?.data?.message || error.error}</Message>) : (
-					<Table striped hover responsive className='table-sm'>
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>DATE</th>
-								<th>Total</th>
-								<th>Pago</th>
-								<th>Entregue</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							{encomendas.map((encomenda) => (
+    encomendas && encomendas.length > 0 ? ( // Verifica se encomendas existe e tem dados
+        <Table striped hover responsive className='table-sm'>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>DATE</th>
+                    <th>Total</th>
+                    <th>Pago</th>
+                    <th>Entregue</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {encomendas.map((encomenda) => (
+                    <tr key={encomenda._id}>
+                        <td>{encomenda._id}</td>
+                        <td>{encomenda.createdAt.substring(0,10)}</td>
+                        <td>{encomenda.precoTotal}</td>
+                        <td>
+                            {encomenda.isPago ? (
+                            encomenda.pagoEm.substring(0,10)
+                            ) : (
+                                <FaTimes style={{color: 'red'}}/>
+                            )}
+                        </td>
+                        <td>
+                            {encomenda.isEntregue ? (
+                            encomenda.entregueEm.substring(0,10)
+                            ) : (
+                                <FaTimes style={{color: 'red'}}/>
+                            )}
+                        </td>
+                        <td>
+                            <LinkContainer to={`/encomenda/${encomenda._id}`}>
+                                <Button className='btn-sm' variant='light'>
+                                    Detalhes
+                                </Button>
+                            </LinkContainer>
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </Table>
+    ) : <Message variant='info'>Não tem encomendas</Message> // Mensagem caso não tenha encomendas
+)}
 
-								<tr key={encomenda._id}>
-									<td>{encomenda._id}</td>
-									<td>{encomenda.createdAt.substring(0,10)}</td>
-									<td>{encomenda.precoTotal}</td>
-									<td>
-										{encomenda.isPago ? (
-										encomenda.pagoEm.substring(0,10)
-										) : (
-											<FaTimes style={{color: 'red'}}/>
-										)}
-									</td>
-									<td>
-										{encomenda.isEntregue ? (
-										encomenda.entregueEm.substring(0,10)
-										) : (
-											<FaTimes style={{color: 'red'}}/>
-										)}
-									</td>
-									<td>
-										<LinkContainer to={`/encomenda/${encomenda._id}`}>
-											<Button className='btn-sm' variant='light'>
-												Detalhes
-											</Button>
-										</LinkContainer>
-									</td>
-								</tr>
-							))}
-						</tbody>
-					</Table>
-				)}
-				<h2>Minhas agendas</h2>
-				{isLoading ? (<Loader/>): error ? (<Message variant='danger'>{error?.data?.message || error.error}</Message>) : (
-					<Table striped hover responsive className='table-sm'>
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>AGENDADO</th>
-								<th>Total</th>
-								<th>Pago</th>
-								<th>Confirmado</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							{agendas.map((agenda) => (
-
-								<tr key={agenda._id}>
-									<td>{agenda._id}</td>
-									<td>{agenda.enderecoPostal.dataMarcacao.substring(0,10)}</td>
-									<td>{agenda.precoTotal}</td>
-									<td>
-										{agenda.isPago ? (
-										agenda.pagoEm.substring(0,10)
-										) : (
-											<FaTimes style={{color: 'red'}}/>
-										)}
-									</td>
-									<td>
-									{agenda.status === "Confirmado" ? (
-										agenda.confirmadoEm.substring(0,10)
-										) : agenda.status === "Recusado" ? (
-											<FaTimes style={{color: 'red'}}/>
-										) : (
-											<FaClock style={{color: 'orange'}}/>
-										)}
-									</td>
-									<td>
-										<LinkContainer to={`/agenda/${agenda._id}`}>
-											<Button className='btn-sm' variant='light'>
-												Detalhes
-											</Button>
-										</LinkContainer>
-									</td>
-								</tr>
-							))}
-						</tbody>
-					</Table>
-				)}
+<h2>Minhas agendas</h2>
+{isLoadingAgendas ? (<Loader/>): errorAgendas ? (<Message variant='danger'>{errorAgendas?.data?.message || errorAgendas.error}</Message>) : (
+    agendas && agendas.length > 0 ? ( // Verifica se agendas existe e tem dados
+        <Table striped hover responsive className='table-sm'>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>AGENDADO</th>
+                    <th>Total</th>
+                    <th>Pago</th>
+                    <th>Confirmado</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {agendas.map((agenda) => (
+                    <tr key={agenda._id}>
+                        <td>{agenda._id}</td>
+                        <td>{agenda.enderecoPostal?.dataMarcacao?.substring(0,10)}</td>
+                        <td>{agenda.precoTotal}</td>
+                        <td>
+                            {agenda.isPago ? (
+                            agenda.pagoEm.substring(0,10)
+                            ) : (
+                                <FaTimes style={{color: 'red'}}/>
+                            )}
+                        </td>
+                        <td>
+                            {agenda.status === "Confirmado" ? (
+                                agenda.confirmadoEm.substring(0,10)
+                                ) : agenda.status === "Recusado" ? (
+                                    <FaTimes style={{color: 'red'}}/>
+                                ) : (
+                                    <FaClock style={{color: 'orange'}}/>
+                                )}
+                        </td>
+                        <td>
+                            <LinkContainer to={`/agenda/${agenda._id}`}>
+                                <Button className='btn-sm' variant='light'>
+                                    Detalhes
+                                </Button>
+                            </LinkContainer>
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </Table>
+    ) : <Message variant='info'>Não tem agendas</Message> // Mensagem caso não tenha agendas
+)}
 			</Col>	
 		</Row>
 	)

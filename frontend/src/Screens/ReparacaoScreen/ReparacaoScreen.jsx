@@ -167,7 +167,7 @@ const ReparacaoScreen = () => {
 							<ListGroup.Item>
 								<Row>
 									<Col>Valor Orcamento</Col>
-									<Col>${reparacao.valor_orcamento}</Col>
+									<Col>{reparacao.valor_orcamento}€</Col>
 								</Row>
 							</ListGroup.Item>
 							{reparacao.status !== "Recusado" && (

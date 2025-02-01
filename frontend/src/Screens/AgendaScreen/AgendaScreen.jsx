@@ -132,7 +132,7 @@ const AgendaScreen = () => {
 								<strong>Email: {agenda.utilizador.email}</strong>
 							</p>
 							<p>
-								<strong>Número de Telemóvel: {utilizadorInfo.num_telemovel}</strong>
+								<strong>Número de Telemóvel: {agenda.utilizador.num_telemovel}</strong>
 							</p>
 							<p>
 								<strong>Endereco: {agenda.enderecoPostal.endereco}, {agenda.enderecoPostal.cidade}{' '}{agenda.enderecoPostal.codigoPostal}, {agenda.enderecoPostal.pais}</strong>
@@ -175,7 +175,7 @@ const AgendaScreen = () => {
 							<ListGroup.Item>
 								<Row>
 									<Col>Deslocamento</Col>
-									<Col>${agenda.precoDeslocamento}</Col>
+									<Col>{agenda.precoDeslocamento}€</Col>
 								</Row>
 							</ListGroup.Item>
 							<ListGroup.Item>
@@ -187,13 +187,13 @@ const AgendaScreen = () => {
 							<ListGroup.Item>
 								<Row>
 									<Col>Taxa</Col>
-									<Col>${agenda.precoTaxa}</Col>
+									<Col>{agenda.precoTaxa}€</Col>
 								</Row>
 							</ListGroup.Item>
 							<ListGroup.Item>
 								<Row>
 									<Col>Total</Col>
-									<Col>${agenda.precoTotal}</Col>
+									<Col>{agenda.precoTotal}€</Col>
 								</Row>
 							</ListGroup.Item>
 							{!agenda.isPago && (

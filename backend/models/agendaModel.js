@@ -62,7 +62,12 @@ const agendaSchema = new mongoose.Schema({
     status:{
        type: String,
        default: "Pendente",
-    }
+    },
+    reparacao: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Reparacao', // Referência ao modelo de Reparação
+    required: false,
+  }
 }, {timestamps: true});
 
 const Agenda = mongoose.model('Agenda', agendaSchema);

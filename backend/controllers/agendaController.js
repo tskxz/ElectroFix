@@ -30,7 +30,7 @@ const addAgendaItens = asyncHandler(async(req, res) => {
 // @route   GET /api/agendas/:id
 // @access  Private/Admin
 const getAgenda = asyncHandler(async(req, res) => {
-    const agenda = await Agenda.findById(req.params.id).populate('utilizador', 'nome email num_telemovel')
+    const agenda = await Agenda.findById(req.params.id).populate('utilizador', 'nome email num_telemovel').populate('reparacao');
     if(agenda){
         res.status(200).json(agenda)
     } else {
@@ -130,5 +130,6 @@ const atualizarAgendaData = asyncHandler(async(req, res) => {
         throw new Error('agenda n encontrado')
     }
 })
+
 
 export {addAgendaItens, getAgenda, getMinhasAgendas, atualizarAgendaPago, getTodasAgendas, atualizarAgendaConfirmado, atualizarAgendaRecusado, atualizarAgendaData}

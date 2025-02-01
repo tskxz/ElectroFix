@@ -1,5 +1,6 @@
 import asyncHandler from '../middleware/asyncHandler.js';
 import Reparacao from '../models/reparacaoModel.js'
+import Agenda from '../models/agendaModel.js';
 
 
 // @desc    Criar nova reparacao
@@ -16,6 +17,16 @@ const addReparacaoItens = asyncHandler(async(req, res) => {
         const criarReparacao = await reparacao.save()
         console.log('reparacao criado: ')
         console.log(criarReparacao)
+        const agendaEncontrada = await Agenda.findById(agenda);
+        if (agendaEncontrada) {
+            // Atualizar a agenda com o ID da reparação
+            agendaEncontrada.reparacao = criarReparacao._id;
+            await agendaEncontrada.save();
+            console.log('Agenda atualizada com o ID da reparação: ', agendaEncontrada);
+        } else {
+            res.status(404);
+            throw new Error('Agenda não encontrada');
+        }
         res.status(201).json(criarReparacao)
     
 })

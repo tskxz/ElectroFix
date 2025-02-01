@@ -41,6 +41,7 @@ const AgendaScreen = () => {
 				}
 			}
 		}
+		console.log(agenda)
 	}, [agenda, paypal, paypalDispatch, loadingPayPal, errorPayPal])
 	
 	function onApprove(data, actions){
@@ -245,6 +246,13 @@ const AgendaScreen = () => {
 								</ListGroup.Item>
 								
 							)}
+							{agenda.reparacao && (
+  <ListGroup.Item>
+    <LinkContainer to={`/reparacao/${agenda.reparacao._id}`}>
+      <Button variant="primary">Visualizar Reparação</Button>
+    </LinkContainer>
+  </ListGroup.Item>
+)}
 						</ListGroup>
 					</Card>
 				</Col>

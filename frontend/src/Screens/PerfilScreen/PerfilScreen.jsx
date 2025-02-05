@@ -94,7 +94,7 @@ const PerfilScreen = () => {
                     <tr key={encomenda._id}>
                         <td>{encomenda._id}</td>
                         <td>{encomenda.createdAt.substring(0,10)}</td>
-                        <td>{encomenda.precoTotal}</td>
+                        <td>{encomenda.precoTotal}€</td>
                         <td>
                             {encomenda.isPago ? (
                             encomenda.pagoEm.substring(0,10)
@@ -142,7 +142,7 @@ const PerfilScreen = () => {
                     <tr key={agenda._id}>
                         <td>{agenda._id}</td>
                         <td>{agenda.enderecoPostal?.dataMarcacao?.substring(0,10)}</td>
-                        <td>{agenda.precoTotal}</td>
+                        <td>{agenda.precoTotal}€</td>
                         <td>
                             {agenda.isPago ? (
                             agenda.pagoEm.substring(0,10)

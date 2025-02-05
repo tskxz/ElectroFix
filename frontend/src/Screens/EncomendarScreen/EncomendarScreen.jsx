@@ -75,7 +75,7 @@ const EncomendarScreen = () => {
 												<Link to={`/eletrodomestico/${item._id}`}>{item.nome}</Link>
 											</Col>
 											<Col md={4}>
-												{item.quantidade} x {item.preco} = ${item.quantidade * item.preco}
+												{item.quantidade} x {item.preco} = {item.quantidade * item.preco}€
 											</Col> 
 										</Row>
 									</ListGroup.Item>
